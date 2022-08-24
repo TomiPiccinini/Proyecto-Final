@@ -1,12 +1,14 @@
 import React from "react";
 import { Route, Router, Switch, Redirect, withRouter } from "react-router-dom";
 import styled from "styled-components";
-import Home from "../Home";
 import history from "../../utils/history";
+import Home from "../Home";
 import Publicaciones from "../Publicaciones";
+import Perfil from "../Perfil";
+import Chat from "../Chats";
 
 export const Container = styled.div`
-  height: 97vh;
+  height: 95vh;
 `;
 
 const App = () => {
@@ -19,6 +21,8 @@ const App = () => {
             </Route>
             <Route exact path="/home" component={withRouter(Home)} />
             <Route exact path="/publicaciones" component={withRouter(Publicaciones)} />
+            <Route exact path="/perfil" component={withRouter(Perfil)} />
+            <Route exact path="/chats" component={withRouter(Chat)} />
           </Switch>
         </Router>
       </Container>

@@ -1,8 +1,8 @@
 import React from 'react'
+import { Wrapper } from './styled'
 import Header from '../../components/Header'
-import {Wrapper} from './styled'
 
-const Home = () => {
+const Chat = () => {
   return (
     <Wrapper>
       <Header />
@@ -10,4 +10,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Chat
