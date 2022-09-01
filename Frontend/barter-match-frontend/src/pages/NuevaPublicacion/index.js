@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../../components/Header'
-import { Container, Title, Wrapper, Button } from './styled'
+import { Container, Title, Wrapper } from './styled'
+import Formulario from '../../components/Form'
 
 const NuevaPublicacion = () => {
 
@@ -9,7 +10,7 @@ const NuevaPublicacion = () => {
       <Header />
       <Container>
         <Title>Nueva publicación</Title>
-        <Button>Publicar</Button>
+        <Formulario />
       </Container>
     </Wrapper>
   )

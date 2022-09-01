@@ -6,6 +6,7 @@ const Chat = () => {
   return (
     <Wrapper>
       <Header />
+      
     </Wrapper>
   )
 }
