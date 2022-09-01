@@ -2,10 +2,10 @@ import React from "react";
 import { Route, Router, Switch, Redirect, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import history from "../../utils/history";
-import Home from "../Home";
-import Publicaciones from "../Publicaciones";
+import Publicaciones from "../HomePubli";
 import Perfil from "../Perfil";
 import Chat from "../Chats";
+import NuevaPublicacion from "../NuevaPublicacion";
 
 export const Container = styled.div`
   height: 95vh;
@@ -19,10 +19,10 @@ const App = () => {
             <Route exact path="/">
               <Redirect from="/" to={{ pathname: "/home" }} />
             </Route>
-            <Route exact path="/home" component={withRouter(Home)} />
-            <Route exact path="/publicaciones" component={withRouter(Publicaciones)} />
+            <Route exact path="/home" component={withRouter(Publicaciones)} />
             <Route exact path="/perfil" component={withRouter(Perfil)} />
             <Route exact path="/chats" component={withRouter(Chat)} />
+            <Route exact path="/new" component={withRouter(NuevaPublicacion)} />
           </Switch>
         </Router>
       </Container>

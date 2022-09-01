@@ -5,6 +5,8 @@ export const Wrapper = styled.div`
   height: 75px;
   display: flex;
   flex-direction: row;
+  z-index: 10;
+  background-color: #808080;
 `;
 
 export const ButtonContainer = styled.div`
