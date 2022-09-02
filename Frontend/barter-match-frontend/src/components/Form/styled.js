@@ -9,10 +9,11 @@ export const Input = styled.input`
 `;
 
 export const InputContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
-  padding: 10px;
   justify-content: center;
+  margin: 10px 0px 10px 0px;
 `;
 
 export const Button = styled.div`
@@ -22,6 +23,7 @@ export const Button = styled.div`
   font-size: ${(props) => props.fontSize ? props.fontSize : '40px'};
   background-color: #a324;
   border-radius: 50px;
+  margin-top: ${(props) => props.type==="submit" ? '40px' : '0px'};
   padding: 15px;
   text-align: center;
   justify-content: center;

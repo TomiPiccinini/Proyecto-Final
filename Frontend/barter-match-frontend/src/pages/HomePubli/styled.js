@@ -10,7 +10,6 @@ export const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   padding: 20px 0px 5px 0px;
 `
