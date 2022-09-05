@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   z-index: 10;
-  background-color: #808080;
+  //background-color: #808080;
 `;
 
 export const ButtonContainer = styled.div`
@@ -25,6 +25,7 @@ export const Button = styled.button`
 `;
 
 export const Logo = styled.img`
-  width: 15%;
+  width: 5%;
   height: 75px;
+  cursor:pointer;
 `
