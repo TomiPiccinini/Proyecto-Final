@@ -22,6 +22,7 @@ export const Publicaciones = styled.div`
   justify-content:top;
   border-right:1px solid grey;
   
+  
 `
 export const Datos = styled.div`
   width:33%;
@@ -84,4 +85,8 @@ export const ContainerColumn = styled.div`
   heigth:100%;
   flex-wrap:wrap;
   justify-content:center;
+`
+
+export const Card = styled.div`
+margin:10px;
 `

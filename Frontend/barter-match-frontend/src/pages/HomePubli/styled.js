@@ -12,6 +12,8 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px 0px 5px 0px;
+  
+  
 `
 
 export const ContainerProduct = styled.div`
@@ -70,3 +72,20 @@ export const Button = styled.div`
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   }
 `
+
+// export const CardContainer = styled.div`
+//   width: 90vw;
+//   max-width: 260px;
+//   height: 300px;
+// `
+
+// export const Card = styled.div`
+//     position: relative;
+//     width: 80vw;
+//     max-width: 260px;
+//     height: 250px;
+//     box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
+//     border-radius: 20px;
+//     background-size: cover;
+//     background-position: center;
+//   `
