@@ -1,81 +1,41 @@
 import React from 'react'
-import Header from '../../components/Header'
-import { Wrapper, Container , Publicaciones , Matchs, Datos, ImgPerfil ,ContainerColumn} from './styled'
+import NavBar from '../../components/NavBar'
 import Imagenperfil from '../../images/User-Profile.png'
-import { PRODUCTS } from '../HomePubli/constants'
+import { Productos } from '../HomePubli/constants'
 import DeleteIcon from '@mui/icons-material/DeleteRounded';
 import { red } from '@mui/material/colors';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import { CardMedia } from '@mui/material'
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-
-
-
-
-
+import {styles} from './perfilStyles.css'
 
 
 const Perfil = () => {
   return (
-    <Wrapper>
-      <Header />
-      
-      <Container>
-        <Publicaciones>
-          <Typography variant="h4">Mis Publicaciones</Typography>
-          <ContainerColumn>
-          
-          {
-            PRODUCTS.map((p)=> {
-              return(
-                <Card sx={{ minWidth:200 , m:3 , border: "1px solid grey"}}>
-                  <CardMedia
-                  component='img'
-                  height='250'
-                  image={p.value}
-                  alt={p.title}
-                  
-                  />
-                  <CardContent sx={{bgcolor:'gray'}}>
-                    <Typography>{p.title}</Typography>
-                   
-                  </CardContent>
-                  <CardActions sx={{bgcolor:'gray'}}> 
-                    <Button size="small">Learn More</Button>
-                  </CardActions>
-                </Card>
-                // 
-              )
-            })
-          }
-          </ContainerColumn>
-          <DeleteIcon sx={{fontSize:50, color: red['A700']}}/>
-        </Publicaciones>
-        <Datos>
-          <Typography variant="h4">Perfil</Typography>
-          <ImgPerfil src={Imagenperfil} alt="imagen de perfil"></ImgPerfil>
-          <Typography variant="subtitle1" sx={{fontSize:30}}>Nombre: Lucas Perri</Typography>
-          <Typography variant="subtitle1" sx={{fontSize:30}}>Email: perris@gmail.com</Typography>
-        </Datos>
-        <Matchs>
+    <>
+    <NavBar />
+    <div className='Contenedor'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto&display=swap' rel='stylesheet' />
+      <div className='DatosContenedor'>
+        <div className='data'>
+            <Typography variant="h4">Lucas</Typography>
+            <img className='ImgPerfil' src={Imagenperfil} alt="imagen de perfil"/>
+            <Typography variant="subtitle1" sx={{fontSize:30}}>perris@gmail.com</Typography>
+        </div>
+      </div>
+
+      <div className='cardContenedor'>
         <Typography variant="h4">Mis Publicaciones</Typography>
-          <ContainerColumn>
-          {
-            PRODUCTS.map((p)=> {
-              return(
-                <ImgPerfil src={p.value} alt="p.title"/>
-              )
-            })
-          }
-          </ContainerColumn>
-          <DeleteIcon sx={{fontSize:50, color: red['A700']}}/>
-        </Matchs>
-      </Container>
-    </Wrapper>
+        <div className="productos">
+        {Productos.map((producto) => (
+          <div style={{ backgroundImage: 'url(' + producto.url + ')' }} className='carta'>
+            <h3>{producto.name}</h3>
+          </div>))}
+        </div>
+        <DeleteIcon sx={{fontSize:50, color: red['A700']}}/>
+      </div>
+
+    </div>
+
+    </>
   )
 }
 

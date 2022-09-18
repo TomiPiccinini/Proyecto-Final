@@ -1,5 +1,12 @@
-#root {    
+/* #root {    
     background: linear-gradient(#e66465, #9198e5);
+  } */
+
+  html{
+    background: linear-gradient(#e66465, #9198e5);
+    height: 100%;
+    width:100%;
+    background-size:cover;
   }
 
   .title {
@@ -38,6 +45,7 @@
   }
     
   .card h3 {
+    font-family: 'Alatsi';
     position: absolute;
     bottom: 0;
     margin: 10px;

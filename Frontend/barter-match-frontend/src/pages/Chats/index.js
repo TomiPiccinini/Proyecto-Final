@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Wrapper, Container, FirstColumn, SecondColumn, ContainerUsers, NameUsers, Messages, NoMessages } from './styled'
-import Header from '../../components/Header'
+import NavBar from '../../components/NavBar'
 import { USERS } from './constants'
 
 const ChatBox = (props) => {
@@ -30,7 +30,7 @@ const Chat = () => {
 
   return (
     <Wrapper>
-      <Header />
+      <NavBar />
       <Container>
         <FirstColumn>
           {

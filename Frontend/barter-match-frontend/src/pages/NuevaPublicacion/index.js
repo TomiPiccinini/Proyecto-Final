@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from '../../components/Header'
+import NavBar from '../../components/NavBar'
 import { Container, Title, Wrapper } from './styled'
 import Formulario from '../../components/Form'
 
@@ -7,7 +7,7 @@ const NuevaPublicacion = () => {
 
   return (
     <Wrapper>
-      <Header />
+      <NavBar />
       <Container>
         <Title>Nueva publicación</Title>
         <Formulario />
