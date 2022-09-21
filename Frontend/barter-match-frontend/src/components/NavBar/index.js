@@ -16,7 +16,12 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 const drawerWidth = 240;
-const navItems = ['Inicio', 'Nueva publicación', 'Perfil' , 'Chats'];
+const navItems = [
+  { title: 'INICIO', value: 'home' },
+  { title: 'NUEVA PUBLICACION', value: 'new' },
+  { title: 'PERFIL', value: 'perfil' },
+  { title: 'CHATS', value: 'chats' },
+];
 
 function DrawerAppBar(props) {
   const { window } = props;
@@ -34,9 +39,9 @@ function DrawerAppBar(props) {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }} onClick={() => history.push(item)} key={item}>
-              <ListItemText primary={item} />
+          <ListItem key={item.title} disablePadding>
+            <ListItemButton sx={{ textAlign: 'center' }} onClick={() => history.push(item.value)} key={item.title}>
+              <ListItemText primary={item.title} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -68,8 +73,8 @@ function DrawerAppBar(props) {
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }} onClick={() => history.push(item)} >
-                {item}
+              <Button key={item.title} sx={{ color: '#fff' }} onClick={() => history.push(item.value)} >
+                {item.title}
               </Button>
             ))}
           </Box>

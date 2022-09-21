@@ -24,7 +24,7 @@ export const SecondColumn = styled.div`
   height: 100%;
   padding: 10px 0px 10px 0px;
   margin-top: 10px;
-  border: 1px solid;
+  border: 1px solid #FFFFFF;
   font-size: 24px;
   text-align: ${(props) => props.noMessage ? 'center': 'none'};
   justify-content: ${(props) => props.noMessage ? 'center': 'none'};
