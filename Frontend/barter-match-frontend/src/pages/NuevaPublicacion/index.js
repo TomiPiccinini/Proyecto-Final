@@ -2,6 +2,7 @@ import React from 'react'
 import NavBar from '../../components/NavBar'
 import { Container, Title, Wrapper } from './styled'
 import Formulario from '../../components/Form'
+import Typography from '@mui/material/Typography';
 
 const NuevaPublicacion = () => {
 
@@ -9,7 +10,7 @@ const NuevaPublicacion = () => {
     <Wrapper>
       <NavBar />
       <Container>
-        <Title>Nueva publicación</Title>
+      <Typography variant="h4" fontWeight="bold" style={{margin: '10px'}}>Nueva publicación</Typography>
         <Formulario />
       </Container>
     </Wrapper>

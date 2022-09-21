@@ -2,13 +2,16 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: 80%;
+  height: 100%;
 `
 
 export const Container = styled.div`
+  padding-top: 3%;
   width: 100%;
-  height: 100%;
+  height: 90%;
   display: flex;
+  color: #FFFFFF;
+  border-radius: 20px;
 `
 
 export const FirstColumn = styled.div`
@@ -59,4 +62,6 @@ export const NoMessages = styled.div`
   padding: 5px;
   margin: 10px;
   text-align: center;
+  justify-content: center;
+  align-items: center;
 `
