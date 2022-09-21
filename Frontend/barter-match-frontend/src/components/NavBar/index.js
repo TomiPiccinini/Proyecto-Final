@@ -18,7 +18,6 @@ import Button from '@mui/material/Button';
 const drawerWidth = 240;
 const navItems = [
   { title: 'INICIO', value: 'home' },
-  { title: 'NUEVA PUBLICACION', value: 'new' },
   { title: 'PERFIL', value: 'perfil' },
   { title: 'CHATS', value: 'chats' },
 ];
