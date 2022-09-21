@@ -92,9 +92,9 @@ const HomePublicaciones = () => {
           ))}
         </div>
         <div className='buttons'>
-          <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('left')}>No me queda!</button>
-          <button style={{ backgroundColor: !canGoBack && '#c3c4d3' }} onClick={() => goBack()}>Deshacer</button>
-          <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('right')}>Me queda!</button>
+          <button style={{ backgroundColor: !canSwipe && '#c3c4d3', cursor: 'pointer' }} onClick={() => swipe('left')}>¡No me queda!</button>
+          <button style={{ backgroundColor: !canGoBack && '#c3c4d3', cursor: 'pointer' }} onClick={() => goBack()}>Deshacer</button>
+          <button style={{ backgroundColor: !canSwipe && '#c3c4d3', cursor: 'pointer' }} onClick={() => swipe('right')}>¡Me queda!</button>
         </div>
         <Dialog name={open} handleClose ={() =>{
     setOpen(!open)
