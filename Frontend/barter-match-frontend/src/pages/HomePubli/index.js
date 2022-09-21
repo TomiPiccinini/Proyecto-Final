@@ -5,6 +5,7 @@ import HomeCard from '../../components/HomeCard'
 import {styles} from './styles.css';
 import Dialog from '../../components/Dialog'
 import {Productos} from './constants'
+import history from "../../utils/history"
 
 const HomePublicaciones = () => {
 
@@ -96,9 +97,10 @@ const HomePublicaciones = () => {
           <button style={{ backgroundColor: !canGoBack && '#c3c4d3', cursor: 'pointer' }} onClick={() => goBack()}>Deshacer</button>
           <button style={{ backgroundColor: !canSwipe && '#c3c4d3', cursor: 'pointer' }} onClick={() => swipe('right')}>¡Me queda!</button>
         </div>
-        <Dialog name={open} handleClose ={() =>{
-    setOpen(!open)
-  }}  />
+        <Dialog name={open} handleClose ={() =>{setOpen(!open)}}  
+        />
+
+        <button className='buttons' style={{ backgroundColor: !canSwipe && '#c3c4d3', cursor: 'pointer' }} onClick={() => history.push("new")}>Nueva publicacion</button>
         
       </div>
       </Container>
