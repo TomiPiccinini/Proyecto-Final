@@ -31,15 +31,15 @@ function DrawerAppBar(props) {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', fontWeight: 'bold' }}>
+      <Typography variant="h6" sx={{ my: 2, fontWeight: 'bold' }}>
         BarterMatch
       </Typography>
       <Divider />
       <List>
         {navItems.map((item) => (
           <ListItem key={item.title} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }} onClick={() => history.push(item.value)} key={item.title}>
+            <ListItemButton sx={{ textAlign: 'center', fontWeight: 'bold' }} onClick={() => history.push(item.value)} key={item.title}>
               <ListItemText primary={item.title} />
             </ListItemButton>
           </ListItem>
@@ -66,13 +66,13 @@ function DrawerAppBar(props) {
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', fontWeight: 'bold' } }}
           >
             BarterMatch
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item.title} sx={{ color: '#fff' }} onClick={() => history.push(item.value)} >
+              <Button key={item.title} sx={{ color: '#fff', fontWeight: 'bold' }} onClick={() => history.push(item.value)} >
                 {item.title}
               </Button>
             ))}

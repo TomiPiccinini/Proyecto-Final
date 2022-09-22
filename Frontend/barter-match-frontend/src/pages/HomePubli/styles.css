@@ -24,6 +24,9 @@
     width: 90vw;
     max-width: 260px;
     height: 300px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
   }
   
   .card {
@@ -46,7 +49,7 @@
     
   .card h3 {
     font-family: 'Alatsi';
-    position: absolute;
+    font-weight: bold;
     bottom: 0;
     margin: 10px;
     color: black;

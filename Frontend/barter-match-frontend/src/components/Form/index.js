@@ -55,6 +55,10 @@ const Formulario = () => {
             value: 'gorra',
             label: 'Gorra',
         },
+        {
+            value: 'accesorio',
+            label: 'Accesorio',
+        },
     ];
 
     const conditions = [
@@ -159,7 +163,7 @@ const Formulario = () => {
                     onChange={handleInputChange}
                     />
                 </div>
-                <div>
+                <div style={{display: 'flex', alignItems: 'center'}}>
                     <TextField
                     fullWidth
                     id="descripcion"
@@ -168,6 +172,10 @@ const Formulario = () => {
                     variant="filled"
                     onChange={handleInputChange}
                     />
+                    <Button style={{marginLeft: 'auto'}} variant="contained" component="label">
+                            Subir imágen
+                        <input hidden accept="image/*" multiple type="file" />
+                    </Button>
                 </div>
                 <Button variant="contained" style={{fontWeight: 'bold'}} onClick={() => enviarDatos()}>Publicar</Button>
             </div>

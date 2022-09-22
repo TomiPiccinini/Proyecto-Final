@@ -65,3 +65,21 @@ export const NoMessages = styled.div`
   justify-content: center;
   align-items: center;
 `
+
+export const Input = styled.input`
+  width: 98%;
+  font-size: 24px;
+  padding: 5px;
+  margin: 10px;
+`
+
+export const ContainerSend = styled.div`
+  width: 80%;
+  font-size: 24px;
+  padding: 5px;
+  margin: 10px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+`

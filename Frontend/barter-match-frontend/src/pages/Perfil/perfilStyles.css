@@ -33,7 +33,7 @@
     background-size: cover;
     background-position: center;
     margin:20px;
-    
+    text-align: center;
   }
 
   .data {
@@ -47,7 +47,6 @@
     
   .card h3 {
     font-family: 'Alatsi';
-    position: absolute;
     bottom: 0;
     margin: 10px;
     color: black;

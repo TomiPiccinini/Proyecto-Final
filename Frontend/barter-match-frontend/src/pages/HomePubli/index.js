@@ -6,6 +6,7 @@ import {styles} from './styles.css';
 import Dialog from '../../components/Dialog'
 import {Productos} from './constants'
 import history from "../../utils/history"
+import { Button } from '@mui/material';
 
 const HomePublicaciones = () => {
 
@@ -70,10 +71,9 @@ const HomePublicaciones = () => {
     <Wrapper>
       <NavBar />
       <Container>
-        <div>
+        <div style={{marginTop: '80px'}}>
         <link href='https://fonts.googleapis.com/css?family=Damion&display=swap' rel='stylesheet' />
         <link href='https://fonts.googleapis.com/css?family=Alatsi&display=swap' rel='stylesheet' />
-        <h1 className='title'>BarterMatch</h1>
         <div className='cardContainer'>
           {Productos.map((producto, index) => (
             <HomeCard
@@ -84,7 +84,7 @@ const HomePublicaciones = () => {
               onCardLeftScreen={() => outOfFrame(producto.name, index)}
             >
               <div
-                style={{ backgroundImage: 'url(' + producto.url + ')' }}
+                style={{ backgroundImage: 'url(' + producto.url + ')'}}
                 className='card'
               >
                 <h3>{producto.name}</h3>
@@ -92,16 +92,19 @@ const HomePublicaciones = () => {
             </HomeCard>
           ))}
         </div>
-        <div className='buttons'>
-          <button style={{ backgroundColor: !canSwipe && '#c3c4d3', cursor: 'pointer' }} onClick={() => swipe('left')}>¡No me queda!</button>
-          <button style={{ backgroundColor: !canGoBack && '#c3c4d3', cursor: 'pointer' }} onClick={() => goBack()}>Deshacer</button>
-          <button style={{ backgroundColor: !canSwipe && '#c3c4d3', cursor: 'pointer' }} onClick={() => swipe('right')}>¡Me queda!</button>
+        <div className='buttons' style={{display: 'flex', flexDirection: 'column', textAlign: 'center'}}>
+          <p style={{fontWeight: 'bold', color: '#fff'}}>Deslice hacia la izquierda si no le gusta el producto.<br></br>Deslice hacia la derecha si el producto le gusta.</p>
+          <div>
+            <button style={{ backgroundColor: !canSwipe && '#c3c4d3', cursor: 'pointer' }} onClick={() => swipe('left')}>¡No me queda!</button>
+            <button style={{ backgroundColor: !canGoBack && '#c3c4d3', cursor: 'pointer' }} onClick={() => goBack()}>Deshacer</button>
+            <button style={{ backgroundColor: !canSwipe && '#c3c4d3', cursor: 'pointer' }} onClick={() => swipe('right')}>¡Me queda!</button>
+          </div>
         </div>
         <Dialog name={open} handleClose ={() =>{setOpen(!open)}}  
         />
-
-        <button className='buttons' style={{ backgroundColor: !canSwipe && '#c3c4d3', cursor: 'pointer' }} onClick={() => history.push("new")}>Nueva publicacion</button>
-        
+        <div style={{textAlign: 'center', margin: '30px'}}>
+          <Button variant="contained" style={{fontWeight: 'bold'}} onClick={() => history.push("new")}>Nueva publicación</Button>
+        </div>
       </div>
       </Container>
     </Wrapper>

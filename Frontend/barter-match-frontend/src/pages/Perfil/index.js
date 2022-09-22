@@ -26,11 +26,14 @@ const Perfil = () => {
         <Typography variant="h4">Mis Publicaciones</Typography>
         <div className="productos">
         {Productos.map((producto) => (
-          <div style={{ backgroundImage: 'url(' + producto.url + ')' }} className='carta'>
-            <h3>{producto.name}</h3>
-          </div>))}
+            <div style={{textAlign: 'center'}}>
+              <div style={{ backgroundImage: 'url(' + producto.url + ')' }} className='carta'>
+                
+              </div>
+              <h3 style={{fontFamily: 'Alatsi'}}>{producto.name}</h3>
+            </div>))}
         </div>
-        <DeleteIcon sx={{fontSize:50, color: red['A700']}}/>
+        <DeleteIcon sx={{fontSize:50, color: red['A700'], cursor: 'pointer'}}/>
       </div>
 
     </div>
