@@ -74,7 +74,7 @@ export const Input = styled.input`
 `
 
 export const ContainerSend = styled.div`
-  width: 80%;
+  width: 95%;
   font-size: 24px;
   padding: 5px;
   margin: 10px;
@@ -82,4 +82,5 @@ export const ContainerSend = styled.div`
   justify-content: center;
   align-items: center;
   display: flex;
+  color: #fff;
 `
