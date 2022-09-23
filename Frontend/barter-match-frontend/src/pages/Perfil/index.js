@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import NavBar from '../../components/NavBar'
 import Imagenperfil from '../../images/User-Profile.png'
-import { Productos } from '../HomePubli/constants'
+import { Publicaciones } from './constants'
 import DeleteIcon from '@mui/icons-material/DeleteRounded';
 import { red } from '@mui/material/colors';
 import Typography from '@mui/material/Typography';
@@ -12,11 +12,11 @@ import {styles} from './perfilStyles.css'
 
 
 const Perfil = () => {
-  const [products,setProducts] = useState(Productos);
+  const [publicaciones,setPublicaciones] = useState(Publicaciones);
 
 
-  function deleteProducto(producto){
-    setProducts(products.filter(p => p.titulo !== producto)) 
+  function deletePublicacion(publicacion){
+    setPublicaciones(publicaciones.filter(p => p.titulo !== publicacion)) 
    }
 
   
@@ -36,13 +36,13 @@ const Perfil = () => {
       <div className='cardContenedor'>
         <Typography variant="h4">Mis Publicaciones</Typography>
         <div className="productos">
-        {products.map((producto) => (
+        {publicaciones.map((publicacion) => (
             <div style={{textAlign: 'center', marginBottom: '25px'}}>
-              <div style={{ backgroundImage: 'url(' + producto.url + ')' }} className='carta'>
+              <div style={{ backgroundImage: 'url(' + publicacion.url + ')' }} className='carta'>
               
               </div>
-              <DeleteIcon sx={{color: red['A700'], cursor: 'pointer'}} onClick={() => deleteProducto(producto.titulo)}/>
-              <h3 style={{fontFamily: 'Alatsi', margin: 0}}>{producto.titulo}</h3>
+              <DeleteIcon sx={{color: red['A700'], cursor: 'pointer'}} onClick={() => deletePublicacion(publicacion.titulo)}/>
+              <h3 style={{fontFamily: 'Alatsi', margin: 0}}>{publicacion.titulo}</h3>
             </div>))}
         </div>
         
