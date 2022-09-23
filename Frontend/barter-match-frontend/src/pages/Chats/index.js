@@ -15,7 +15,7 @@ const ChatBox = (props) => {
         <NoMessages>AÚN NO HAY MENSAJES.</NoMessages>
         <ContainerSend>
           <TextField fullWidth id="standard-basic" label="Escriba su mensaje" variant="standard" sx={{color: '#fff'}}/>
-          <Button variant="contained" endIcon={<SendIcon />}>
+          <Button variant="contained" sx={{backgroundColor:'#9198e5'}} endIcon={<SendIcon />}>
           Enviar
           </Button>
         </ContainerSend>
@@ -32,7 +32,7 @@ const ChatBox = (props) => {
         })}
         <ContainerSend>
           <TextField fullWidth id="standard-basic" label="Escriba su mensaje" variant="standard" sx={{color: '#fff'}}/>
-          <Button variant="contained" endIcon={<SendIcon />}>
+          <Button variant="contained" sx={{backgroundColor:'#9198e5'}} endIcon={<SendIcon />}>
           Enviar
           </Button>
         </ContainerSend>

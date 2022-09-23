@@ -63,10 +63,10 @@ function DrawerAppBar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
+          <Typography onClick={() => history.push("home")}
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', fontWeight: 'bold' } }}
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, cursor:'pointer', fontWeight: 'bold' }}
           >
             BarterMatch
           </Typography>

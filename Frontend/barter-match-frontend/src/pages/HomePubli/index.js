@@ -2,16 +2,16 @@ import React, { useState, useMemo, useRef  } from 'react'
 import NavBar from '../../components/NavBar'
 import { Container, Wrapper } from './styled'
 import HomeCard from '../../components/HomeCard'
+import { Button } from '@mui/material';
 import {styles} from './styles.css';
 import Dialog from '../../components/Dialog'
 import {Productos} from './constants'
 import history from "../../utils/history"
-import { Button } from '@mui/material';
+
 
 const HomePublicaciones = () => {
 
   const [currentIndex, setCurrentIndex] = useState(Productos.length - 1)
-  const [lastDirection, setLastDirection] = useState()
   const [open,setOpen] = useState(false)
   const currentIndexRef = useRef(currentIndex)
 
@@ -34,10 +34,10 @@ const HomePublicaciones = () => {
 
   // set last direction and decrease current index
   const swiped = (direction, nameToDelete, index) => {
-    if (nameToDelete === "chaleco" && direction === "right"){
+    if (nameToDelete === "Chaleco" && direction === "right"){
       handleOpen()
     }
-    setLastDirection(direction)
+    
     updateCurrentIndex(index - 1)
   }
 
@@ -61,11 +61,8 @@ const HomePublicaciones = () => {
   }
 
   const handleOpen = () =>{
-    setOpen(!open)
-    
+    setOpen(!open) 
   }
-
-  
 
   return (
     <Wrapper>
@@ -79,15 +76,15 @@ const HomePublicaciones = () => {
             <HomeCard
               ref={childRefs[index]}
               className='swipe'
-              key={producto.name}
-              onSwipe={(dir) => swiped(dir, producto.name, index)}
-              onCardLeftScreen={() => outOfFrame(producto.name, index)}
+              key={producto.titulo}
+              onSwipe={(dir) => swiped(dir, producto.titulo, index)}
+              onCardLeftScreen={() => outOfFrame(producto.titulo, index)}
             >
               <div
                 style={{ backgroundImage: 'url(' + producto.url + ')'}}
                 className='card'
               >
-                <h3>{producto.name}</h3>
+                <h3>{producto.titulo}</h3>
               </div>
             </HomeCard>
           ))}
@@ -100,10 +97,10 @@ const HomePublicaciones = () => {
             <button style={{ backgroundColor: !canSwipe && '#c3c4d3', cursor: 'pointer' }} onClick={() => swipe('right')}>¡Me queda!</button>
           </div>
         </div>
-        <Dialog name={open} handleClose ={() =>{setOpen(!open)}}  
-        />
+
+        <Dialog name={open} handleClose ={() =>{setOpen(!open)}}  />
         <div style={{textAlign: 'center', margin: '30px'}}>
-          <Button variant="contained" style={{fontWeight: 'bold'}} onClick={() => history.push("new")}>Nueva publicación</Button>
+          <Button variant="contained" style={{fontWeight: 'bold' , backgroundColor:'#9198e5'}} onClick={() => history.push("new")}>Nueva publicación</Button>
         </div>
       </div>
       </Container>

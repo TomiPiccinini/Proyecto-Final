@@ -18,18 +18,19 @@ export default function AlertDialogSlide(props) {
     <div>
       
       <Dialog
+        maxWidth='500px'
         open={props.name}
         TransitionComponent={Transition}
         keepMounted
         onClose={props.handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Matcheaste"}</DialogTitle>
+        <DialogTitle>{"Hay match!"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
            <DialogContainer>
-              <MatchImg />
-              <MatchImg />
+              <MatchImg src='https://d368r8jqz0fwvm.cloudfront.net/32611-product_lg/chaleco-de-hombre-polar-amaro.jpg' />
+              <MatchImg  src='https://images.squarespace-cdn.com/content/v1/579202971b631b5dbc741986/1547662669652-1OJ154T8EZOKIEEFZ0VQ/image-asset.octet-stream?format=500w'/>
            </DialogContainer>
           </DialogContentText>
         </DialogContent>

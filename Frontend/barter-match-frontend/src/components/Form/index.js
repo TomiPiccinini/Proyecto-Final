@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import { Input, InputContainer } from './styled';
 import { Box, TextField, MenuItem, Button } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
 const Formulario = () => {
     const [datos, setDatos] = useState({
@@ -26,9 +26,9 @@ const Formulario = () => {
         console.log('enviando datos...' + datos.titulo + datos.tipo + datos.category + datos.marca + datos.condition + datos.color + datos.descripcion)
     }
 
-    const adjuntarImagen = () => {
+    // const adjuntarImagen = () => {
 
-    }
+    // }
 
     const categories = [
         {
@@ -84,13 +84,37 @@ const Formulario = () => {
         setCategory(event.target.value);
     };
 
+    
+
+    const useStyles = makeStyles((theme) => ({
+        root: {
+            "& .MuiFilledInput-root": {
+              backgroundColor: "rgb(232, 241, 250)"
+            },
+            "& .MuiFilledInput-root:hover": {
+              backgroundColor: "rgb(250, 232, 241)",
+              // Reset on touch devices, it doesn't add specificity
+              "@media (hover: none)": {
+                backgroundColor: "rgb(232, 241, 250)"
+              }
+            },
+            "& .MuiFilledInput-root.Mui-focused": {
+              backgroundColor: "rgb(250, 241, 232)"
+            }
+          }
+
+
+    }));
+
+    const classes = useStyles();
     return (
+        
         <Box
             component="form"
             sx={{
                 padding: '20px',
                 borderRadius: '20px',
-                backgroundColor: 'white',
+                backgroundColor: 'linear-gradient(#e66465, #9198e5)',
                 '& .MuiTextField-root': { m: 1, width: '25ch' },
                 textAlign: 'center',
             }}
@@ -100,6 +124,7 @@ const Formulario = () => {
             <div style={{color: '#ffffff'}}>
                 <div>
                     <TextField
+                    className={classes.root}
                     required
                     id="titulo"
                     label="Titulo"
@@ -107,6 +132,7 @@ const Formulario = () => {
                     onChange={handleInputChange}
                     />
                     <TextField
+                    className={classes.root}
                     id="category"
                     select
                     label="Categoría"
@@ -124,12 +150,14 @@ const Formulario = () => {
                 </div>
                 <div>
                     <TextField
+                    className={classes.root}
                     id="marca"
                     label="Marca"
                     variant="filled"
                     onChange={handleInputChange}
                     />
                     <TextField
+                    className={classes.root}
                     required
                     id="condition"
                     select
@@ -148,6 +176,7 @@ const Formulario = () => {
                 </div>
                 <div>
                     <TextField
+                    className={classes.root}
                     required
                     id="color"
                     label="Color"
@@ -156,6 +185,7 @@ const Formulario = () => {
                     onChange={handleInputChange}
                     />
                     <TextField
+                    className={classes.root}
                     id="talle"
                     label="Talle"
                     type="text"
@@ -165,6 +195,7 @@ const Formulario = () => {
                 </div>
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     <TextField
+                    className={classes.root}
                     fullWidth
                     id="descripcion"
                     label="Descripción"
@@ -177,7 +208,7 @@ const Formulario = () => {
                         <input hidden accept="image/*" multiple type="file" />
                     </Button>
                 </div>
-                <Button variant="contained" style={{fontWeight: 'bold'}} onClick={() => enviarDatos()}>Publicar</Button>
+                <Button variant="contained" style={{fontWeight: 'bold', backgroundColor:'#9198e5'}} onClick={() => enviarDatos()}>Publicar</Button>
             </div>
         </Box>
         );

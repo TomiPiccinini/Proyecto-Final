@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import NavBar from '../../components/NavBar'
 import Imagenperfil from '../../images/User-Profile.png'
 import { Productos } from '../HomePubli/constants'
@@ -8,7 +8,18 @@ import Typography from '@mui/material/Typography';
 import {styles} from './perfilStyles.css'
 
 
+
+
+
 const Perfil = () => {
+  const [products,setProducts] = useState(Productos);
+
+
+  function deleteProducto(producto){
+    setProducts(products.filter(p => p.titulo !== producto)) 
+   }
+
+  
   return (
     <>
     <NavBar />
@@ -25,15 +36,15 @@ const Perfil = () => {
       <div className='cardContenedor'>
         <Typography variant="h4">Mis Publicaciones</Typography>
         <div className="productos">
-        {Productos.map((producto) => (
+        {products.map((producto) => (
             <div style={{textAlign: 'center'}}>
               <div style={{ backgroundImage: 'url(' + producto.url + ')' }} className='carta'>
-                
+              <DeleteIcon sx={{fontSize:30, color: red['A700'], cursor: 'pointer', marginTop:"170px"}} onClick={() => deleteProducto(producto.titulo)}/>
               </div>
-              <h3 style={{fontFamily: 'Alatsi'}}>{producto.name}</h3>
+              <h3 style={{fontFamily: 'Alatsi'}}>{producto.titulo}</h3>
             </div>))}
         </div>
-        <DeleteIcon sx={{fontSize:50, color: red['A700'], cursor: 'pointer'}}/>
+        
       </div>
 
     </div>
