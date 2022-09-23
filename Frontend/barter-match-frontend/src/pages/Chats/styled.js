@@ -2,13 +2,16 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: 80%;
+  height: 100%;
 `
 
 export const Container = styled.div`
+  padding-top: 3%;
   width: 100%;
-  height: 100%;
+  height: 90%;
   display: flex;
+  color: #FFFFFF;
+  border-radius: 20px;
 `
 
 export const FirstColumn = styled.div`
@@ -24,7 +27,7 @@ export const SecondColumn = styled.div`
   height: 100%;
   padding: 10px 0px 10px 0px;
   margin-top: 10px;
-  border: 1px solid;
+  border: 1px solid #FFFFFF;
   font-size: 24px;
   text-align: ${(props) => props.noMessage ? 'center': 'none'};
   justify-content: ${(props) => props.noMessage ? 'center': 'none'};
@@ -59,4 +62,25 @@ export const NoMessages = styled.div`
   padding: 5px;
   margin: 10px;
   text-align: center;
+  justify-content: center;
+  align-items: center;
+`
+
+export const Input = styled.input`
+  width: 98%;
+  font-size: 24px;
+  padding: 5px;
+  margin: 10px;
+`
+
+export const ContainerSend = styled.div`
+  width: 95%;
+  font-size: 24px;
+  padding: 5px;
+  margin: 10px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color: #fff;
 `
