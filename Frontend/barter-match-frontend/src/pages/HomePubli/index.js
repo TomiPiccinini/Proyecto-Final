@@ -68,7 +68,7 @@ const HomePublicaciones = () => {
     <Wrapper>
       <NavBar />
       <Container>
-        <div style={{marginTop: '80px'}}>
+        <div style={{marginTop: '70px'}}>
         <link href='https://fonts.googleapis.com/css?family=Damion&display=swap' rel='stylesheet' />
         <link href='https://fonts.googleapis.com/css?family=Alatsi&display=swap' rel='stylesheet' />
         <div className='cardContainer'>

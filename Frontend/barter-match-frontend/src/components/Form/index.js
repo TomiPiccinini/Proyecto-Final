@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { Box, TextField, MenuItem, Button } from '@mui/material';
+import React, {useState, useEffect} from 'react';
+import { Box, TextField, MenuItem, Button, Alert } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 const Formulario = () => {
@@ -13,6 +13,16 @@ const Formulario = () => {
         descripcion: ''
     })
 
+    const [showAlert, setShowAlert] = useState(false)
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+          console.log('This will run after 5 second!')
+          setShowAlert(false)
+        }, 5000);
+        return () => clearTimeout(timer);
+      }, [showAlert]);
+
     const handleInputChange = (event) => {
          console.log(event.target.id)
          console.log(event.target.value)
@@ -24,6 +34,7 @@ const Formulario = () => {
 
     const enviarDatos = (event) => {
         console.log('enviando datos...' + datos.titulo + datos.tipo + datos.category + datos.marca + datos.condition + datos.color + datos.descripcion)
+        setShowAlert(true)
     }
 
     // const adjuntarImagen = () => {
@@ -72,13 +83,13 @@ const Formulario = () => {
         },
     ];
 
-    const [condition, setCondition] = React.useState('');
+    const [condition, setCondition] = useState('');
 
     const handleChangeCondition = (event) => {
         setCondition(event.target.value);
     };
 
-    const [category, setCategory] = React.useState('');
+    const [category, setCategory] = useState('');
 
     const handleChange = (event) => {
         setCategory(event.target.value);
@@ -208,7 +219,8 @@ const Formulario = () => {
                         <input hidden accept="image/*" multiple type="file" />
                     </Button>
                 </div>
-                <Button variant="contained" style={{fontWeight: 'bold', backgroundColor:'#e66465'}} onClick={() => enviarDatos()}>Publicar</Button>
+                <Button variant="contained" style={{fontWeight: 'bold', backgroundColor:'#e66465', marginBottom:'10px'}} onClick={() => enviarDatos()}>Publicar</Button>
+                {showAlert && <Alert variant='filled' severity="success" onClose={() => {setShowAlert(false)}}>¡Su producto se ha registrado con éxito!</Alert>}
             </div>
         </Box>
         );
