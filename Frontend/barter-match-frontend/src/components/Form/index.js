@@ -208,7 +208,7 @@ const Formulario = () => {
                         <input hidden accept="image/*" multiple type="file" />
                     </Button>
                 </div>
-                <Button variant="contained" style={{fontWeight: 'bold', backgroundColor:'#9198e5'}} onClick={() => enviarDatos()}>Publicar</Button>
+                <Button variant="contained" style={{fontWeight: 'bold', backgroundColor:'#e66465'}} onClick={() => enviarDatos()}>Publicar</Button>
             </div>
         </Box>
         );

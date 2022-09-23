@@ -100,7 +100,7 @@ const HomePublicaciones = () => {
 
         <Dialog name={open} handleClose ={() =>{setOpen(!open)}}  />
         <div style={{textAlign: 'center', margin: '30px'}}>
-          <Button variant="contained" style={{fontWeight: 'bold' , backgroundColor:'#9198e5'}} onClick={() => history.push("new")}>Nueva publicación</Button>
+          <Button variant="contained" style={{fontWeight: 'bold' , backgroundColor:'#e66465'}} onClick={() => history.push("new")}>Nueva publicación</Button>
         </div>
       </div>
       </Container>
