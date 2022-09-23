@@ -203,7 +203,7 @@ const Formulario = () => {
                     variant="filled"
                     onChange={handleInputChange}
                     />
-                    <Button style={{marginLeft: 'auto'}} variant="contained" component="label">
+                    <Button style={{marginLeft:"10px", marginBottom:'30px', backgroundColor:'#9198e5'}}  variant="contained" component="label">
                             Subir imágen
                         <input hidden accept="image/*" multiple type="file" />
                     </Button>

@@ -39,8 +39,9 @@ const Perfil = () => {
         {products.map((producto) => (
             <div style={{textAlign: 'center'}}>
               <div style={{ backgroundImage: 'url(' + producto.url + ')' }} className='carta'>
-              <DeleteIcon sx={{fontSize:30, color: red['A700'], cursor: 'pointer', marginTop:"170px"}} onClick={() => deleteProducto(producto.titulo)}/>
+              
               </div>
+              <DeleteIcon sx={{fontSize:30, color: red['A700'], cursor: 'pointer'}} onClick={() => deleteProducto(producto.titulo)}/>
               <h3 style={{fontFamily: 'Alatsi'}}>{producto.titulo}</h3>
             </div>))}
         </div>
