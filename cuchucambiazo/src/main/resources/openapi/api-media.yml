@@ -1,0 +1,103 @@
+openapi: 3.0.0
+info:
+  title: API Business Layer
+  version: "0.1"
+paths:
+
+
+  /media/save:
+
+    post:
+      summary: Save users
+      tags:
+        - user
+      operationId: saveUser
+
+      requestBody:
+        description: Save users request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MediasRequest"
+      responses:
+        '201':
+          description: Add user confirmation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaResponse'
+        '400':
+          description: Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+
+
+
+components:
+  schemas:
+
+    MediasRequest:
+      description: ''
+      type: object
+      properties:
+        alert_list:
+          $ref: '#/components/schemas/MediaList'
+      required:
+        - user_list
+
+    MediaList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Media'
+
+    Media:
+      type: object
+      description: ''
+      required:
+        - userId
+        - url
+        - state
+        - auction
+      properties:
+        userId:
+          type: integer
+        url:
+          type: string
+        state:
+          type: string
+        auction:
+          type: boolean
+
+    MediaResponse:
+      type: object
+      description: ''
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+
+    GeneralBusinessError:
+      type: object
+      description: 'Code that represents the error that took place'
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+          description: Human readable description of the error
+
