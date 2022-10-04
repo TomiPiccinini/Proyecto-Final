@@ -15,8 +15,14 @@ public class Usuario {
     @Column(name = "id_usuario")
     private Integer idUsuario;
 
-    @Column(name = "nombre")
+    @Column
     private String nombre;
+
+    @Column
+    private String contrasenia;
+
+    @Column
+    private String email;
 
     @OneToMany(mappedBy = "usuario")
     private List<Publicacion> publicaciones;
