@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef  } from 'react'
+import React, { useState, useMemo, useRef, useEffect } from 'react'
 import NavBar from '../../components/NavBar'
 import { Container, Wrapper } from './styled'
 import HomeCard from '../../components/HomeCard'
@@ -7,13 +7,19 @@ import {styles} from './styles.css';
 import Dialog from '../../components/Dialog'
 import {Productos} from './constants'
 import history from "../../utils/history"
+import { useDispatch, useSelector } from 'react-redux';
+import { getPublicaciones } from '../../store/HomePubli/action';
+import { selectPublicaciones } from '../../store/HomePubli/selectors';
 
 
 const HomePublicaciones = () => {
+  const dispatch = useDispatch()
 
   const [currentIndex, setCurrentIndex] = useState(Productos.length - 1)
   const [open,setOpen] = useState(false)
   const currentIndexRef = useRef(currentIndex)
+
+  const publis = useSelector(selectPublicaciones)
 
   const childRefs = useMemo(
     () =>
@@ -63,6 +69,10 @@ const HomePublicaciones = () => {
   const handleOpen = () =>{
     setOpen(!open) 
   }
+
+  useEffect(() => {
+    dispatch(getPublicaciones())
+  }, []);
 
   return (
     <Wrapper>
