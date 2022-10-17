@@ -91,33 +91,37 @@ components:
       description: ''
       type: object
       properties:
-        user_list:
-          $ref: '#/components/schemas/UserList'
-      required:
-        - user_list
+        name:
+          type: string
 
     UsersRequest:
       description: ''
+      required:
+        - name
+        - password
+        - email
       type: object
       properties:
-        user_list:
-          $ref: '#/components/schemas/UserList'
-      required:
-        - user_list
-
-    UserList:
-      type: array
-      items:
-        $ref: '#/components/schemas/User'
+        User:
+          $ref: '#/components/schemas/User'
 
     User:
-      type: object
       description: ''
       required:
-        - userName
+        - name
+        - password
+        - email
+      type: object
       properties:
-        userName:
+        name:
           type: string
+        password:
+          type: string
+        email:
+          type: string
+          pattern: '^$|^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'
+
+
 
 
     UserResponse:
