@@ -7,12 +7,18 @@ import {styles} from './styles.css';
 import Dialog from '../../components/Dialog'
 import {Productos} from './constants'
 import history from "../../utils/history"
+import DetailsCard from "../../components/DetailsCard"
+import { fontSize } from '@mui/system';
+
 
 
 const HomePublicaciones = () => {
 
   const [currentIndex, setCurrentIndex] = useState(Productos.length - 1)
   const [open,setOpen] = useState(false)
+  const [openDetails,setOpenDetails] = useState(false)
+  const [name,setName] = useState('')
+  const [image,setImage] = useState('')
   const currentIndexRef = useRef(currentIndex)
 
   const childRefs = useMemo(
@@ -64,6 +70,12 @@ const HomePublicaciones = () => {
     setOpen(!open) 
   }
 
+  const handleOpenDetails = (name,imagen)=>{
+    setName(name)
+    setImage(imagen)
+    setOpenDetails(!openDetails)
+  }
+
   return (
     <Wrapper>
       <NavBar />
@@ -79,28 +91,37 @@ const HomePublicaciones = () => {
               key={producto.titulo}
               onSwipe={(dir) => swiped(dir, producto.titulo, index)}
               onCardLeftScreen={() => outOfFrame(producto.titulo, index)}
+              
             >
               <div
+                onDoubleClick={()=> handleOpenDetails(producto.titulo,producto.url)}
                 style={{ backgroundImage: 'url(' + producto.url + ')'}}
                 className='card'
+                
               >
                 <h3>{producto.titulo}</h3>
+                
               </div>
+              
+             
             </HomeCard>
           ))}
         </div>
         <div className='buttons' style={{display: 'flex', flexDirection: 'column', textAlign: 'center'}}>
           <p style={{fontWeight: 'bold', color: '#fff'}}>Deslice hacia la izquierda si no le gusta el producto.<br></br>Deslice hacia la derecha si el producto le gusta.</p>
           <div>
-            <button style={{ backgroundColor: !canSwipe && '#c3c4d3', cursor: 'pointer' }} onClick={() => swipe('left')}>¡No me queda!</button>
-            <button style={{ backgroundColor: !canGoBack && '#c3c4d3', cursor: 'pointer' }} onClick={() => goBack()}>Deshacer</button>
-            <button style={{ backgroundColor: !canSwipe && '#c3c4d3', cursor: 'pointer' }} onClick={() => swipe('right')}>¡Me queda!</button>
+            <img src="https://i.ibb.co/Jp8YJYD/Like-icon-on-transparent-PNG.png" className='button' alt="dislike" border="0" style={{width:"100px", rotate:"180deg" }} onClick={() => swipe('left')}/>
+            
+            <img src="https://i.ibb.co/5YFjNZS/reload.png" alt="reload" className='button' border="0" style={{width:"100px"}} onClick={() => goBack()}/>
+            
+            <img src="https://i.ibb.co/Jp8YJYD/Like-icon-on-transparent-PNG.png" alt="Like-icon-on-transparent-PNG" className='button' border="0" style={{width:"100px"}} onClick={() => swipe('right')}/>
           </div>
         </div>
-
+        <DetailsCard open={openDetails} image={image} name={name} handleCloseDetails ={() =>{setOpenDetails(!openDetails)}} />    
         <Dialog name={open} handleClose ={() =>{setOpen(!open)}}  />
+        
         <div style={{textAlign: 'center', margin: '30px'}}>
-          <Button variant="contained" style={{fontWeight: 'bold' , backgroundColor:'#e66465'}} onClick={() => history.push("new")}>Nueva publicación</Button>
+          <Button variant="contained" style={{fontWeight: 'bold' , backgroundColor:'rgb(82 97 205)', borderRadius:'50%' ,height:'60px',width:'60px', fontSize:'1.7em'}} className="button" onClick={() => history.push("new")}>+</Button>
         </div>
       </div>
       </Container>
