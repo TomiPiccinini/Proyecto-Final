@@ -18,7 +18,4 @@ public class Tag {
     @Column
     private String nombre;
 
-    @OneToMany(mappedBy = "tag")
-    private List<PublicacionTag> publicaciones;
-
 }

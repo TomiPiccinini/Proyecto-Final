@@ -1,10 +1,8 @@
 package com.cuchucambiazo.user;
 
-import api.orange.business.controller.user.model.UserResponse;
-import api.orange.business.controller.user.model.UsersRequest;
+import api.cuchucambiazo.controller.user.model.User;
+import api.cuchucambiazo.controller.user.model.UserResponse;
 import com.cuchucambiazo.persistence.UsuarioRepository;
-import com.cuchucambiazo.persistence.entity.Usuario;
-import com.cuchucambiazo.persistence.mapper.UserMapper;
 import com.cuchucambiazo.user.build.ResponseBuild;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,18 +17,9 @@ public class UserService {
     private UsuarioRepository usuarioRepository;
 
 
-    public UserResponse saveUsers(UsersRequest usersRequest){
+    public UserResponse saveUser(User user){
 
-        usersRequest.getUserList().forEach(a -> {
-            Usuario usuario = new Usuario();
-            usuario.setNombre(a.getUserName());
-
-            //Usuario usuario = userMapper.toUsuario(a);
-
-            usuarioRepository.save(usuario);
-
-        });
-
+        //usuarioRepository.save(user);
 
         return responseBuild.userResponseBuild("00","Correcto paaaaa");
     }

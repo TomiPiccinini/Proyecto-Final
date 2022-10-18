@@ -27,5 +27,7 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     private List<Publicacion> publicaciones;
 
+    @OneToMany(mappedBy = "usuario")
+    private List<MeGusta> meGustas;
 
 }

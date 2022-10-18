@@ -1,6 +1,6 @@
 package com.cuchucambiazo.persistence.mapper;
 
-import api.orange.business.controller.user.model.User;
+import api.cuchucambiazo.controller.user.model.User;
 import com.cuchucambiazo.persistence.entity.Usuario;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -11,7 +11,8 @@ import org.mapstruct.Mappings;
 public interface UserMapper {
 
     @Mappings({
-            @Mapping(target = "nombre", source = "userName"),
+            @Mapping(target = "nombre", source = "name"),
+            @Mapping(target = "contrasenia", source = "password")
     })
     User toUser(Usuario usuario);
 

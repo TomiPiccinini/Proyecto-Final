@@ -1,6 +1,6 @@
 package com.cuchucambiazo.user.build;
 
-import api.orange.business.controller.user.model.UserResponse;
+import api.cuchucambiazo.controller.user.model.UserResponse;
 import org.springframework.stereotype.Component;
 
 @Component

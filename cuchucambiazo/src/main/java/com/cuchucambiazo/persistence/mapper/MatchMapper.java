@@ -1,6 +1,6 @@
 package com.cuchucambiazo.persistence.mapper;
 
-import api.orange.business.controller.match.model.Match;
+import api.cuchucambiazo.controller.match.model.Match;
 import com.cuchucambiazo.persistence.entity.Matcheo;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

@@ -4,21 +4,54 @@ info:
   version: "0.1"
 paths:
 
+  /media:
+
+    get:
+      summary: Get Medias
+      tags:
+        - getMedia
+      operationId: getMedias
+
+      responses:
+        '201':
+          description: Add user confirmation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaResponse'
+        '400':
+          description: Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
 
   /media/save:
 
     post:
-      summary: Save users
+      summary: Save medias
       tags:
-        - user
-      operationId: saveUser
+        - media
+      operationId: saveMedia
 
       requestBody:
-        description: Save users request
+        description: Save medias request
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/MediasRequest"
+              $ref: "#/components/schemas/Media"
       responses:
         '201':
           description: Add user confirmation
@@ -50,14 +83,14 @@ paths:
 components:
   schemas:
 
-    MediasRequest:
+    getMediaResponse:
       description: ''
       type: object
       properties:
-        alert_list:
+        media_list:
           $ref: '#/components/schemas/MediaList'
       required:
-        - user_list
+        - media_list
 
     MediaList:
       type: array
@@ -69,18 +102,30 @@ components:
       description: ''
       required:
         - userId
-        - url
+        - urlPhoto
         - state
-        - auction
+        - description
+        - measures
       properties:
         userId:
           type: integer
-        url:
-          type: string
+        photoList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Photo'
         state:
           type: string
-        auction:
-          type: boolean
+        description:
+          type: string
+        measures:
+          type: string
+
+    Photo:
+      type: object
+      description: ''
+      properties:
+        url:
+          type: string
 
     MediaResponse:
       type: object

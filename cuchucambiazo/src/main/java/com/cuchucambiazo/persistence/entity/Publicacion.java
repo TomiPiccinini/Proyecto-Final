@@ -19,6 +19,9 @@ public class Publicacion {
     @Column
     private String descripcion;
 
+    @Column
+    private String medidas;
+
     @Column(name = "fecha_modificacion")
     private String fechaModificacion;
 
@@ -34,5 +37,8 @@ public class Publicacion {
 
     @OneToMany(mappedBy = "publicacion")
     private List<Foto> fotos;
+
+    @OneToMany(mappedBy = "publicacion", cascade = {CascadeType.ALL})
+    private List<MeGusta> meGustas;
 
 }

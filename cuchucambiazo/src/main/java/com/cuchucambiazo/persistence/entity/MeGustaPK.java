@@ -8,12 +8,12 @@ import java.io.Serializable;
 
 @Embeddable
 @Data
-public class PublicacionTagPK implements Serializable {
+public class MeGustaPK implements Serializable {
+
+    @Column(name = "id_usuario")
+    private Integer idUsuario;
 
     @Column(name = "id_publicacion")
     private Integer idPublicacion;
-
-    @Column(name = "id_tag")
-    private Integer idTag;
 
 }

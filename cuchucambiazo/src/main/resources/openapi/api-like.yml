@@ -4,28 +4,61 @@ info:
   version: "0.1"
 paths:
 
+  /like:
 
-  /users/save:
+    get:
+      summary: Get Likes
+      tags:
+        - getLike
+      operationId: getLikes
+
+      responses:
+        '201':
+          description: Get like
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getLikeResponse'
+        '400':
+          description: Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+
+  /like/save:
 
     post:
-      summary: Save users
+      summary: Save like
       tags:
-        - user
-      operationId: saveUser
+        - like
+      operationId: saveLike
 
       requestBody:
-        description: Save users request
+        description: Save likes request
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/User"
+              $ref: "#/components/schemas/Like"
       responses:
         '201':
           description: Add user confirmation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserResponse'
+                $ref: '#/components/schemas/LikeResponse'
         '400':
           description: Bad Request.
           content:
@@ -44,76 +77,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GeneralBusinessError'
-
-  /users:
-
-    get:
-      summary: Post to get all users
-      tags:
-        - user
-
-      operationId: getUsers
-
-      responses:
-        '200':
-          description: Card Setting confirmation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserGetResponse'
-        '400':
-          description: Bad Request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GeneralBusinessError'
-        '404':
-          description: Not Found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GeneralBusinessError'
-        '500':
-          description: Internal Server Error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GeneralBusinessError'
-
-
 
 
 
 components:
   schemas:
 
-    UserGetResponse:
+    getLikeResponse:
       description: ''
       type: object
       properties:
-        name:
-          type: string
+        like_list:
+          $ref: '#/components/schemas/LikeList'
+      required:
+        - media_list
 
-    User:
+    LikeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Like'
+
+    Like:
+      type: object
       description: ''
       required:
-        - name
-        - password
-        - email
-      type: object
+        - transmitter
+        - receiver
       properties:
-        name:
-          type: string
-        password:
-          type: string
-        email:
-          type: string
-          pattern: '^$|^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'
+        userId:
+          type: integer
+        mediaId:
+          type: integer
 
-
-
-
-    UserResponse:
+    LikeResponse:
       type: object
       description: ''
       properties:

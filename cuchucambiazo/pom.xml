@@ -134,8 +134,8 @@
 								<generateApis>true</generateApis>
 								<apisToGenerate>User</apisToGenerate>
 								<interfaceOnly>true</interfaceOnly>
-								<apiPackage>api.orange.business.controller.user.api</apiPackage>
-								<modelPackage>api.orange.business.controller.user.model</modelPackage>
+								<apiPackage>api.cuchucambiazo.controller.user.api</apiPackage>
+								<modelPackage>api.cuchucambiazo.controller.user.model</modelPackage>
 								<java8>true</java8>
 								<dateLibrary>java8</dateLibrary>
 								<library>spring-boot</library>
@@ -161,8 +161,8 @@
 								<generateApis>true</generateApis>
 								<apisToGenerate>Match</apisToGenerate>
 								<interfaceOnly>true</interfaceOnly>
-								<apiPackage>api.orange.business.controller.match.api</apiPackage>
-								<modelPackage>api.orange.business.controller.match.model</modelPackage>
+								<apiPackage>api.cuchucambiazo.controller.match.api</apiPackage>
+								<modelPackage>api.cuchucambiazo.controller.match.model</modelPackage>
 								<java8>true</java8>
 								<dateLibrary>java8</dateLibrary>
 								<library>spring-boot</library>
@@ -188,8 +188,35 @@
 								<generateApis>true</generateApis>
 								<apisToGenerate>Media</apisToGenerate>
 								<interfaceOnly>true</interfaceOnly>
-								<apiPackage>api.orange.business.controller.media.api</apiPackage>
-								<modelPackage>api.orange.business.controller.media.model</modelPackage>
+								<apiPackage>api.cuchucambiazo.controller.media.api</apiPackage>
+								<modelPackage>api.cuchucambiazo.controller.media.model</modelPackage>
+								<java8>true</java8>
+								<dateLibrary>java8</dateLibrary>
+								<library>spring-boot</library>
+								<serializableModel>true</serializableModel>
+								<sourceFolder>src/main/java</sourceFolder>
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
+								<generateSupportingFiles>false</generateSupportingFiles>
+							</configOptions>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>generate-like-server</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/resources/openapi/api-like.yml</inputSpec>
+							<generatorName>spring</generatorName>
+							<generateApiDocumentation>false</generateApiDocumentation>
+							<generateModelDocumentation>false</generateModelDocumentation>
+							<configOptions>
+								<generateApis>true</generateApis>
+								<apisToGenerate>Media</apisToGenerate>
+								<interfaceOnly>true</interfaceOnly>
+								<apiPackage>api.cuchucambiazo.controller.like.api</apiPackage>
+								<modelPackage>api.cuchucambiazo.controller.like.model</modelPackage>
 								<java8>true</java8>
 								<dateLibrary>java8</dateLibrary>
 								<library>spring-boot</library>
