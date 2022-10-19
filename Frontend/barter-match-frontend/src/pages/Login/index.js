@@ -19,7 +19,7 @@ const Login = () => {
                 padding: '20px',
                 borderRadius: '20px',
                 backgroundColor: 'white',
-                '& .MuiTextField-root': { m: 1, width: '25ch' },
+                '& .MuiTextField-root': { m: 1 },
                 textAlign: 'center',
                 
             }}
@@ -34,15 +34,14 @@ const Login = () => {
                     id="Usuario"
                     label="Usuario"
                     variant="filled"
-                    sx={{width:'100%'
-                      
-                    }}
+                    
                     />
                     <TextField
                     required
                     id="Password"
                     label="Password"
                     variant="filled"
+                    type="password"
                     />
                     <Button style={{marginLeft:"10px",marginTop:'25px', backgroundColor:'#9198e5'}}  variant="contained" component="label" onClick={() => history.push("home")}>
                             Send 

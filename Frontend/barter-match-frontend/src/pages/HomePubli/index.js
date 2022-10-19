@@ -99,7 +99,7 @@ const HomePublicaciones = () => {
         
           <link href='https://fonts.googleapis.com/css?family=Damion&display=swap' rel='stylesheet' />
           <link href='https://fonts.googleapis.com/css?family=Alatsi&display=swap' rel='stylesheet' />
-          <Tooltip title="Double click for details" placement="top">
+          <Tooltip title="Doble click para detalles" placement="top">
           <div className='cardContainer'>
             {Productos.map((producto, index) => (
               <HomeCard
