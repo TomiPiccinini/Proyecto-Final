@@ -219,7 +219,7 @@ const Formulario = () => {
                         <input hidden accept="image/*" multiple type="file" />
                     </Button>
                 </div>
-                <Button variant="contained" style={{fontWeight: 'bold', backgroundColor:'#e66465', marginBottom:'10px'}} onClick={() => enviarDatos()}>Publicar</Button>
+                <Button variant="contained" style={{fontWeight: 'bold', backgroundColor:'rgb(82 97 205)', marginBottom:'10px'}} onClick={() => enviarDatos()}>Publicar</Button>
                 {showAlert && <Alert variant='filled' severity="success" onClose={() => {setShowAlert(false)}}>¡Su producto se ha registrado con éxito!</Alert>}
             </div>
         </Box>

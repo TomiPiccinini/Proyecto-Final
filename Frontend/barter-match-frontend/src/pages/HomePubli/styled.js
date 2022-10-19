@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
   width: 100%;
   height: 100%;
+  margin-top:100px;
   display: flex;
   flex-direction: column;
   align-items: center;

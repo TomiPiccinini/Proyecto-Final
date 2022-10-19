@@ -6,15 +6,18 @@ import DeleteIcon from '@mui/icons-material/DeleteRounded';
 import { red } from '@mui/material/colors';
 import Typography from '@mui/material/Typography';
 import { Alert } from '@mui/material';
-import {styles} from './perfilStyles.css'
-
-
+import DetailsCard from "../../components/DetailsCard"
+// eslint-disable-next-line
+import { styles } from './perfilStyles.css' 
+import  VanillaTilt from 'vanilla-tilt'
 
 
 
 const Perfil = () => {
   const [publicaciones,setPublicaciones] = useState(Publicaciones);
-
+  const [name,setName] = useState('')
+  const [image,setImage] = useState('')
+  const [openDetails,setOpenDetails] = useState(false)
   const [showAlert, setShowAlert] = useState(false)
 
   function deletePublicacion(publicacion){
@@ -22,18 +25,35 @@ const Perfil = () => {
     setShowAlert(true)
    }
 
+   useEffect(() => {
+    VanillaTilt.init(document.querySelectorAll(".carta"), {
+      glare:true,
+      "max-glare":1,
+      max: 25,
+      speed: 400
+      })
+  }, []);
 
    useEffect(() => {
     const timer = setTimeout(() => {
       console.log('This will run after 5 second!')
       setShowAlert(false)
-    }, 5000);
+    }, 3000);
     return () => clearTimeout(timer);
   }, [showAlert]);
 
+ 
+
+
+  const handleOpenDetails = (name,imagen)=>{
+    setName(name)
+    setImage(imagen)
+    setOpenDetails(!openDetails)
+  }
   
   return (
     <>
+    
     <NavBar />
     <div className='Contenedor'>
     <link href='https://fonts.googleapis.com/css?family=Roboto&display=swap' rel='stylesheet' />
@@ -50,21 +70,19 @@ const Perfil = () => {
         <div className="productos">
         {publicaciones.map((publicacion) => (
             <div style={{textAlign: 'center', marginBottom: '25px'}}>
-              <div style={{ backgroundImage: 'url(' + publicacion.url + ')' }} className='carta'>
+              <div style={{ backgroundImage: 'url(' + publicacion.url + ')' }} className='carta' onClick={()=> handleOpenDetails(publicacion.titulo,publicacion.url)}></div>
               
-              </div>
               <div style={{display: 'flex', textAlign:'center', justifyContent: 'center'}}>
                 <h3 style={{fontFamily: 'Alatsi', margin: 0}}>{publicacion.titulo}</h3>
                 <DeleteIcon sx={{color: red['A700'], cursor: 'pointer'}} onClick={() => deletePublicacion(publicacion.titulo)}/>
               </div>
-            </div>))}
-            
+            </div>))}  
         </div>
+        <DetailsCard open={openDetails} image={image} name={name} handleCloseDetails ={() =>{setOpenDetails(!openDetails)}} />
         {showAlert && <Alert variant='filled' severity="success" onClose={() => {setShowAlert(false)}}>¡Su producto se ha eliminado con éxito!</Alert>}
       </div>
 
-    </div>
-
+    </div>   
     </>
   )
 }

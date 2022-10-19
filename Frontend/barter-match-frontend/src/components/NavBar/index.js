@@ -14,6 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { makeStyles } from '@mui/styles';
 
 const drawerWidth = 240;
 const navItems = [
@@ -29,6 +30,18 @@ function DrawerAppBar(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+       
+       '&:hover': {
+        transform: 'scale(1.05)',
+        transition: '0.5s',
+        borderBottom: '2px solid white',
+     }
+      }
+  }));
+  const classes = useStyles();
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', fontWeight: 'bold' }}>
@@ -67,12 +80,13 @@ function DrawerAppBar(props) {
             variant="h6"
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, cursor:'pointer', fontWeight: 'bold' }}
+            
           >
             BarterMatch
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item.title} sx={{ color: '#fff', fontWeight: 'bold' }} onClick={() => history.push(item.value)} >
+              <Button key={item.title} sx={{ color: '#fff', fontWeight: 'bold',mr:2 }} onClick={() => history.push(item.value)}className={classes.root} >
                 {item.title}
               </Button>
             ))}
@@ -86,7 +100,7 @@ function DrawerAppBar(props) {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+          keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
