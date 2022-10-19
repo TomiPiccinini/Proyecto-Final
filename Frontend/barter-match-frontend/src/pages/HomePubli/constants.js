@@ -36,7 +36,7 @@ export const Productos = [
       url: 'https://d3ugyf2ht6aenh.cloudfront.net/stores/887/995/products/1211-4fdb747ce6721192c816371679157801-1024-1024.jpg'
     },
     {
-      titulo: 'Pantalon',
+      titulo: 'Pantalon2',
       categoria:'',
       marca:'',
       condicion:'',
