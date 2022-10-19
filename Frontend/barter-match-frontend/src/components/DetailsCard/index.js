@@ -5,17 +5,13 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import Slide from '@mui/material/Slide';
 import { DialogContainer , MatchImg} from "./styled";
 import { Grow } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { flexbox } from '@mui/system';
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
-const useStyles = makeStyles((theme) => ({
+
+const useStyles = makeStyles(() => ({
   root: {
      display:'flex',
      flexDirection:'column',
