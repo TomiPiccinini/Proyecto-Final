@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef , useEffect } from 'react'
+import React, { useState, useMemo, useRef, useEffect } from 'react'
 import NavBar from '../../components/NavBar'
 import { Container, Wrapper } from './styled'
 import HomeCard from '../../components/HomeCard'
@@ -11,11 +11,13 @@ import history from "../../utils/history"
 import DetailsCard from "../../components/DetailsCard"
 import Tooltip from '@mui/material/Tooltip';
 import  VanillaTilt from 'vanilla-tilt'
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getPublicaciones } from '../../store/HomePubli/action';
+import { selectPublicaciones } from '../../store/HomePubli/selectors';
 
 
 const HomePublicaciones = () => {
+  const dispatch = useDispatch()
 
   const [currentIndex, setCurrentIndex] = useState(Productos.length - 1)
   const [open,setOpen] = useState(false)
@@ -32,6 +34,7 @@ const HomePublicaciones = () => {
       speed: 400
       })
   }, []);
+  const publis = useSelector(selectPublicaciones)
 
   const childRefs = useMemo(
     () =>
@@ -87,10 +90,10 @@ const HomePublicaciones = () => {
     setImage(imagen)
     setOpenDetails(!openDetails)
   }
-
   
-
-  
+  useEffect(() => {
+    dispatch(getPublicaciones())
+  }, []);
 
   return (
     <Wrapper>

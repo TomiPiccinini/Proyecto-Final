@@ -1,0 +1,130 @@
+openapi: 3.0.0
+info:
+  title: API Business Layer
+  version: "0.1"
+paths:
+
+  /like:
+
+    get:
+      summary: Get Likes
+      tags:
+        - getLike
+      operationId: getLikes
+
+      responses:
+        '201':
+          description: Get like
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getLikeResponse'
+        '400':
+          description: Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+
+  /like/save:
+
+    post:
+      summary: Save like
+      tags:
+        - like
+      operationId: saveLike
+
+      requestBody:
+        description: Save likes request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Like"
+      responses:
+        '201':
+          description: Add user confirmation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LikeResponse'
+        '400':
+          description: Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+
+
+
+components:
+  schemas:
+
+    getLikeResponse:
+      description: ''
+      type: object
+      properties:
+        like_list:
+          $ref: '#/components/schemas/LikeList'
+      required:
+        - media_list
+
+    LikeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Like'
+
+    Like:
+      type: object
+      description: ''
+      required:
+        - transmitter
+        - receiver
+      properties:
+        userId:
+          type: integer
+        mediaId:
+          type: integer
+
+    LikeResponse:
+      type: object
+      description: ''
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+
+    GeneralBusinessError:
+      type: object
+      description: 'Code that represents the error that took place'
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+          description: Human readable description of the error
+

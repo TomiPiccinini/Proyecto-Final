@@ -1,0 +1,155 @@
+openapi: 3.0.0
+info:
+  title: API Business Layer
+  version: "0.1"
+paths:
+
+
+  /match/save:
+
+    post:
+      summary: Save matchs
+      tags:
+        - user
+      operationId: saveUser
+
+      requestBody:
+        description: Save matchs request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MatchRequest"
+      responses:
+        '201':
+          description: Add match confirmation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchResponse'
+        '400':
+          description: Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+
+  /match:
+
+    get:
+      summary: Post to get all matchs
+      tags:
+        - user
+
+      operationId: getMatchs
+
+      responses:
+        '200':
+          description: Get Match
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchGetResponse'
+        '400':
+          description: Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+
+
+components:
+  schemas:
+
+    MatchRequest:
+      description: ''
+      type: object
+      properties:
+        match_list:
+          $ref: '#/components/schemas/Match_list'
+      required:
+        - match_list
+
+    MatchGetResponse:
+      description: ''
+      type: object
+      properties:
+        new_matchs:
+          $ref: '#/components/schemas/Match_list'
+        new_triple_matchs:
+          $ref: '#/components/schemas/Match_list'
+        old_matchs:
+          $ref: '#/components/schemas/Match_list'
+        old_triple_matchs:
+          $ref: '#/components/schemas/Match_list'
+
+    Match_list:
+      type: array
+      items:
+        $ref: '#/components/schemas/Match'
+
+
+    Match:
+      type: object
+      description: ''
+      required:
+        - dateTimeMatch
+        - userId1
+        - userId2
+        - state
+      properties:
+        dateTimeMatch:
+          type: string
+        userId1:
+          type: string
+        userId2:
+          type: string
+        userId3:
+          type: string
+        state:
+          type: string
+
+
+
+    MatchResponse:
+      type: object
+      description: ''
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+
+    GeneralBusinessError:
+      type: object
+      description: 'Code that represents the error that took place'
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+          description: Human readable description of the error
+

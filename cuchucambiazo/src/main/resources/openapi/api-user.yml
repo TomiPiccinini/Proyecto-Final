@@ -1,0 +1,134 @@
+openapi: 3.0.0
+info:
+  title: API Business Layer
+  version: "0.1"
+paths:
+
+
+  /users/save:
+
+    post:
+      summary: Save users
+      tags:
+        - user
+      operationId: saveUser
+
+      requestBody:
+        description: Save users request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        '201':
+          description: Add user confirmation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+
+  /users:
+
+    get:
+      summary: Post to get all users
+      tags:
+        - user
+
+      operationId: getUsers
+
+      responses:
+        '200':
+          description: Card Setting confirmation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserGetResponse'
+        '400':
+          description: Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+
+
+
+
+
+components:
+  schemas:
+
+    UserGetResponse:
+      description: ''
+      type: object
+      properties:
+        name:
+          type: string
+
+    User:
+      description: ''
+      required:
+        - name
+        - password
+        - email
+      type: object
+      properties:
+        name:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+          pattern: '^$|^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'
+
+
+
+
+    UserResponse:
+      type: object
+      description: ''
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+
+    GeneralBusinessError:
+      type: object
+      description: 'Code that represents the error that took place'
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+          description: Human readable description of the error
+
