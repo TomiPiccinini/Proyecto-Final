@@ -18,21 +18,15 @@ public class Matcheo {
     @Column(name = "fecha_alta")
     private String fechaAlta;
 
-    @Column(name = "id_publication1")
-    private Integer publicacionId1;
-
-    @Column(name = "id_publication2")
-    private Integer publicacionId2;
-
     @Column(name = "fecha_baja")
     private String fechaBaja;
 
     @ManyToOne
-    @JoinColumn(name = "id_publicacion", insertable = false, updatable = false)
+    @JoinColumn(name = "id_publicacion1", insertable = false, updatable = false)
     private Publicacion publicacion1;
 
     @ManyToOne
-    @JoinColumn(name = "id_publicacion", insertable = false, updatable = false)
+    @JoinColumn(name = "id_publicacion2", insertable = false, updatable = false)
     private Publicacion publicacion2;
 
     @OneToMany(mappedBy = "matcheo")

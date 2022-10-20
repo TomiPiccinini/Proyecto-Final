@@ -4,56 +4,22 @@ info:
   version: "0.1"
 paths:
 
-
-  /match/save:
+  /match/consult:
 
     post:
-      summary: Save matchs
-      tags:
-        - user
-      operationId: saveUser
-
-      requestBody:
-        description: Save matchs request
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/MatchRequest"
-      responses:
-        '201':
-          description: Add match confirmation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MatchResponse'
-        '400':
-          description: Bad Request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GeneralBusinessError'
-        '404':
-          description: Not Found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GeneralBusinessError'
-        '500':
-          description: Internal Server Error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GeneralBusinessError'
-
-  /match:
-
-    get:
       summary: Post to get all matchs
+
       tags:
         - user
 
       operationId: getMatchs
 
+      requestBody:
+        description: Save likes request
+        content:
+          text/plain:
+            schema:
+              type: string
       responses:
         '200':
           description: Get Match
@@ -84,32 +50,55 @@ paths:
 components:
   schemas:
 
-    MatchRequest:
-      description: ''
-      type: object
-      properties:
-        match_list:
-          $ref: '#/components/schemas/Match_list'
-      required:
-        - match_list
-
     MatchGetResponse:
       description: ''
       type: object
       properties:
-        new_matchs:
-          $ref: '#/components/schemas/Match_list'
-        new_triple_matchs:
-          $ref: '#/components/schemas/Match_list'
-        old_matchs:
-          $ref: '#/components/schemas/Match_list'
-        old_triple_matchs:
+        matchs:
           $ref: '#/components/schemas/Match_list'
 
     Match_list:
       type: array
       items:
-        $ref: '#/components/schemas/Match'
+        $ref: '#/components/schemas/Chat'
+
+
+    Chat:
+      type: object
+      description: ''
+      required:
+        - matchId1
+        - userId2
+        - state
+      properties:
+        matchId:
+          type: string
+        fotos:
+          type: array
+          items:
+            type: string
+        mensajes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Mensaje'
+
+    Mensaje:
+      type: object
+      description: ''
+      required:
+        - userIssuing
+        - userReceiver
+        - dateTime
+        - text
+      properties:
+        userIssuing:
+          type: string
+        userReceiver:
+          type: string
+        dateTime:
+          type: string
+        text:
+          type: string
 
 
     Match:
@@ -123,24 +112,11 @@ components:
       properties:
         dateTimeMatch:
           type: string
-        userId1:
+        mediaId1:
           type: string
-        userId2:
-          type: string
-        userId3:
+        mediaId2:
           type: string
         state:
-          type: string
-
-
-
-    MatchResponse:
-      type: object
-      description: ''
-      properties:
-        code:
-          type: string
-        message:
           type: string
 
     GeneralBusinessError:

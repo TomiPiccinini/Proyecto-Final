@@ -6,12 +6,19 @@ paths:
 
   /like:
 
-    get:
+    post:
       summary: Get Likes
+
       tags:
         - getLike
       operationId: getLikes
 
+      requestBody:
+        description: Save likes request
+        content:
+          text/plain:
+            schema:
+              type: string
       responses:
         '201':
           description: Get like
@@ -58,7 +65,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LikeResponse'
+                $ref: 'api-user.yml#/components/schemas/GeneralBusinessResponse'
         '400':
           description: Bad Request.
           content:
@@ -101,8 +108,8 @@ components:
       type: object
       description: ''
       required:
-        - transmitter
-        - receiver
+        - userId
+        - mediaId
       properties:
         userId:
           type: integer

@@ -1,7 +1,7 @@
 package com.cuchucambiazo.user;
 
+import api.cuchucambiazo.controller.user.model.GeneralBusinessResponse;
 import api.cuchucambiazo.controller.user.model.User;
-import api.cuchucambiazo.controller.user.model.UserResponse;
 import com.cuchucambiazo.persistence.UsuarioRepository;
 import com.cuchucambiazo.user.build.ResponseBuild;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class UserService {
     private UsuarioRepository usuarioRepository;
 
 
-    public UserResponse saveUser(User user){
+    public GeneralBusinessResponse saveUser(User user){
 
         //usuarioRepository.save(user);
 

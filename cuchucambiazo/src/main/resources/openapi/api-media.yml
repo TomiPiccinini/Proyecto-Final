@@ -6,19 +6,25 @@ paths:
 
   /media:
 
-    get:
+    post:
       summary: Get Medias
       tags:
         - getMedia
       operationId: getMedias
 
+      requestBody:
+        description: Save likes request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/getMediaRequest"
       responses:
         '201':
           description: Add user confirmation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MediaResponse'
+                $ref: '#/components/schemas/getMediaResponse'
         '400':
           description: Bad Request.
           content:
@@ -58,7 +64,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MediaResponse'
+                $ref: 'api-user.yml#/components/schemas/GeneralBusinessResponse'
         '400':
           description: Bad Request.
           content:
@@ -82,6 +88,18 @@ paths:
 
 components:
   schemas:
+
+    getMediaRequest:
+      type: object
+      description: ''
+      required:
+        - isHome
+        - userId
+      properties:
+        isHome:
+          type: boolean
+        userId:
+          type: integer
 
     getMediaResponse:
       description: ''

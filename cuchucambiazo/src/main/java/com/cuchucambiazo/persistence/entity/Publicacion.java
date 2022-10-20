@@ -13,14 +13,14 @@ public class Publicacion {
     @Column(name = "id_publicacion")
     private Integer idPublicacion;
 
-    @Column(name = "id_usuario")
-    private Integer usuarioId;
-
     @Column
     private String descripcion;
 
     @Column
     private String medidas;
+
+    @Column
+    private String estado;
 
     @Column(name = "fecha_modificacion")
     private String fechaModificacion;
