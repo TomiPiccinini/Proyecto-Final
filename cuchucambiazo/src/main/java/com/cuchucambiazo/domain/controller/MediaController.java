@@ -2,6 +2,7 @@ package com.cuchucambiazo.domain.controller;
 
 import api.cuchucambiazo.controller.media.api.MediaApi;
 import api.cuchucambiazo.controller.media.model.*;
+import com.cuchucambiazo.commons.utils.Utils;
 import com.cuchucambiazo.domain.service.MediaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ public class MediaController implements MediaApi {
     @Autowired
     private MediaService service;
 
+
     @Override
     public ResponseEntity<GetMediaResponse> getMedias(GetMediaRequest getMediaRequest) {
         GetMediaResponse response = service.getMedias(getMediaRequest);
@@ -23,6 +25,14 @@ public class MediaController implements MediaApi {
     @Override
     public ResponseEntity<GeneralBusinessResponse> saveMedia(Media media) {
         service.saveMedia(media);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(buildGeneralBusinessResponse() ,HttpStatus.CREATED);
+    }
+
+    public GeneralBusinessResponse buildGeneralBusinessResponse(){
+        GeneralBusinessResponse generalBusinessResponse = new GeneralBusinessResponse();
+        generalBusinessResponse.setCode("00");
+        generalBusinessResponse.setMessage("Correcto");
+
+        return generalBusinessResponse;
     }
 }

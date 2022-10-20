@@ -145,15 +145,6 @@ components:
         url:
           type: string
 
-    MediaResponse:
-      type: object
-      description: ''
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-
     GeneralBusinessError:
       type: object
       description: 'Code that represents the error that took place'
