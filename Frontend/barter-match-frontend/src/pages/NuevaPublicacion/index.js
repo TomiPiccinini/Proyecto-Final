@@ -1,6 +1,6 @@
 import React from 'react'
 import NavBar from '../../components/NavBar'
-import { Container, Title, Wrapper } from './styled'
+import { Container, Wrapper } from './styled'
 import Formulario from '../../components/Form'
 import Typography from '@mui/material/Typography';
 

@@ -5,6 +5,7 @@ import history from "../../utils/history";
 import Publicaciones from "../HomePubli";
 import Perfil from "../Perfil";
 import Chat from "../Chats";
+import Login from "../Login";
 import NuevaPublicacion from "../NuevaPublicacion";
 
 export const Container = styled.div`
@@ -17,8 +18,9 @@ const App = () => {
         <Router history={history}>
           <Switch>
             <Route exact path="/">
-              <Redirect from="/" to={{ pathname: "/home" }} />
+              <Redirect from="/" to={{ pathname: "/login" }} />
             </Route>
+            <Route exact path="/login" component={withRouter(Login)} />
             <Route exact path="/home" component={withRouter(Publicaciones)} />
             <Route exact path="/perfil" component={withRouter(Perfil)} />
             <Route exact path="/chats" component={withRouter(Chat)} />
