@@ -23,7 +23,7 @@ const getPublicacionesError = (msg) => {
 export const getPublicaciones = () => {
   return async (dispatch, getState) => {
     dispatch(getPublicacionesRequested());
-    const requestURL = ``;
+    const requestURL = `http://localhost:8080/media`;
     try {
       const response = await fetch(requestURL, {
         method: "GET",

@@ -5,51 +5,60 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { DialogContainer , MatchImg} from "./styled";
+import { DialogContainer, MatchImg } from "./styled";
 import { Grow } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { PropaneSharp } from '@mui/icons-material';
 
 
 
 const useStyles = makeStyles(() => ({
   root: {
-     display:'flex',
-     flexDirection:'column',
-    
-    },
-  
+    display: 'flex',
+    flexDirection: 'column',
+
+  },
+
 }));
 
 
 export default function AlertDialogSlide(props) {
   const classes = useStyles();
-  return (
-    <div>
-      
-      <Dialog
-        
-        
-        open={props.open}
-        TransitionComponent={Grow}
-        keepMounted
-        onClose={props.handleCloseDetails}
-        aria-describedby="alert-dialog-slide-description"
-        
-      >
-        <DialogTitle>{props.name}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-           <DialogContainer className={classes.root} >
-              <MatchImg src={props.image} />
-              <p>Detalles del producto</p>
-           </DialogContainer>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={props.handleCloseDetails}>Cerrar</Button>
-          
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
+  if (!props.show) {
+    return null;
+  }
+  else {
+    return (
+      <div>
+
+        <Dialog
+          open={props.show}
+          TransitionComponent={Grow}
+          keepMounted
+          onClose={props.handleCloseDetails}
+          aria-describedby="alert-dialog-slide-description"
+
+        >
+          <DialogTitle>{props.name}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+              <DialogContainer className={classes.root} >
+                <MatchImg src={props.photoList.url} />
+                <p>Detalles del producto
+                  Descripcion:{props.description}
+                  Estado: {props.state}
+                  Talle:{props.measures}
+                  Tipo de Prenda:{props.tag}
+                </p>
+              </DialogContainer>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={props.handleCloseDetails}>Cerrar</Button>
+
+          </DialogActions>
+        </Dialog>
+      </div>
+    );
+  }
 }

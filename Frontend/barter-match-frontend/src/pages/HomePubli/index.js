@@ -137,7 +137,7 @@ const HomePublicaciones = () => {
               <img src="https://i.ibb.co/Jp8YJYD/Like-icon-on-transparent-PNG.png" alt="Like-icon-on-transparent-PNG" className='button' border="0" style={{width:"100px"}} onClick={() => swipe('right')}/>
             </div>
           </div>
-          <DetailsCard open={openDetails} image={image} name={name} handleCloseDetails ={() =>{setOpenDetails(!openDetails)}} />    
+          <DetailsCard show={openDetails} image={image} name={name} handleCloseDetails ={() =>{setOpenDetails(!openDetails)}} />    
           <Dialog name={open} handleClose ={() =>{setOpen(!open)}}  />
           
           <div style={{textAlign: 'center', marginTop:'20px'}}>
