@@ -14,6 +14,7 @@ import  VanillaTilt from 'vanilla-tilt'
 import { useDispatch, useSelector } from 'react-redux';
 import { getPublicaciones } from '../../store/HomePubli/action';
 import { selectPublicaciones } from '../../store/HomePubli/selectors';
+import { selectMail } from '../../store/Login/selectors';
 
 
 const HomePublicaciones = () => {
@@ -26,6 +27,11 @@ const HomePublicaciones = () => {
   const [image,setImage] = useState('')
   const currentIndexRef = useRef(currentIndex)
 
+  const publis = useSelector(selectPublicaciones)
+  const mail = useSelector(selectMail)
+
+  console.log(mail)
+
   useEffect(() => {
     VanillaTilt.init(document.querySelectorAll(".card"), {
       glare:true,
@@ -34,7 +40,6 @@ const HomePublicaciones = () => {
       speed: 400
       })
   }, []);
-  const publis = useSelector(selectPublicaciones)
 
   const childRefs = useMemo(
     () =>

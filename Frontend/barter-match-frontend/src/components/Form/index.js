@@ -17,15 +17,12 @@ const Formulario = () => {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-          console.log('This will run after 5 second!')
           setShowAlert(false)
         }, 5000);
         return () => clearTimeout(timer);
       }, [showAlert]);
 
     const handleInputChange = (event) => {
-         console.log(event.target.id)
-         console.log(event.target.value)
         setDatos({
             ...datos,
             [event.target.name] : event.target.value

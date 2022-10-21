@@ -36,7 +36,6 @@ const Perfil = () => {
 
    useEffect(() => {
     const timer = setTimeout(() => {
-      console.log('This will run after 5 second!')
       setShowAlert(false)
     }, 3000);
     return () => clearTimeout(timer);
