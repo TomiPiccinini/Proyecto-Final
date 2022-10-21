@@ -10,6 +10,7 @@ import DetailsCard from "../../components/DetailsCard"
 // eslint-disable-next-line
 import { styles } from './perfilStyles.css' 
 import  VanillaTilt from 'vanilla-tilt'
+import { Wrapper } from './styled'
 
 
 
@@ -51,21 +52,25 @@ const Perfil = () => {
   }
   
   return (
-    <>
+    <Wrapper>
     
     <NavBar />
     <div className='Contenedor'>
     <link href='https://fonts.googleapis.com/css?family=Roboto&display=swap' rel='stylesheet' />
       <div className='DatosContenedor'>
-        <div className='data'>
-            <Typography variant="h4">Lucas Perrino</Typography>
-            <img className='ImgPerfil' src={Imagenperfil} alt="imagen de perfil"/>
-            <Typography variant="subtitle1" sx={{fontSize:30}}>perris@gmail.com</Typography>
-        </div>
+        
       </div>
 
       <div className='cardContenedor'>
+      <div className='data'>
+            <Typography variant="h4">Lucas</Typography>
+            <img className='ImgPerfil' src={Imagenperfil} alt="imagen de perfil"/>
+            <Typography variant="subtitle1" sx={{fontSize:30}}>lucasperrino@gmail.com</Typography>
+        </div>
+        
+        <div className='MisPublicaciones' style={{marginTop:'50px'}} >
         <Typography variant="h4">Mis Publicaciones</Typography>
+        </div>
         <div className="productos">
         {publicaciones.map((publicacion) => (
             <div style={{textAlign: 'center', marginBottom: '25px'}}>
@@ -82,7 +87,7 @@ const Perfil = () => {
       </div>
 
     </div>   
-    </>
+    </Wrapper>
   )
 }
 

@@ -4,11 +4,13 @@ export const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   color: #FFFFFF;
+  background:linear-gradient(#e66465, #9198e5);
+  height: 100vh;
 `
 
 export const Container = styled.div`
   width: 100%;
-  height: 100%;
+  height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;

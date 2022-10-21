@@ -8,13 +8,11 @@ import Chat from "../Chats";
 import Login from "../Login";
 import NuevaPublicacion from "../NuevaPublicacion";
 
-export const Container = styled.div`
-  height: 95vh;
-`;
+
 
 const App = () => {
   return (
-      <Container>
+      
         <Router history={history}>
           <Switch>
             <Route exact path="/">
@@ -27,7 +25,7 @@ const App = () => {
             <Route exact path="/new" component={withRouter(NuevaPublicacion)} />
           </Switch>
         </Router>
-      </Container>
+      
   );
 };
 

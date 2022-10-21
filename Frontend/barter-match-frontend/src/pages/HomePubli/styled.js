@@ -2,14 +2,15 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  background:linear-gradient(#e66465, #9198e5);
 `
 
 export const Container = styled.div`
   width: 100%;
-  height: 100%;
-  margin-top:100px;
+  height: 90%;
   display: flex;
+  justify-content:center;
   flex-direction: column;
   align-items: center;
   

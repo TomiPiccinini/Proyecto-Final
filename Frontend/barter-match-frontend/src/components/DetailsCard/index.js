@@ -16,7 +16,8 @@ const useStyles = makeStyles(() => ({
      display:'flex',
      flexDirection:'column',
     
-    }
+    },
+  
 }));
 
 
@@ -26,7 +27,8 @@ export default function AlertDialogSlide(props) {
     <div>
       
       <Dialog
-        maxWidth='1000px'
+        
+        
         open={props.open}
         TransitionComponent={Grow}
         keepMounted
