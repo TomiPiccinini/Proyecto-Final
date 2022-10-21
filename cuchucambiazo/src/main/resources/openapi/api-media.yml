@@ -125,6 +125,8 @@ components:
         - description
         - measures
       properties:
+        mediaId:
+          type: integer
         userId:
           type: integer
         photoList:
@@ -139,11 +141,19 @@ components:
           type: string
         tag:
           type: string
+        updateDate:
+          type: string
+        dischargeDate:
+          type: string
 
     Photo:
       type: object
       description: ''
       properties:
+        photoId:
+          type: integer
+        mediaId:
+          type: integer
         url:
           type: string
 

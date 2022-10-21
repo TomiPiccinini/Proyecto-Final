@@ -1,6 +1,8 @@
 package com.cuchucambiazo.persistence.entity;
 
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,6 +14,9 @@ public class Publicacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_publicacion")
     private Integer idPublicacion;
+
+    @Column(name = "id_usuario")
+    private Integer idUsuario;
 
     @Column
     private String descripcion;
@@ -41,4 +46,91 @@ public class Publicacion {
     @OneToMany(mappedBy = "publicacion", cascade = {CascadeType.ALL})
     private List<MeGusta> meGustas;
 
+    public Integer getIdPublicacion() {
+        return idPublicacion;
+    }
+
+    public void setIdPublicacion(Integer idPublicacion) {
+        this.idPublicacion = idPublicacion;
+    }
+
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getMedidas() {
+        return medidas;
+    }
+
+    public void setMedidas(String medidas) {
+        this.medidas = medidas;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getFechaModificacion() {
+        return fechaModificacion;
+    }
+
+    public void setFechaModificacion(String fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
+    }
+
+    public String getFechaBaja() {
+        return fechaBaja;
+    }
+
+    public void setFechaBaja(String fechaBaja) {
+        this.fechaBaja = fechaBaja;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<Foto> getFotos() {
+        return fotos;
+    }
+
+    public void setFotos(List<Foto> fotos) {
+        this.fotos = fotos;
+    }
+
+    public List<MeGusta> getMeGustas() {
+        return meGustas;
+    }
+
+    public void setMeGustas(List<MeGusta> meGustas) {
+        this.meGustas = meGustas;
+    }
 }

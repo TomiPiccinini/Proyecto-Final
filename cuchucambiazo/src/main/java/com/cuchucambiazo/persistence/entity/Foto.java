@@ -5,7 +5,6 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Data
 @Table
 public class Foto {
 
@@ -24,4 +23,35 @@ public class Foto {
     @JoinColumn(name = "id_publicacion", insertable = false, updatable = false)
     private Publicacion publicacion;
 
+    public Integer getIdFoto() {
+        return idFoto;
+    }
+
+    public void setIdFoto(Integer idFoto) {
+        this.idFoto = idFoto;
+    }
+
+    public Integer getIdPublicacion() {
+        return idPublicacion;
+    }
+
+    public void setIdPublicacion(Integer idPublicacion) {
+        this.idPublicacion = idPublicacion;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Publicacion getPublicacion() {
+        return publicacion;
+    }
+
+    public void setPublicacion(Publicacion publicacion) {
+        this.publicacion = publicacion;
+    }
 }

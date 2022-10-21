@@ -10,12 +10,12 @@ import java.util.List;
 public interface PublicacionCrudRepository extends CrudRepository<Publicacion, Integer> {
 
     @Query(
-            value = "SELECT * FROM publicacion p WHERE p.id_publicacion <> :idPublicacion",
+            value = "SELECT * FROM publicacion p WHERE p.id_usuario <> :idUsuario",
             nativeQuery = true
     )
-    List<Publicacion> findAllWithOutIdPublicacion(@Param("idPublicacion") Integer idPublicacion);
+    List<Publicacion> findAllWithOutIdPublicacion(@Param("idUsuario") Integer idUsuario);
 
-    List<Publicacion> findAllByIdPublicacion(Integer idPublicacion);
+    List<Publicacion> findAllByIdUsuario(Integer idUsuario);
 
 
 }
