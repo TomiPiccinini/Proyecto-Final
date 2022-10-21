@@ -90,9 +90,8 @@ const HomePublicaciones = () => {
     setOpen(!open) 
   }
 
-  const handleOpenDetails = (name,imagen)=>{
+  const handleOpenDetails = (name)=>{
     setName(name)
-    setImage(imagen)
     setOpenDetails(!openDetails)
   }
   
@@ -117,7 +116,7 @@ const HomePublicaciones = () => {
                 
               >
                 <div
-                  onDoubleClick={()=> handleOpenDetails(producto.titulo,producto.url)}
+                  onDoubleClick={()=> handleOpenDetails(producto)}
                   style={{ backgroundImage: 'url(' + producto.url + ')'}}
                   className='card'
                   

@@ -11,8 +11,9 @@ import DetailsCard from "../../components/DetailsCard"
 import { styles } from './perfilStyles.css' 
 import  VanillaTilt from 'vanilla-tilt'
 import { Wrapper } from './styled'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getPublicaciones } from '../../store/HomePubli/action';
+import { selectMail } from '../../store/Login/selectors';
 
 
 
@@ -24,6 +25,8 @@ const Perfil = () => {
   const [image,setImage] = useState('')
   const [openDetails,setOpenDetails] = useState(false)
   const [showAlert, setShowAlert] = useState(false)
+
+  const mail = useSelector(selectMail)
 
   const deletePublicacion = (publicacion) => {
     setPublicaciones(publicaciones.filter(p => p.titulo !== publicacion))
@@ -53,9 +56,8 @@ const Perfil = () => {
  
 
 
-  const handleOpenDetails = (name,imagen)=>{
+  const handleOpenDetails = (name)=>{
     setName(name)
-    setImage(imagen)
     setOpenDetails(!openDetails)
   }
   
@@ -73,7 +75,7 @@ const Perfil = () => {
       <div className='data'>
             <Typography variant="h4">Lucas</Typography>
             <img className='ImgPerfil' src={Imagenperfil} alt="imagen de perfil"/>
-            <Typography variant="subtitle1" sx={{fontSize:30}}>lucasperrino@gmail.com</Typography>
+            <Typography variant="subtitle1" sx={{fontSize:30}}>{mail}</Typography>
         </div>
         
         <div className='MisPublicaciones' style={{marginTop:'50px'}} >
@@ -82,7 +84,7 @@ const Perfil = () => {
         <div className="productos">
         {publicaciones.map((publicacion) => (
             <div style={{textAlign: 'center', marginBottom: '25px'}}>
-              <div style={{ backgroundImage: 'url(' + publicacion.url + ')' }} className='carta' onClick={()=> handleOpenDetails(publicacion.titulo,publicacion.url)}></div>
+              <div style={{ backgroundImage: 'url(' + publicacion.url + ')' }} className='carta' onClick={()=> handleOpenDetails(publicacion)}></div>
               
               <div style={{display: 'flex', textAlign:'center', justifyContent: 'center'}}>
                 <h3 style={{fontFamily: 'Alatsi', margin: 0}}>{publicacion.titulo}</h3>
