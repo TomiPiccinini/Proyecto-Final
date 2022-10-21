@@ -11,20 +11,28 @@ import DetailsCard from "../../components/DetailsCard"
 import { styles } from './perfilStyles.css' 
 import  VanillaTilt from 'vanilla-tilt'
 import { Wrapper } from './styled'
+import { useDispatch } from 'react-redux';
+import { getPublicaciones } from '../../store/HomePubli/action';
+
 
 
 
 const Perfil = () => {
+  const dispatch = useDispatch();
   const [publicaciones,setPublicaciones] = useState(Publicaciones);
   const [name,setName] = useState('')
   const [image,setImage] = useState('')
   const [openDetails,setOpenDetails] = useState(false)
   const [showAlert, setShowAlert] = useState(false)
 
-  function deletePublicacion(publicacion){
+  const deletePublicacion = (publicacion) => {
     setPublicaciones(publicaciones.filter(p => p.titulo !== publicacion))
     setShowAlert(true)
    }
+
+   useEffect(() => {
+    dispatch(getPublicaciones())
+  }, []);
 
    useEffect(() => {
     VanillaTilt.init(document.querySelectorAll(".carta"), {
@@ -82,7 +90,7 @@ const Perfil = () => {
               </div>
             </div>))}  
         </div>
-        <DetailsCard open={openDetails} image={image} name={name} handleCloseDetails ={() =>{setOpenDetails(!openDetails)}} />
+        <DetailsCard show={openDetails} image={image} name={name} handleCloseDetails ={() =>{setOpenDetails(!openDetails)}} />
         {showAlert && <Alert variant='filled' severity="success" onClose={() => {setShowAlert(false)}}>¡Su producto se ha eliminado con éxito!</Alert>}
       </div>
 

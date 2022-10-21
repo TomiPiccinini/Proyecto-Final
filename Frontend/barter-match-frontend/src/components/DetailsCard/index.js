@@ -8,7 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { DialogContainer, MatchImg } from "./styled";
 import { Grow } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { PropaneSharp } from '@mui/icons-material';
+
 
 
 
@@ -16,6 +16,8 @@ const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
+    justifyContent:'center',
+    alignItems:'center',
 
   },
 
@@ -37,19 +39,18 @@ export default function AlertDialogSlide(props) {
           keepMounted
           onClose={props.handleCloseDetails}
           aria-describedby="alert-dialog-slide-description"
-
+          className={classes.root}
         >
-          <DialogTitle>{props.name}</DialogTitle>
+          <DialogTitle >{props.name}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
               <DialogContainer className={classes.root} >
-                <MatchImg src={props.photoList.url} />
-                <p>Detalles del producto
-                  Descripcion:{props.description}
-                  Estado: {props.state}
-                  Talle:{props.measures}
-                  Tipo de Prenda:{props.tag}
-                </p>
+                <MatchImg src={props.image} />
+                <p>Detalles del producto</p>
+                <p>Descripcion:{props.description}</p>
+                <p>Estado: {props.state}</p>
+                <p>Talle:{props.measures}</p>
+                <p>Tipo de Prenda:{props.tag}</p>
               </DialogContainer>
             </DialogContentText>
           </DialogContent>
