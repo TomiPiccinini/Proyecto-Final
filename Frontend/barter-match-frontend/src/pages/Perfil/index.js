@@ -73,7 +73,7 @@ const Perfil = () => {
 
       <div className='cardContenedor'>
       <div className='data'>
-            <Typography variant="h4">Lucas</Typography>
+            
             <img className='ImgPerfil' src={Imagenperfil} alt="imagen de perfil"/>
             <Typography variant="subtitle1" sx={{fontSize:30}}>{mail}</Typography>
         </div>
