@@ -7,9 +7,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-@Mapper(componentModel = "spring")
+//@Mapper(componentModel = "spring")
 public interface UserMapper {
-
+/*
     @Mappings({
             @Mapping(target = "nombre", source = "name"),
             @Mapping(target = "contrasenia", source = "password")
@@ -18,5 +18,5 @@ public interface UserMapper {
 
     @InheritInverseConfiguration
     Usuario toUsuario(User user);
-
+*/
 }

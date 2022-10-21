@@ -7,16 +7,17 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-@Mapper(componentModel = "spring", uses = {})
+//@Mapper(componentModel = "spring", uses = {MediaMapper.class})
 public interface FotoMapper {
-
+/*
     @Mappings({
-            @Mapping(source = "idPublicacion", target = "productId"),
-            @Mapping(source = "url", target = "quantity")
+            @Mapping(source = "idFoto", target = "mediaId"),
+            @Mapping(source = "idPublicacion", target = "mediaId")
     })
     Photo toPhoto (Foto foto);
 
     @InheritInverseConfiguration
+    @Mapping(target = "publicacion", ignore = true)
     Foto toFoto (Photo photo);
-
+*/
 }

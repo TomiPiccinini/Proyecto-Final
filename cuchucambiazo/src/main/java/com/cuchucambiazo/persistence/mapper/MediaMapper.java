@@ -9,23 +9,24 @@ import org.mapstruct.Mappings;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+//@Mapper(componentModel = "spring")
 public interface MediaMapper {
-
+/*
     @Mappings({
-            @Mapping(target = "userId", source = "usuarioId"),
-            @Mapping(target = "description", source = "descripcion"),
-            @Mapping(target = "measure", source = "medida"),
-            @Mapping(target = "state", source = "estado")
+            @Mapping(target = "idPublicacion", source = "mediaId"),
+            @Mapping(target = "idUsuario", source = "userId"),
+            @Mapping(target = "descripcion", source = "description"),
+            @Mapping(target = "medidas", source = "measures"),
+            @Mapping(target = "fotos", source = "photoList"),
+            @Mapping(target = "estado", source = "state")
     })
     Media toMedia(Publicacion publicacion);
     List<Media> toMedias(List<Publicacion> publicacions);
 
     @InheritInverseConfiguration
     @Mappings({
-            @Mapping(target = "fechaModificacion", ignore = true),
-            @Mapping(target = "fechaBaja", ignore = true)
+            @Mapping(target = "usuario", ignore = true)
     })
     Publicacion toPublicacion(Media media);
-
+*/
 }
