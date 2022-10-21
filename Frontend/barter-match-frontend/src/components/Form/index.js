@@ -10,7 +10,8 @@ const Formulario = () => {
         marca: '',
         condition: '',
         color: '',
-        descripcion: ''
+        descripcion: '',
+        imagen:'',
     })
 
     const [showAlert, setShowAlert] = useState(false)
@@ -30,7 +31,7 @@ const Formulario = () => {
     }
 
     const enviarDatos = (event) => {
-        console.log('enviando datos...' + datos.titulo + datos.tipo + datos.category + datos.marca + datos.condition + datos.color + datos.descripcion)
+        console.log('enviando datos...' + datos.titulo + datos.tipo + datos.category + datos.marca + datos.condition + datos.color + datos.descripcion + datos.imagen)
         setShowAlert(true)
     }
 
@@ -201,7 +202,7 @@ const Formulario = () => {
                     onChange={handleInputChange}
                     />
                 </div>
-                <div style={{display: 'flex', alignItems: 'center'}}>
+                <div>
                     <TextField
                     className={classes.root}
                     fullWidth
@@ -211,10 +212,16 @@ const Formulario = () => {
                     variant="filled"
                     onChange={handleInputChange}
                     />
-                    <Button style={{marginLeft:"10px", marginBottom:'30px', backgroundColor:'#9198e5'}}  variant="contained" component="label">
-                            Subir imágen
-                        <input hidden accept="image/*" multiple type="file" />
-                    </Button>
+                    <TextField
+                    className={classes.root}
+                    fullWidth
+                    id="imagen"
+                    label="URL Imagen"
+                    helperText="Ingrese URL de la imagen"
+                    variant="filled"
+                    onChange={handleInputChange}
+                    />
+                   
                 </div>
                 <Button variant="contained" style={{fontWeight: 'bold', backgroundColor:'rgb(82 97 205)', marginBottom:'10px'}} onClick={() => enviarDatos()}>Publicar</Button>
                 {showAlert && <Alert variant='filled' severity="success" onClose={() => {setShowAlert(false)}}>¡Su producto se ha registrado con éxito!</Alert>}

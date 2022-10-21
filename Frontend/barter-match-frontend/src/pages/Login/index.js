@@ -20,7 +20,9 @@ const Login = () => {
   };
 
   const handleInputChange = (event) => {
-    setUserMail(event.target.value)
+    if(event.target.id == 'usuario') {
+      setUserMail(event.target.value)
+    }
   };
 
   return (
@@ -40,6 +42,7 @@ const Login = () => {
           noValidate
           autoComplete="off"
         >
+          <img src="https://i.ibb.co/7zthj3d/Pngtree-gray-silhouette-avatar-6404679.png" alt="Pngtree-gray-silhouette-avatar-6404679" border="0"  width={'150px'}/>
           <Typography
             variant="h4"
             fontWeight="bold"

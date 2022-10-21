@@ -3,4 +3,5 @@ export const initialState = {
   error: false,
   errorMessage: "",
   publicaciones: [],
+  newPubli: {}
 };
