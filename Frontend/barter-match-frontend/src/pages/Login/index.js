@@ -20,7 +20,9 @@ const Login = () => {
   };
 
   const handleInputChange = (event) => {
-    setUserMail(event.target.value)
+    if(event.target.id == 'usuario') {
+      setUserMail(event.target.value)
+    }
   };
 
   return (
