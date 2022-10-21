@@ -92,9 +92,9 @@ components:
         - text
       properties:
         userIssuing:
-          type: string
+          type: integer
         userReceiver:
-          type: string
+          type: integer
         dateTime:
           type: string
         text:
@@ -113,9 +113,9 @@ components:
         dateTimeMatch:
           type: string
         mediaId1:
-          type: string
+          type: integer
         mediaId2:
-          type: string
+          type: integer
         state:
           type: string
 

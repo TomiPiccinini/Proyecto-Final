@@ -65,7 +65,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'api-user.yml#/components/schemas/GeneralBusinessResponse'
+                $ref: '#/components/schemas/LikeResponse'
         '400':
           description: Bad Request.
           content:
@@ -108,21 +108,26 @@ components:
       type: object
       description: ''
       required:
-        - userId
+        - userIssuing
         - mediaId
+        - userReceiver
       properties:
-        userId:
+        likeId:
+          type: integer
+        userIssuing:
           type: integer
         mediaId:
+          type: integer
+        userReceiver:
           type: integer
 
     LikeResponse:
       type: object
       description: ''
       properties:
-        code:
-          type: string
-        message:
+        isMatch:
+          type: boolean
+        matchPhoto:
           type: string
 
     GeneralBusinessError:

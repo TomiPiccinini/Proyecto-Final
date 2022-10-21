@@ -1,0 +1,46 @@
+package com.cuchucambiazo.persistence;
+
+import api.cuchucambiazo.controller.like.model.Like;
+import com.cuchucambiazo.domain.repository.LikeRepository;
+import com.cuchucambiazo.persistence.builds.LikeBuilds;
+import com.cuchucambiazo.persistence.crud.LikeCrudRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Repository
+public class MeGustaRepository implements LikeRepository {
+
+    @Autowired
+    private LikeCrudRepository repository;
+
+    @Autowired
+    private LikeBuilds builds;
+
+    @Override
+    public void saveLike(Like like) {
+
+        repository.save(builds.LikeToMeGusta(like));
+
+    }
+
+    @Override
+    public List<Like> getLikesToMatch(Like like) {
+
+        List<Like> likes = new ArrayList<>();
+
+        repository.getMeGustasToMatch(like.getUserIssuing(), like.getUserReceiver()).forEach(
+        a -> {
+            likes.add(builds.MeGustaToLike(a));
+        });
+
+        return likes;
+    }
+
+    @Override
+    public void deleteLike(Like like) {
+
+    }
+}
