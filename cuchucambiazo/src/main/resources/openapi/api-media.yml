@@ -137,6 +137,8 @@ components:
           type: string
         measures:
           type: string
+        tag:
+          type: string
 
     Photo:
       type: object

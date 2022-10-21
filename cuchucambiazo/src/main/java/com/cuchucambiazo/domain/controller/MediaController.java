@@ -2,7 +2,6 @@ package com.cuchucambiazo.domain.controller;
 
 import api.cuchucambiazo.controller.media.api.MediaApi;
 import api.cuchucambiazo.controller.media.model.*;
-import com.cuchucambiazo.commons.utils.Utils;
 import com.cuchucambiazo.domain.service.MediaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

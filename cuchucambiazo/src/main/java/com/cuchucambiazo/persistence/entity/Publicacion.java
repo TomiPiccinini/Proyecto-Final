@@ -28,12 +28,12 @@ public class Publicacion {
     @Column(name = "fecha_baja")
     private String fechaBaja;
 
+    @Column
+    private String tag;
+
     @ManyToOne
     @JoinColumn(name = "id_usuario", insertable = false, updatable = false)
     private Usuario usuario;
-
-    @OneToMany(mappedBy = "tag")
-    private List<PublicacionTag> tags;
 
     @OneToMany(mappedBy = "publicacion")
     private List<Foto> fotos;
