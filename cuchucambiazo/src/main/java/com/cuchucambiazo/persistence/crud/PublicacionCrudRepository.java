@@ -13,9 +13,10 @@ public interface PublicacionCrudRepository extends CrudRepository<Publicacion, I
             value = "SELECT * FROM publicacion p WHERE p.id_usuario <> :idUsuario",
             nativeQuery = true
     )
-    List<Publicacion> findAllWithOutIdPublicacion(@Param("idUsuario") Integer idUsuario);
+    List<Publicacion> findAllWithOutIdUsuario(@Param("idUsuario") Integer idUsuario);
 
     List<Publicacion> findAllByIdUsuario(Integer idUsuario);
+
 
 
 }

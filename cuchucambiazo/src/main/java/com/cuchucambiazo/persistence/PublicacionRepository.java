@@ -50,10 +50,15 @@ public class PublicacionRepository implements MediaRepository {
     public List<Media> getAllWithOutUserId(Integer userId) {
 
         List<Media> listMedias = new ArrayList<>();
-        publicacionCrudRepository.findAllWithOutIdPublicacion(userId).forEach(a -> {
+        publicacionCrudRepository.findAllWithOutIdUsuario(userId).forEach(a -> {
             listMedias.add(mediaBuilds.PublicacionToMedia(a));
         });
 
         return listMedias;
+    }
+
+    @Override
+    public Media getMediaByMediaId(Integer mediaId) {
+        return mediaBuilds.PublicacionToMedia(publicacionCrudRepository.findById(mediaId).get());
     }
 }

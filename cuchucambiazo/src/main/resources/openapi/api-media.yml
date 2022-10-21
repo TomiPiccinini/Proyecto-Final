@@ -98,8 +98,8 @@ components:
       properties:
         isHome:
           type: boolean
-        userId:
-          type: integer
+        email:
+          type: string
 
     getMediaResponse:
       description: ''
