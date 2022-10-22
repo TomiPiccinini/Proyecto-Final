@@ -57,10 +57,50 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Media"
+              $ref: "#/components/schemas/MediaRequest"
       responses:
         '201':
           description: Add user confirmation
+          content:
+            application/json:
+              schema:
+                $ref: 'api-user.yml#/components/schemas/GeneralBusinessResponse'
+        '400':
+          description: Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+
+  /media/delete:
+
+    post:
+      summary: Remove medias
+      tags:
+        - media
+      operationId: removeMedia
+
+      requestBody:
+        description: Save medias request
+        content:
+          text/plain:
+            schema:
+              type: integer
+      responses:
+        '201':
+          description: Remove user confirmation
           content:
             application/json:
               schema:
@@ -89,6 +129,8 @@ paths:
 components:
   schemas:
 
+
+
     getMediaRequest:
       type: object
       description: ''
@@ -115,11 +157,22 @@ components:
       items:
         $ref: '#/components/schemas/Media'
 
+    MediaRequest:
+      description: ''
+      type: object
+      properties:
+        email:
+          type: string
+        Media:
+          $ref: '#/components/schemas/Media'
+      required:
+        - Media
+        - email
+
     Media:
       type: object
       description: ''
       required:
-        - userId
         - urlPhoto
         - state
         - description

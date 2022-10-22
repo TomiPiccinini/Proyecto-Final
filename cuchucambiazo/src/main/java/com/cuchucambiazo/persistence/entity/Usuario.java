@@ -21,7 +21,7 @@ public class Usuario {
     @Column
     private String contrasenia;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String email;
 
     @OneToMany(mappedBy = "usuario")

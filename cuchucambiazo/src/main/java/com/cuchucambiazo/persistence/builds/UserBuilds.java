@@ -11,6 +11,7 @@ public class UserBuilds {
 
         User user = new User();
 
+        user.setUserId(usuario.getIdUsuario());
         user.setName(usuario.getNombre());
         user.setEmail(usuario.getEmail());
         user.setPassword(usuario.getContrasenia());

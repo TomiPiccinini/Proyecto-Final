@@ -7,15 +7,22 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface MatcheoCrudRepository extends CrudRepository <Matcheo, Integer> {
-    /*
+
     @Query(
-            value = "SELECT * FROM matcheo m WHERE (m.id_Publicacion1 = :idPublicacion1 AND" +
-                    " m.id_Publicacion2 = :idPublicacion2) OR (m.id_Publicacion1 = :idPublicacion2 AND" +
-                    "m.id_Publicacion2 = :idPublicacion1)",
+            value = "SELECT * FROM matcheo m WHERE m.id_publicacion1 = :idPublicacion OR" +
+                    "m.id_publicacion2 = :idPublicacion",
             nativeQuery = true
     )
-    Matcheo verifyMatch(@Param("idPublicacion1") Integer idPublicacion1,
-                               @Param("idPublicacion2") Integer idPublicacion2);*/
+    List<Matcheo> getMatchPublicacionId(@Param("idPublicacion") Integer idPublicacion);
 
+    @Query(
+            value = "UPDATE TABLE matcheo m SET m.fecha_baja = :fechaBaja, m.estado = :reason" +
+                    "WHERE m.id_match = :matchId",
+            nativeQuery = true
+    )
+    void closeMatch(@Param("matchId") Integer matchId, @Param("reason") String reason,
+                    @Param("fechaBaja") String fechaBaja);
 }

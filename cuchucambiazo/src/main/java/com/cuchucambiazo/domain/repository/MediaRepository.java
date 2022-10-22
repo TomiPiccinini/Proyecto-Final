@@ -10,4 +10,5 @@ public interface MediaRepository {
     List<Media> getAllWithUserId(Integer userId);
     List<Media> getAllWithOutUserId(Integer userId);
     Media getMediaByMediaId(Integer mediaId);
+    void deleteMedia(Integer mediaId);
 }

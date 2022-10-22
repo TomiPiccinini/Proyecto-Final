@@ -61,4 +61,9 @@ public class PublicacionRepository implements MediaRepository {
     public Media getMediaByMediaId(Integer mediaId) {
         return mediaBuilds.PublicacionToMedia(publicacionCrudRepository.findById(mediaId).get());
     }
+
+    @Override
+    public void deleteMedia(Integer mediaId) {
+        publicacionCrudRepository.deleteById(mediaId);
+    }
 }

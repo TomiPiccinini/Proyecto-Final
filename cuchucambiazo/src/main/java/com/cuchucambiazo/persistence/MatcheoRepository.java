@@ -7,6 +7,10 @@ import com.cuchucambiazo.persistence.crud.MatcheoCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -27,5 +31,24 @@ public class MatcheoRepository implements MatchRepository {
     @Override
     public void saveMatch(Match match) {
         repository.save(builds.MatchToMatcheo(match));
+    }
+
+    @Override
+    public List<Match> getMatchs(Integer mediaId) {
+
+        List<Match> matches = new ArrayList<>();
+        repository.getMatchPublicacionId(mediaId).forEach(a -> {
+            matches.add(builds.MatcheoToMatch(a));
+        });
+
+        return matches;
+    }
+
+    @Override
+    public void closeMatch(Integer matchId, String reason) {
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+        repository.closeMatch(matchId, reason, formatter.format(date));
     }
 }

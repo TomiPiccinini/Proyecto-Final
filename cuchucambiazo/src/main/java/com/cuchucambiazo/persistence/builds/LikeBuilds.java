@@ -20,6 +20,7 @@ public class LikeBuilds {
     public Like MeGustaToLike(MeGusta meGusta){
         Like like = new Like();
 
+        like.setLikeId(meGusta.getIdMeGusta());
         like.setUserIssuing(meGusta.getIdUsuarioEmisor());
         like.setMediaId(meGusta.getIdPublicacion());
         like.setUserReceiver(meGusta.getIdUsuarioReceptor());

@@ -15,6 +15,7 @@ public class MediaBuilds {
     public Media PublicacionToMedia(Publicacion publicacion){
         Media media = new Media();
 
+        media.setMediaId(publicacion.getIdPublicacion());
         media.setUserId(publicacion.getIdPublicacion());
         media.setDescription(publicacion.getDescripcion());
         media.setMeasures(publicacion.getMedidas());

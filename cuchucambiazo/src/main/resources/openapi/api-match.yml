@@ -19,7 +19,7 @@ paths:
         content:
           text/plain:
             schema:
-              type: string
+              type: integer
       responses:
         '200':
           description: Get Match
@@ -46,9 +46,64 @@ paths:
               schema:
                 $ref: '#/components/schemas/GeneralBusinessError'
 
+  /match/close:
+
+    post:
+      summary: Post to end a match
+
+      tags:
+        - user
+
+      operationId: closeMatch
+
+      requestBody:
+        description: Save likes request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatchRequest'
+      responses:
+        '200':
+          description: Get Match
+          content:
+            application/json:
+              schema:
+                $ref: 'api-user.yml#/components/schemas/GeneralBusinessResponse'
+        '400':
+          description: Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+
+
 
 components:
   schemas:
+
+    MatchRequest:
+      description: ''
+      type: object
+      properties:
+        matchId:
+          type: integer
+        reason:
+          type: string
+          enum:
+            - Succes
+            - Cancel
 
     MatchGetResponse:
       description: ''
@@ -60,7 +115,7 @@ components:
     Match_list:
       type: array
       items:
-        $ref: '#/components/schemas/Chat'
+        $ref: '#/components/schemas/Match'
 
 
     Chat:

@@ -50,7 +50,7 @@ public class LikeService {
                 likeRepository.deleteLike(a);
 
                 response.setIsMatch(true);
-                response.setMatchPhoto(mediaRepository.getMediaByMediaId(like.getMediaId()).getPhotoList().get(0).getUrl());
+                response.setMatchPhoto(mediaRepository.getMediaByMediaId(a.getMediaId()).getPhotoList().get(0).getUrl());
 
             });
         }

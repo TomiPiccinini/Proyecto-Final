@@ -17,4 +17,10 @@ public interface LikeCrudRepository extends CrudRepository <MeGusta, Integer> {
     List<MeGusta> getMeGustasToMatch(@Param("idUsuarioEmisor") Integer idUsuarioEmisor,
                                      @Param("idUsuarioReceptor") Integer idUsuarioReceptor);
 
+    @Query(
+            value = "SELECT * FROM me_gusta mg WHERE mg.id_usuario_receptor = :idUsuarioReceptor",
+            nativeQuery = true
+    )
+    List<MeGusta> getLikesByUserReceiver(@Param("idUsuarioReceptor") Integer idUsuarioReceptor);
+
 }

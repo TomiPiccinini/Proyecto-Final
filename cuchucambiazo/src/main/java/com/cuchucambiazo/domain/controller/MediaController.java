@@ -22,10 +22,17 @@ public class MediaController implements MediaApi {
     }
 
     @Override
-    public ResponseEntity<GeneralBusinessResponse> saveMedia(Media media) {
-        service.saveMedia(media);
+    public ResponseEntity<GeneralBusinessResponse> saveMedia(MediaRequest request) {
+        service.saveMedia(request);
         return new ResponseEntity<>(buildGeneralBusinessResponse() ,HttpStatus.CREATED);
     }
+
+    @Override
+    public ResponseEntity<GeneralBusinessResponse> removeMedia(Integer body) {
+        service.deleteMedia(body);
+        return new ResponseEntity<>(buildGeneralBusinessResponse(), HttpStatus.ACCEPTED);
+    }
+
 
     public GeneralBusinessResponse buildGeneralBusinessResponse(){
         GeneralBusinessResponse generalBusinessResponse = new GeneralBusinessResponse();
@@ -34,4 +41,7 @@ public class MediaController implements MediaApi {
 
         return generalBusinessResponse;
     }
+
+
 }
+

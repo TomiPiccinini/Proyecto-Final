@@ -8,4 +8,5 @@ public interface LikeRepository {
     void saveLike(Like like);
     List<Like> getLikesToMatch(Like like);
     void deleteLike(Like like);
+    List<Like> getLikesByUserReceiver(Integer userId);
 }

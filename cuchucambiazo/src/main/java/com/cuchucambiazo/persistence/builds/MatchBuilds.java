@@ -19,4 +19,16 @@ public class MatchBuilds {
         return matcheo;
     }
 
+    public Match MatcheoToMatch(Matcheo matcheo){
+
+        Match match = new Match();
+
+        match.setDateTimeMatch(matcheo.getFechaAlta());
+        match.setMediaId1(matcheo.getIdPublicacion1());
+        match.setMediaId2(matcheo.getIdPublicacion2());
+        match.setState(matcheo.getEstado());
+
+        return match;
+    }
+
 }

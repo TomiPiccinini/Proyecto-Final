@@ -41,6 +41,14 @@ public class MeGustaRepository implements LikeRepository {
 
     @Override
     public void deleteLike(Like like) {
+        repository.deleteById(like.getLikeId());
+    }
 
+    @Override
+    public List<Like> getLikesByUserReceiver(Integer userId) {
+
+        List<Like> likes = new ArrayList<>();
+        repository.getLikesByUserReceiver(userId).forEach(a -> likes.add(builds.MeGustaToLike(a)));
+        return likes;
     }
 }
