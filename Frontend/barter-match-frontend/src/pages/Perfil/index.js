@@ -15,9 +15,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPublicaciones } from '../../store/HomePubli/action';
 import { selectMail } from '../../store/Login/selectors';
 
-
-
-
 const Perfil = () => {
   const dispatch = useDispatch();
   const [publicaciones,setPublicaciones] = useState(Publicaciones);
@@ -34,7 +31,7 @@ const Perfil = () => {
    }
 
    useEffect(() => {
-    dispatch(getPublicaciones())
+    dispatch(getPublicaciones(mail))
   }, []);
 
    useEffect(() => {
