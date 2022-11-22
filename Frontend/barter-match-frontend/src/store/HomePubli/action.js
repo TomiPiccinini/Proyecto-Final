@@ -154,3 +154,35 @@ export const deletePublicacion = (mail) => {
     }
   };
 };
+
+/* LIKE */
+
+export const postLike = (data) => {
+  return async (dispatch, getState) => {
+    const mail = selectMail(getState());
+    console.log('data', data)
+    dispatch(postPubliRequested());
+    const requestURL = `http://bartermatch-proyecto.herokuapp.com/media/save`;
+    try {
+      const response = await fetch(requestURL, {
+        method: "POST",
+        body: JSON.stringify({ email: "franco12@gmail.com", media: data }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const response_1 = await checkStatus(response);
+      console.log(response_1)
+      const json = await parseJSON(response_1);
+      console.log(json)
+
+      /*if (response.status === "1") {
+        dispatch(postPubliSucces(response.result));
+      } else {
+        dispatch(postPubliError(response.message));
+      }*/
+    } catch (error) {
+      dispatch(postPubliError("ERROR"));
+    }
+  };
+};

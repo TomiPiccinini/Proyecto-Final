@@ -163,7 +163,10 @@ const HomePublicaciones = () => {
               className="button"
               border="0"
               style={{ width: "100px" }}
-              onClick={() => swipe("right")}
+              onClick={() => {
+                swipe("right");
+                submitLike();
+              }}
             />
           </div>
         </div>
