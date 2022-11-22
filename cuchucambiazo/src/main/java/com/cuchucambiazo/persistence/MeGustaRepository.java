@@ -56,6 +56,6 @@ public class MeGustaRepository implements LikeRepository {
 
     @Override
     public Boolean getLikeOfMediaLiked(Integer idMedia, Integer idUserIssuing){
-        return repository.getLikeOfMediaLiked(idMedia, idUserIssuing).isPresent();
+        return repository.findLikeOfMediaLiked(idMedia, idUserIssuing).isPresent();
     }
 }

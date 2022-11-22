@@ -4,47 +4,6 @@ info:
   version: "0.1"
 paths:
 
-  /like:
-
-    post:
-      summary: Get Likes
-
-      tags:
-        - getLike
-      operationId: getLikes
-
-      requestBody:
-        description: Save likes request
-        content:
-          text/plain:
-            schema:
-              type: string
-      responses:
-        '201':
-          description: Get like
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getLikeResponse'
-        '400':
-          description: Bad Request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GeneralBusinessError'
-        '404':
-          description: Not Found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GeneralBusinessError'
-        '500':
-          description: Internal Server Error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GeneralBusinessError'
-
   /like/save:
 
     post:

@@ -25,9 +25,10 @@ public interface LikeCrudRepository extends CrudRepository <MeGusta, Integer> {
     List<MeGusta> getLikesByUserReceiver(@Param("idUsuarioReceptor") Integer idUsuarioReceptor);
 
     @Query(
-            value = "Select * FROM me_gusta mg WHERE mg.id_publicacion = :idMedia AND mg.id_usuario_emisor <> :idUsuarioEmisor"
+            value = "SELECT * FROM me_gusta mg WHERE mg.id_publicacion = :idPublicacion AND mg.id_usuario_emisor <> :idUsuarioEmisor",
+            nativeQuery = true
     )
-    Optional<MeGusta> getLikeOfMediaLiked(@Param("idPublicacion") Integer idPublicacion,
+    Optional<MeGusta> findLikeOfMediaLiked(@Param("idPublicacion") Integer idPublicacion,
                                             @Param("idUsuarioEmisor") Integer idUsuarioEmisor);
 
 }

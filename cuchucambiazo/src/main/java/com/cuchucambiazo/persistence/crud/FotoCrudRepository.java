@@ -8,8 +8,8 @@ import org.springframework.data.repository.query.Param;
 public interface FotoCrudRepository extends CrudRepository<Foto, Integer> {
 
     @Query(
-            value = "UPDATE foto SET id_publicacion = idPublicacion, url = :url" +
-                    "WHERE id_foto = idFoto",
+            value = "UPDATE foto SET id_publicacion = :idPublicacion, url = :url" +
+                    "WHERE id_foto = :idFoto",
             nativeQuery = true
     )
     void updateFoto (@Param("idFoto") Integer idFoto,

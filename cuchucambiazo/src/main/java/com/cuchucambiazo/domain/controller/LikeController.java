@@ -17,11 +17,7 @@ public class LikeController implements LikeApi {
     @Autowired
     private LikeService service;
 
-    @Override
-    @CrossOrigin
-    public ResponseEntity<GetLikeResponse> getLikes(String body) {
-        return LikeApi.super.getLikes(body);
-    }
+
 
     @Override
     @CrossOrigin
