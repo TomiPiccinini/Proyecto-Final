@@ -81,18 +81,13 @@ const HomePublicaciones = () => {
   };
 
   const swipe = async (dir) => {
+    console.log(currentIndex);
     if (canSwipe && currentIndex < publis.length) {
       await childRefs[currentIndex].current.swipe(dir); // Swipe the card!
     }
   };
 
-  // increase current index and show card
-  const goBack = async () => {
-    if (!canGoBack) return;
-    const newIndex = currentIndex + 1;
-    updateCurrentIndex(newIndex);
-    await childRefs[newIndex].current.restoreCard();
-  };
+
 
   const handleOpen = () => {
     setOpen(!open);

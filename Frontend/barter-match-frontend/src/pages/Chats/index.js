@@ -5,15 +5,28 @@ import { USERS } from './constants'
 import { TextField } from '@mui/material'
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
+import Chip from '@mui/material/Chip';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles(() => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+  },
+}));
 
 const ChatBox = (props) => {
+  const classes = useStyles();
   console.log('user chat:', props.user.messages)
   if (!props.user.messages) {
     return(
       <SecondColumn noMessage={true}>
         <NoMessages>AÚN NO HAY MENSAJES.</NoMessages>
         <ContainerSend>
-          <TextField fullWidth id="standard-basic" label="Escriba su mensaje" variant="standard" sx={{ input: { color: '#fff' } }}/>
+          <TextField fullWidth id="standard-basic" label="Escriba su mensaje" variant="standard" sx={{ input: { color: '#fff' }}}/>
           <Button variant="contained" sx={{backgroundColor:'#9198e5'}} endIcon={<SendIcon />}>
           Enviar
           </Button>
@@ -26,7 +39,10 @@ const ChatBox = (props) => {
       <SecondColumn>
         {props.user.messages.map((message) => {
           return(
-            <Messages key={message.text} sender={message.sender}>{message.text}</Messages>
+            <>
+            <Chip label={message.text} color="primary" variant="filled" sx={{display: "${(message) => message.sender ? 'flex' : 'flex'}"}} />
+            {/* <Messages key={message.text} sender={message.sender}>{message.text}</Messages> */}
+            </>  
           )
         })}
         <ContainerSend>
@@ -52,7 +68,9 @@ const Chat = () => {
             USERS.map((u)=> {
               return(
                 <ContainerUsers key={u.name} >
-                  <NameUsers onClick={() => setSelectedUser(u)}>{u.name} - {u.product}</NameUsers>
+                  <Chip label={u.name} color="primary" variant="filled" onClick={() => setSelectedUser(u)} 
+                  style={{width:"80%" , margin:"10px", color:"#fff", backgroundColor:"#9198e5"}}/>
+                 {/* <NameUsers onClick={() => setSelectedUser(u)}>{u.name} - {u.product}</NameUsers> */}
                 </ContainerUsers>
               )
             })
