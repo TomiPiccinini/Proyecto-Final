@@ -17,7 +17,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Like"
+              $ref: "#/components/schemas/postLikeRequest"
       responses:
         '201':
           description: Add user confirmation
@@ -49,36 +49,20 @@ paths:
 components:
   schemas:
 
-    getLikeResponse:
-      description: ''
-      type: object
-      properties:
-        like_list:
-          $ref: '#/components/schemas/LikeList'
-      required:
-        - media_list
-
-    LikeList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Like'
-
     postLikeRequest:
       type: object
       description: ''
       required:
-        - userIssuing
+        - emailIssuing
         - mediaId
-        - userReceiver
+        - emailReceiver
       properties:
-        likeId:
-          type: integer
-        userIssuing:
-          type: integer
+        emailIssuing:
+          type: string
         mediaId:
           type: integer
-        userReceiver:
-          type: integer
+        emailReceiver:
+          type: string
 
     Like:
       type: object

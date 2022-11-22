@@ -1,9 +1,8 @@
 package com.cuchucambiazo.domain.controller;
 
 import api.cuchucambiazo.controller.like.api.LikeApi;
-import api.cuchucambiazo.controller.like.model.GetLikeResponse;
-import api.cuchucambiazo.controller.like.model.Like;
 import api.cuchucambiazo.controller.like.model.LikeResponse;
+import api.cuchucambiazo.controller.like.model.PostLikeRequest;
 import com.cuchucambiazo.domain.service.LikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +20,7 @@ public class LikeController implements LikeApi {
 
     @Override
     @CrossOrigin
-    public ResponseEntity<LikeResponse> saveLike(Like like) {
+    public ResponseEntity<LikeResponse> saveLike(PostLikeRequest like) {
 
         LikeResponse response = service.saveLike(like);
 

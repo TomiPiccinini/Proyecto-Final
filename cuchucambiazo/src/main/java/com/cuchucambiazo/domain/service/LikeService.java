@@ -2,10 +2,12 @@ package com.cuchucambiazo.domain.service;
 
 import api.cuchucambiazo.controller.like.model.Like;
 import api.cuchucambiazo.controller.like.model.LikeResponse;
+import api.cuchucambiazo.controller.like.model.PostLikeRequest;
 import api.cuchucambiazo.controller.match.model.Match;
 import com.cuchucambiazo.domain.repository.LikeRepository;
 import com.cuchucambiazo.domain.repository.MatchRepository;
 import com.cuchucambiazo.domain.repository.MediaRepository;
+import com.cuchucambiazo.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,13 +28,22 @@ public class LikeService {
     @Autowired
     private MediaRepository mediaRepository;
 
-    public LikeResponse saveLike(Like like){
+    @Autowired
+    private UserRepository userRepository;
+
+    public LikeResponse saveLike(PostLikeRequest request){
 
         LikeResponse response = new LikeResponse();
         response.setIsMatch(false);
 
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+        Like like = new Like();
+
+        like.setMediaId(request.getMediaId());
+        like.setUserIssuing(userRepository.findByEmail(request.getEmailIssuing()).getUserId());
+        like.setUserReceiver(userRepository.findByEmail(request.getEmailReceiver()).getUserId());
 
         List<Like> likesMatch = likeRepository.getLikesToMatch(like);
         if (likesMatch.isEmpty()){
@@ -43,7 +54,7 @@ public class LikeService {
                 Match match = new Match();
                 match.setState("Activo");
                 match.setMediaId1(a.getMediaId());
-                match.setMediaId2(like.getMediaId());
+                match.setMediaId2(request.getMediaId());
                 match.setDateTimeMatch(formatter.format(date));
 
                 matchRepository.saveMatch(match);
