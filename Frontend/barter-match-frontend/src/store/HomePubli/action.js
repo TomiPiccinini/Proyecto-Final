@@ -1,5 +1,6 @@
 import { selectMail } from "../Login/selectors";
 import * as types from "./types";
+import { checkStatus, parseJSON } from "../../utils/request";
 
 const getPublicacionesRequested = () => {
   return {
@@ -21,34 +22,33 @@ const getPublicacionesError = (msg) => {
   };
 };
 
+/*usuarios: 
+alva","1234","alva@gmail.com
+franco","1234","franco12@gmail.com
+*/
+
 export const getPublicaciones = (mail) => {
-  console.log("get publis");
-  const asd = {
-    isHome: true,
-    email: "fran@gmail.com",
-  };
-  console.log("body", asd);
   return async (dispatch, getState) => {
     dispatch(getPublicacionesRequested());
-    //const requestURL = `http://bartermatch-proyecto.herokuapp.com/media`;
-    const requestURL = 'http://localhost:8080/media'
+    const requestURL = `http://bartermatch-proyecto.herokuapp.com/media`;
     try {
       const response = await fetch(requestURL, {
         method: "POST",
         body: JSON.stringify({
-          'isHome': true,
-          'email': "alva@gmail.com",
+          isHome: true,
+          email: "alva@gmail.com",
         }),
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       });
-      console.log(response);
-      /*if (response.status === "1") {
-        dispatch(getPublicacionesSucces(response.result));
+      const response_1 = await checkStatus(response);
+      const json = await parseJSON(response_1);
+      if (response_1.status === 200) {
+        dispatch(getPublicacionesSucces(json.media_list));
       } else {
-        dispatch(getPublicacionesError(response.message));
-      }*/
+        dispatch(getPublicacionesError("Error"));
+      }
     } catch (error) {
       console.log(error);
       //dispatch(getPublicacionesError("ERROR"));
@@ -81,23 +81,27 @@ const postPubliError = (msg) => {
 export const postPubli = (data) => {
   return async (dispatch, getState) => {
     const mail = selectMail(getState());
-    console.log(mail);
+    console.log('data', data)
     dispatch(postPubliRequested());
     const requestURL = `http://bartermatch-proyecto.herokuapp.com/media/save`;
     try {
       const response = await fetch(requestURL, {
         method: "POST",
-        body: { email: mail, Media: data },
-        credentials: "include",
+        body: JSON.stringify({ email: "franco12@gmail.com", media: data }),
         headers: {
-          Accept: "application/json",
+          "Content-Type": "application/json",
         },
       });
-      if (response.status === "1") {
+      const response_1 = await checkStatus(response);
+      console.log(response_1)
+      const json = await parseJSON(response_1);
+      console.log(json)
+
+      /*if (response.status === "1") {
         dispatch(postPubliSucces(response.result));
       } else {
         dispatch(postPubliError(response.message));
-      }
+      }*/
     } catch (error) {
       dispatch(postPubliError("ERROR"));
     }
