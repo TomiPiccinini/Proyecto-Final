@@ -27,6 +27,8 @@ public class MatchBuilds {
         match.setMediaId1(matcheo.getIdPublicacion1());
         match.setMediaId2(matcheo.getIdPublicacion2());
         match.setState(matcheo.getEstado());
+        match.setMatchId(matcheo.getIdMatcheo());
+
 
         return match;
     }

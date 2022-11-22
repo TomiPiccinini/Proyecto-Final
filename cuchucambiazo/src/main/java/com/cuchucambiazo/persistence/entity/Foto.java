@@ -16,6 +16,7 @@ public class Foto {
     @Column(name = "id_publicacion")
     private Integer idPublicacion;
 
+    @Lob
     @Column
     private String url;
 

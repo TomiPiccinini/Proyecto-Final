@@ -4,4 +4,5 @@ import api.cuchucambiazo.controller.user.model.User;
 
 public interface UserRepository {
     User findByEmail(String email);
+    User findByUserId(Integer userId);
 }

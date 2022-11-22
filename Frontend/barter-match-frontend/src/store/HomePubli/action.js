@@ -30,19 +30,18 @@ export const getPublicaciones = (mail) => {
   console.log("body", asd);
   return async (dispatch, getState) => {
     dispatch(getPublicacionesRequested());
-    const requestURL = `http://bartermatch-proyecto.herokuapp.com/media`;
+    //const requestURL = `http://bartermatch-proyecto.herokuapp.com/media`;
+    const requestURL = 'http://localhost:8080/media'
     try {
       const response = await fetch(requestURL, {
         method: "POST",
-        body: {
-          isHome: true,
-          email: "fran@gmail.com",
-        },
-        credentials: "include",
+        body: JSON.stringify({
+          'isHome': true,
+          'email': "alva@gmail.com",
+        }),
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
+          "Content-Type": "application/json"
+        }
       });
       console.log(response);
       /*if (response.status === "1") {

@@ -20,4 +20,6 @@ public class UsuarioRepository  implements UserRepository {
     public User findByEmail(String email) {
         return builds.UsuarioToUser(repository.findByEmail(email));
     }
+
+    public User findByUserId(Integer usuarioId){return builds.UsuarioToUser(repository.findById(usuarioId).get());}
 }

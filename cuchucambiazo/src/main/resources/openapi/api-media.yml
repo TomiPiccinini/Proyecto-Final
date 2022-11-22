@@ -9,7 +9,7 @@ paths:
     post:
       summary: Get Medias
       tags:
-        - getMedia
+        - media
       operationId: getMedias
 
       requestBody:
@@ -59,7 +59,7 @@ paths:
             schema:
               $ref: "#/components/schemas/MediaRequest"
       responses:
-        '201':
+        '200':
           description: Add user confirmation
           content:
             application/json:
@@ -163,7 +163,7 @@ components:
       properties:
         email:
           type: string
-        Media:
+        media:
           $ref: '#/components/schemas/Media'
       required:
         - Media
@@ -173,7 +173,7 @@ components:
       type: object
       description: ''
       required:
-        - urlPhoto
+        - photoList
         - state
         - description
         - measures
@@ -182,6 +182,12 @@ components:
           type: integer
         userId:
           type: integer
+        title:
+          type: string
+        color:
+          type: string
+        brand:
+          type: string
         photoList:
           type: array
           items:
@@ -209,6 +215,7 @@ components:
           type: integer
         url:
           type: string
+          format: base64
 
     GeneralBusinessError:
       type: object

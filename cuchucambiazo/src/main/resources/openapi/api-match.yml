@@ -10,7 +10,7 @@ paths:
       summary: Post to get all matchs
 
       tags:
-        - user
+        - match
 
       operationId: getMatchs
 
@@ -19,7 +19,7 @@ paths:
         content:
           text/plain:
             schema:
-              type: integer
+              type: string
       responses:
         '200':
           description: Get Match
@@ -52,7 +52,7 @@ paths:
       summary: Post to end a match
 
       tags:
-        - user
+        - match
 
       operationId: closeMatch
 
@@ -65,6 +65,49 @@ paths:
       responses:
         '200':
           description: Get Match
+          content:
+            application/json:
+              schema:
+                $ref: 'api-user.yml#/components/schemas/GeneralBusinessResponse'
+        '400':
+          description: Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBusinessError'
+
+
+  /match/message:
+
+    post:
+      summary: Post to add a message to match
+
+      tags:
+        - chat
+
+      operationId: addMessage
+
+      requestBody:
+        description: Save message to match's chat
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Message'
+      responses:
+        '200':
+          description: Add message
           content:
             application/json:
               schema:
@@ -102,8 +145,8 @@ components:
         reason:
           type: string
           enum:
-            - Succes
-            - Cancel
+            - Confirmado
+            - Cancelado
 
     MatchGetResponse:
       description: ''
@@ -115,29 +158,32 @@ components:
     Match_list:
       type: array
       items:
-        $ref: '#/components/schemas/Match'
+        $ref: '#/components/schemas/MsgMatch'
 
 
-    Chat:
+    MsgMatch:
       type: object
       description: ''
       required:
-        - matchId1
-        - userId2
-        - state
+        - foto
+        - dateTimeMatch
+        - nameOtherUser
+        - idOtherUser
       properties:
-        matchId:
+        foto:
           type: string
-        fotos:
-          type: array
-          items:
-            type: string
+        dateTimeMatch:
+          type: string
+        nameOtherUser:
+          type: string
+        idOtherUser:
+          type: integer
         mensajes:
           type: array
           items:
-            $ref: '#/components/schemas/Mensaje'
+            $ref: '#/components/schemas/Message'
 
-    Mensaje:
+    Message:
       type: object
       description: ''
       required:
@@ -146,6 +192,8 @@ components:
         - dateTime
         - text
       properties:
+        matchId:
+          type: integer
         userIssuing:
           type: integer
         userReceiver:
@@ -165,6 +213,8 @@ components:
         - userId2
         - state
       properties:
+        matchId:
+          type: integer
         dateTimeMatch:
           type: string
         mediaId1:

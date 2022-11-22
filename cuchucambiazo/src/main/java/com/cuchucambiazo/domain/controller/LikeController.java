@@ -8,6 +8,7 @@ import com.cuchucambiazo.domain.service.LikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -17,11 +18,13 @@ public class LikeController implements LikeApi {
     private LikeService service;
 
     @Override
+    @CrossOrigin
     public ResponseEntity<GetLikeResponse> getLikes(String body) {
         return LikeApi.super.getLikes(body);
     }
 
     @Override
+    @CrossOrigin
     public ResponseEntity<LikeResponse> saveLike(Like like) {
 
         LikeResponse response = service.saveLike(like);

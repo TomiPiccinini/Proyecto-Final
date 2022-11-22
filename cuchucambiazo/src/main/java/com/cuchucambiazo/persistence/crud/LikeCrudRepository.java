@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface LikeCrudRepository extends CrudRepository <MeGusta, Integer> {
 
@@ -22,5 +23,11 @@ public interface LikeCrudRepository extends CrudRepository <MeGusta, Integer> {
             nativeQuery = true
     )
     List<MeGusta> getLikesByUserReceiver(@Param("idUsuarioReceptor") Integer idUsuarioReceptor);
+
+    @Query(
+            value = "Select * FROM me_gusta mg WHERE mg.id_publicacion = :idMedia AND mg.id_usuario_emisor <> :idUsuarioEmisor"
+    )
+    Optional<MeGusta> getLikeOfMediaLiked(@Param("idPublicacion") Integer idPublicacion,
+                                            @Param("idUsuarioEmisor") Integer idUsuarioEmisor);
 
 }

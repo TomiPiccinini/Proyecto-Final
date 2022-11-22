@@ -11,4 +11,6 @@ public interface MediaRepository {
     List<Media> getAllWithOutUserId(Integer userId);
     Media getMediaByMediaId(Integer mediaId);
     void deleteMedia(Integer mediaId);
+    Boolean existsMedia(Integer idMedia);
+    void updateMedia(Media media);
 }

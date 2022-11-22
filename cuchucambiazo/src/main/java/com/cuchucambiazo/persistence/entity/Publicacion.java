@@ -19,6 +19,15 @@ public class Publicacion {
     private Integer idUsuario;
 
     @Column
+    private String titulo;
+
+    @Column
+    private String color;
+
+    @Column
+    private String marca;
+
+    @Column
     private String descripcion;
 
     @Column

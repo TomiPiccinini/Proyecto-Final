@@ -104,6 +104,23 @@ components:
       items:
         $ref: '#/components/schemas/Like'
 
+    postLikeRequest:
+      type: object
+      description: ''
+      required:
+        - userIssuing
+        - mediaId
+        - userReceiver
+      properties:
+        likeId:
+          type: integer
+        userIssuing:
+          type: integer
+        mediaId:
+          type: integer
+        userReceiver:
+          type: integer
+
     Like:
       type: object
       description: ''
