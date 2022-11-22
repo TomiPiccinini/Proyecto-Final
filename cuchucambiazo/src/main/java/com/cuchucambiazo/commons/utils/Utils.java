@@ -1,6 +1,7 @@
 package com.cuchucambiazo.commons.utils;
 
-import api.cuchucambiazo.controller.user.model.GeneralBusinessResponse;
+
+import api.cuchucambiazo.controller.match.model.GeneralBusinessResponse;
 import org.springframework.stereotype.Component;
 
 @Component

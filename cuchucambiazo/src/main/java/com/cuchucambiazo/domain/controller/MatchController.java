@@ -1,10 +1,8 @@
 package com.cuchucambiazo.domain.controller;
 
 import api.cuchucambiazo.controller.match.api.MatchApi;
-import api.cuchucambiazo.controller.match.model.GeneralBusinessResponse;
-import api.cuchucambiazo.controller.match.model.MatchGetResponse;
-import api.cuchucambiazo.controller.match.model.MatchRequest;
-import api.cuchucambiazo.controller.match.model.Message;
+import api.cuchucambiazo.controller.match.model.*;
+import com.cuchucambiazo.commons.utils.Utils;
 import com.cuchucambiazo.domain.service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +19,9 @@ public class MatchController implements MatchApi {
     @Autowired
     private MatchService service;
 
+    @Autowired
+    private Utils utils;
+
     @Override
     @CrossOrigin
     public ResponseEntity<MatchGetResponse> getMatchs(String email) {
@@ -30,12 +31,19 @@ public class MatchController implements MatchApi {
     @Override
     @CrossOrigin
     public ResponseEntity<GeneralBusinessResponse> closeMatch(MatchRequest matchRequest) {
-        return MatchApi.super.closeMatch(matchRequest);
+        service.closeMatch(matchRequest);
+
+        GeneralBusinessResponse response = utils.buildGeneralBusinessResponse();
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @Override
     @CrossOrigin
-    public ResponseEntity<GeneralBusinessResponse> addMessage(Message message) {
-        return MatchApi.super.addMessage(message);
+    public ResponseEntity<GeneralBusinessResponse> addMessage(MessageRequest message) {
+
+        service.addMessage(message);
+
+        GeneralBusinessResponse response = utils.buildGeneralBusinessResponse();
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 }

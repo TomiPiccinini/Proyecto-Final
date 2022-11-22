@@ -104,7 +104,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Message'
+              $ref: '#/components/schemas/MessageRequest'
       responses:
         '200':
           description: Add message
@@ -198,6 +198,26 @@ components:
           type: integer
         userReceiver:
           type: integer
+        dateTime:
+          type: string
+        text:
+          type: string
+
+    MessageRequest:
+      type: object
+      description: ''
+      required:
+        - emailIssuing
+        - emailReceiver
+        - dateTime
+        - text
+      properties:
+        matchId:
+          type: integer
+        emailIssuing:
+          type: string
+        emailReceiver:
+          type: string
         dateTime:
           type: string
         text:

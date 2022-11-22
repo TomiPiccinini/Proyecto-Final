@@ -1,13 +1,11 @@
 package com.cuchucambiazo.domain.service;
 
-import api.cuchucambiazo.controller.match.model.Match;
-import api.cuchucambiazo.controller.match.model.MatchGetResponse;
-import api.cuchucambiazo.controller.match.model.MatchRequest;
-import api.cuchucambiazo.controller.match.model.MsgMatch;
+import api.cuchucambiazo.controller.match.model.*;
 import api.cuchucambiazo.controller.media.model.Media;
 import api.cuchucambiazo.controller.user.model.User;
 import com.cuchucambiazo.domain.repository.MatchRepository;
 import com.cuchucambiazo.domain.repository.MediaRepository;
+import com.cuchucambiazo.domain.repository.MessageRepository;
 import com.cuchucambiazo.domain.repository.UserRepository;
 import com.cuchucambiazo.persistence.MensajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +29,7 @@ public class MatchService {
     private UserRepository userRepository;
 
     @Autowired
-    private MensajeRepository mensajeRepository;
+    private MessageRepository messageRepository;
 
     public MatchGetResponse getMatchs(String email){
 
@@ -56,7 +54,7 @@ public class MatchService {
                 msgMatch.setNameOtherUser(otherUser.getName());
                 msgMatch.setFoto(otherMedia.getPhotoList().get(0).getUrl());
 
-                msgMatch.setMensajes(mensajeRepository.getAllMessagesByMatchId(mat.getMatchId()));
+                msgMatch.setMensajes(messageRepository.getAllMessagesByMatchId(mat.getMatchId()));
             });
 
         });
@@ -67,7 +65,19 @@ public class MatchService {
     }
 
     public void closeMatch(MatchRequest request){
+        matchRepository.closeMatch(request.getMatchId(), request.getReason().getValue());
+    }
 
+    public void addMessage(MessageRequest message){
+
+        Message reqToSave = new Message();
+        reqToSave.setMatchId(message.getMatchId());
+
+        reqToSave.setUserIssuing(userRepository.findByEmail(message.getEmailIssuing()).getUserId());
+        reqToSave.setUserReceiver(userRepository.findByEmail(message.getEmailReceiver()).getUserId());
+        reqToSave.setDateTime(message.getDateTime());
+
+        messageRepository.saveMessage(reqToSave);
     }
 
 }
