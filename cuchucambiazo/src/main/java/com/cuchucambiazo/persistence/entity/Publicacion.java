@@ -55,6 +55,30 @@ public class Publicacion {
     @OneToMany(mappedBy = "publicacion", cascade = {CascadeType.ALL})
     private List<MeGusta> meGustas;
 
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
     public Integer getIdPublicacion() {
         return idPublicacion;
     }

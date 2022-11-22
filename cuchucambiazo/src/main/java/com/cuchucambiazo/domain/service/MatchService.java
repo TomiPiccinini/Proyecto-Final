@@ -54,7 +54,20 @@ public class MatchService {
                 msgMatch.setNameOtherUser(otherUser.getName());
                 msgMatch.setFoto(otherMedia.getPhotoList().get(0).getUrl());
 
-                msgMatch.setMensajes(messageRepository.getAllMessagesByMatchId(mat.getMatchId()));
+                List<MessageRequest> messageRequests = new ArrayList<>();
+                messageRepository.getAllMessagesByMatchId(mat.getMatchId()).forEach(mess -> {
+                    MessageRequest messageReq = new MessageRequest();
+                    messageReq.setMatchId(mess.getMatchId());
+                    messageReq.setText(mess.getText());
+                    messageReq.setDateTime(mess.getDateTime());
+                    messageReq.setEmailIssuing(userRepository.findByUserId(mess.getUserIssuing()).getEmail());
+                    messageReq.setEmailReceiver(userRepository.findByUserId(mess.getUserReceiver()).getEmail());
+                    messageRequests.add(messageReq);
+                });
+
+                msgMatch.setMensajes(messageRequests);
+
+                matchesWithMsg.add(msgMatch);
             });
 
         });
@@ -75,6 +88,7 @@ public class MatchService {
 
         reqToSave.setUserIssuing(userRepository.findByEmail(message.getEmailIssuing()).getUserId());
         reqToSave.setUserReceiver(userRepository.findByEmail(message.getEmailReceiver()).getUserId());
+        reqToSave.setText(message.getText());
         reqToSave.setDateTime(message.getDateTime());
 
         messageRepository.saveMessage(reqToSave);

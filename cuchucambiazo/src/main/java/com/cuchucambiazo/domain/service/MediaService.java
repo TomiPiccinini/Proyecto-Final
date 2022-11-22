@@ -28,13 +28,15 @@ public class MediaService {
         GetMediaResponse response = new GetMediaResponse();
 
         User user = userRepository.findByEmail(request.getEmail());
+        System.out.println("usuario : " + user);
         if (request.getIsHome()){
             List<Media> mediaList = new ArrayList<>();
             //traigo todas las publicaciones de los usuarios que le dieron like al usuario para darles prioridad
             likeRepository.getLikesByUserReceiver(user.getUserId()).forEach(a -> mediaList.addAll(mediaRepository.getAllWithUserId(a.getUserIssuing())));
             //si le di like a la publicacion, no tiene q volver a aparecer
+            System.out.println("lista de medias que te likearon:" + mediaList);
             mediaList.forEach(media -> {
-                if (!likeRepository.getLikeOfMediaLiked(media.getMediaId(), user.getUserId())){
+                if (Boolean.TRUE.equals(likeRepository.getLikeOfMediaLiked(media.getMediaId(), user.getUserId()))){
                     mediaList.remove(media);
                 }
             });
@@ -42,7 +44,9 @@ public class MediaService {
             Collections.shuffle(mediaList);
             //relleno la lista con todas las publicaciones que no fueron likeadas por el usuario
             mediaRepository.getAllWithOutUserId(user.getUserId()).forEach(media -> {
-                if (likeRepository.getLikeOfMediaLiked(media.getMediaId(), user.getUserId())){
+                System.out.println("Media que no es tuya: " + media);
+                if (Boolean.FALSE.equals(likeRepository.getLikeOfMediaLiked(media.getMediaId(), user.getUserId()))){
+                    System.out.println("no la likeaste, osea que te la voy a mostrar");
                     mediaList.add(media);
                 }
             });

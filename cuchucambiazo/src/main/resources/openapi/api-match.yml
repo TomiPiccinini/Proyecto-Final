@@ -181,7 +181,7 @@ components:
         mensajes:
           type: array
           items:
-            $ref: '#/components/schemas/Message'
+            $ref: '#/components/schemas/MessageRequest'
 
     Message:
       type: object

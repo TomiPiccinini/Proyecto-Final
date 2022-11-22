@@ -16,6 +16,9 @@ public class MediaBuilds {
         Media media = new Media();
 
         media.setMediaId(publicacion.getIdPublicacion());
+        media.setBrand(publicacion.getMarca());
+        media.setColor(publicacion.getColor());
+        media.setTitle(publicacion.getTitulo());
         media.setUserId(publicacion.getIdPublicacion());
         media.setDescription(publicacion.getDescripcion());
         media.setMeasures(publicacion.getMedidas());
@@ -45,6 +48,9 @@ public class MediaBuilds {
         Publicacion publicacion = new Publicacion();
 
         publicacion.setIdUsuario(media.getUserId());
+        publicacion.setColor(media.getColor());
+        publicacion.setMarca(media.getBrand());
+        publicacion.setTitulo(media.getTitle());
         publicacion.setDescripcion(media.getDescription());
         publicacion.setMedidas(media.getMeasures());
         publicacion.setEstado(media.getState());
