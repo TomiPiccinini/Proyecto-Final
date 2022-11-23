@@ -11,6 +11,7 @@ import history from "../../utils/history";
 import DetailsCard from "../../components/DetailsCard";
 import Tooltip from "@mui/material/Tooltip";
 import VanillaTilt from "vanilla-tilt";
+import { CardSwiper } from "react-card-rotate-swiper";
 import { useDispatch, useSelector } from "react-redux";
 import { getPublicaciones } from "../../store/HomePubli/action";
 import { selectPublicaciones } from "../../store/HomePubli/selectors";
@@ -24,16 +25,10 @@ const HomePublicaciones = () => {
   }, []);
 
   const publis = useSelector(selectPublicaciones);
-
-  const [currentIndex, setCurrentIndex] = useState(publis.length - 1);
   const [open, setOpen] = useState(false);
   const [openDetails, setOpenDetails] = useState(false);
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
-  const currentIndexRef = useRef(currentIndex);
-
-  console.log("index", currentIndex);
-
   const mail = useSelector(selectMail);
 
   console.log(publis);
@@ -47,52 +42,6 @@ const HomePublicaciones = () => {
     });
   }, []);
 
-  const childRefs = useMemo(
-    () =>
-      Array(publis.length)
-        .fill(0)
-        .map((i) => React.createRef()),
-    []
-  );
-
-  const updateCurrentIndex = (val) => {
-    setCurrentIndex(val);
-    currentIndexRef.current = val;
-  };
-
-  const canGoBack = currentIndex < publis.length - 1;
-
-  const canSwipe = currentIndex >= 0;
-
-  // set last direction and decrease current index
-  const swiped = (direction, nameToDelete, index) => {
-    /*if (nameToDelete === "Chaleco" && direction === "right") {
-      handleOpen();
-    }*/
-
-    updateCurrentIndex(index - 1);
-  };
-
-  const outOfFrame = (name, idx) => {
-    // handle the case in which go back is pressed before card goes outOfFrame
-    currentIndexRef.current >= idx && childRefs[idx].current.restoreCard();
-  };
-
-  const swipe = async (dir) => {
-    console.log(currentIndex);
-    if (currentIndex < publis.length) {
-      await childRefs[currentIndex].current.swipe(dir); // Swipe the card!
-    }
-    if (currentIndex == -1) {
-      console.log("no mas");
-    }
-  };
-
-  const submitLike = () => {
-    //enviar info de email de la publi, email de la sesión actual y mediaId
-    //dispatch(postLike(params))
-  };
-
   const handleOpen = () => {
     setOpen(!open);
   };
@@ -102,6 +51,9 @@ const HomePublicaciones = () => {
     setOpenDetails(!openDetails);
   };
 
+  const handleSwipe = (d) => {
+    d == "left" ? console.log("hola") : console.log("chau");
+  };
   return (
     <Wrapper>
       <NavBar />
@@ -116,23 +68,24 @@ const HomePublicaciones = () => {
         >
           <div className="cardContainer">
             {publis.map((producto, index) => (
-              <HomeCard
-                ref={childRefs[index]}
-                className="swipe"
-                key={producto.title}
-                onSwipe={(dir) => swiped(dir, producto.title, index)}
-                onCardLeftScreen={() => outOfFrame(producto.title, index)}
-              >
-                <div
-                  onDoubleClick={() => handleOpenDetails(producto)}
-                  style={{
-                    backgroundImage: `url(${producto.photoList[0].url})`,
-                  }}
-                  className="card"
-                >
-                  <h3>{producto.title}</h3>
-                </div>
-              </HomeCard>
+              <CardSwiper
+                onSwipe={handleSwipe}
+                className={"swiper"}
+                contents={
+                  <>
+                    <div
+                      onDoubleClick={() => handleOpenDetails(producto)}
+                      style={{
+                        backgroundImage: `url(${producto.photoList[0].url})`,
+                        //backgroundImage: 'url(' + producto.url + ')',
+                      }}
+                      className="card"
+                    >
+                      <h3>{producto.title}</h3>
+                    </div>
+                  </>
+                }
+              />
             ))}
           </div>
         </Tooltip>
@@ -143,32 +96,7 @@ const HomePublicaciones = () => {
             flexDirection: "column",
             textAlign: "center",
           }}
-        >
-          <div>
-            <img
-              src="https://i.ibb.co/Jp8YJYD/Like-icon-on-transparent-PNG.png"
-              className="button"
-              alt="dislike"
-              border="0"
-              style={{ width: "100px", rotate: "180deg" }}
-              onClick={() => swipe("left")}
-            />
-
-            {/* <img src="https://i.ibb.co/5YFjNZS/reload.png" alt="reload" className='button' border="0" style={{width:"100px"}} onClick={() => goBack()}/> */}
-
-            <img
-              src="https://i.ibb.co/Jp8YJYD/Like-icon-on-transparent-PNG.png"
-              alt="Like-icon-on-transparent-PNG"
-              className="button"
-              border="0"
-              style={{ width: "100px" }}
-              onClick={() => {
-                swipe("right");
-                //submitLike();
-              }}
-            />
-          </div>
-        </div>
+        ></div>
         <DetailsCard
           show={openDetails}
           image={image}

@@ -16,6 +16,14 @@ const useStyles = makeStyles(() => ({
     alignItems: 'center',
 
   },
+  inputs: {
+    color:'fff',
+    backgroundColor:'fff'
+  },
+  nombres:{
+    fontSize:'100px',
+    backgroundColor:'red'
+  }
 }));
 
 const ChatBox = (props) => {
@@ -26,7 +34,7 @@ const ChatBox = (props) => {
       <SecondColumn noMessage={true}>
         <NoMessages>AÚN NO HAY MENSAJES.</NoMessages>
         <ContainerSend>
-          <TextField fullWidth id="standard-basic" label="Escriba su mensaje" variant="standard" sx={{ input: { color: '#fff' }}}/>
+          <TextField className={classes.inputs} fullWidth id="standard-basic" label="Escriba su mensaje" variant="standard" sx={{ input: { color: '#fff' }}}/>
           <Button variant="contained" sx={{backgroundColor:'#9198e5'}} endIcon={<SendIcon />}>
           Enviar
           </Button>
@@ -40,14 +48,14 @@ const ChatBox = (props) => {
         {props.user.messages.map((message) => {
           return(
             <>
-            <Chip label={message.text} color="primary" variant="filled" sx={{display: "${(message) => message.sender ? 'flex' : 'flex'}"}} />
+            <Chip className={classes.nombres} label={message.text} color="primary" variant="filled" sx={{backgroundColor:"#9198e5" , fontSize:'16px'}} />
             {/* <Messages key={message.text} sender={message.sender}>{message.text}</Messages> */}
             </>  
           )
         })}
         <ContainerSend>
-          <TextField fullWidth id="standard-basic" label="Escriba su mensaje" variant="standard" sx={{input: { color: '#fff' }}}/>
-          <Button variant="contained" sx={{backgroundColor:'#9198e5'}} endIcon={<SendIcon />}>
+          <TextField fullWidth id="standard-basic" label="Escriba su mensaje" variant="standard" className={classes.inputs} sx={{input: { color: '#fff' }}}/>
+          <Button variant="contained" sx={{backgroundColor:'rgb(82 97 205)'}} endIcon={<SendIcon />}>
           Enviar
           </Button>
         </ContainerSend>
@@ -69,7 +77,7 @@ const Chat = () => {
               return(
                 <ContainerUsers key={u.name} >
                   <Chip label={u.name} color="primary" variant="filled" onClick={() => setSelectedUser(u)} 
-                  style={{width:"80%" , margin:"10px", color:"#fff", backgroundColor:"#9198e5"}}/>
+                  style={{width:"80%" , margin:"15px 10px", color:"#fff", backgroundColor:"#9198e5" , fontSize:"20px"}}/>
                  {/* <NameUsers onClick={() => setSelectedUser(u)}>{u.name} - {u.product}</NameUsers> */}
                 </ContainerUsers>
               )

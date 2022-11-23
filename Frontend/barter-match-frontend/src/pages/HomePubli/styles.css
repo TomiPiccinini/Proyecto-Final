@@ -21,7 +21,8 @@
   
   .card {
     cursor:pointer;
-    position: relative;
+    position: absolute;
+    
     background-color: #fff;
     width: 80vw;
     max-width: 260px;
