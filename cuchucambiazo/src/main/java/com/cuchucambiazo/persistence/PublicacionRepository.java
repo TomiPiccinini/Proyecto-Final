@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional
@@ -69,7 +70,17 @@ public class PublicacionRepository implements MediaRepository {
 
     @Override
     public Media getMediaByMediaId(Integer mediaId) {
-        return mediaBuilds.PublicacionToMedia(publicacionCrudRepository.findById(mediaId).get());
+
+        Optional<Publicacion> publicacion = publicacionCrudRepository.findById(mediaId);
+
+        if (publicacion.isPresent()){
+            Media response = mediaBuilds.PublicacionToMedia(publicacion.get());
+            System.out.println("Media encontrada: " + response);
+            return response;
+
+        }else {
+            return new Media();
+        }
     }
 
     @Override

@@ -27,6 +27,7 @@ public class MediaService {
 
         GetMediaResponse response = new GetMediaResponse();
 
+
         User user = userRepository.findByEmail(request.getEmail());
         System.out.println("usuario : " + user);
         if (request.getIsHome()){
@@ -52,11 +53,20 @@ public class MediaService {
             });
             Set<Media> mediaSet = new LinkedHashSet<>(mediaList);
             mediaList.clear();
-            mediaList.addAll(mediaSet);
+            mediaSet.forEach(media -> {
+                User otherUser = userRepository.findByUserId(media.getUserId());
+                System.out.println("OtherUser: " + otherUser);
+                media.setUserEmail(otherUser.getEmail());
+                mediaList.add(media);
+            });
             response.setMediaList(mediaList);
 
         }else {
-            response.setMediaList(mediaRepository.getAllWithUserId(user.getUserId()));
+            List<Media> mediaList = mediaRepository.getAllWithUserId(user.getUserId());
+            mediaList.forEach(media -> {
+                media.setUserEmail(user.getEmail());
+            });
+            response.setMediaList(mediaList);
         }
 
         return response;
