@@ -23,19 +23,17 @@ const HomePublicaciones = () => {
     dispatch(getPublicaciones());
   }, []);
 
-  const index = () => {
-    if (!publis) return 0;
-    else return publis.length - 1;
-  };
+  const publis = useSelector(selectPublicaciones);
 
-  const [currentIndex, setCurrentIndex] = useState(index);
+  const [currentIndex, setCurrentIndex] = useState(publis.length - 1);
   const [open, setOpen] = useState(false);
   const [openDetails, setOpenDetails] = useState(false);
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const currentIndexRef = useRef(currentIndex);
 
-  const publis = useSelector(selectPublicaciones);
+  console.log("index", currentIndex);
+
   const mail = useSelector(selectMail);
 
   console.log(publis);
@@ -68,9 +66,9 @@ const HomePublicaciones = () => {
 
   // set last direction and decrease current index
   const swiped = (direction, nameToDelete, index) => {
-    if (nameToDelete === "Chaleco" && direction === "right") {
+    /*if (nameToDelete === "Chaleco" && direction === "right") {
       handleOpen();
-    }
+    }*/
 
     updateCurrentIndex(index - 1);
   };
@@ -82,12 +80,18 @@ const HomePublicaciones = () => {
 
   const swipe = async (dir) => {
     console.log(currentIndex);
-    if (canSwipe && currentIndex < publis.length) {
+    if (currentIndex < publis.length) {
       await childRefs[currentIndex].current.swipe(dir); // Swipe the card!
+    }
+    if (currentIndex == -1) {
+      console.log("no mas");
     }
   };
 
-
+  const submitLike = () => {
+    //enviar info de email de la publi, email de la sesión actual y mediaId
+    //dispatch(postLike(params))
+  };
 
   const handleOpen = () => {
     setOpen(!open);
@@ -115,7 +119,7 @@ const HomePublicaciones = () => {
               <HomeCard
                 ref={childRefs[index]}
                 className="swipe"
-                key={producto.titulo}
+                key={producto.title}
                 onSwipe={(dir) => swiped(dir, producto.title, index)}
                 onCardLeftScreen={() => outOfFrame(producto.title, index)}
               >
