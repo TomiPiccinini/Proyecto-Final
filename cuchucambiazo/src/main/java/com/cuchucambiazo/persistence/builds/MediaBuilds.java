@@ -21,7 +21,7 @@ public class MediaBuilds {
         media.setTitle(publicacion.getTitulo());
         media.setUserId(publicacion.getIdUsuario());
         media.setDescription(publicacion.getDescripcion());
-        media.setMeasures(publicacion.getMedidas());
+        media.setMeasure(publicacion.getMedidas());
         media.setState(publicacion.getEstado());
         media.setTag(publicacion.getTag());
 
@@ -52,7 +52,7 @@ public class MediaBuilds {
         publicacion.setMarca(media.getBrand());
         publicacion.setTitulo(media.getTitle());
         publicacion.setDescripcion(media.getDescription());
-        publicacion.setMedidas(media.getMeasures());
+        publicacion.setMedidas(media.getMeasure());
         publicacion.setEstado(media.getState());
         publicacion.setFechaModificacion(media.getUpdateDate());
         publicacion.setFechaBaja(media.getDischargeDate());

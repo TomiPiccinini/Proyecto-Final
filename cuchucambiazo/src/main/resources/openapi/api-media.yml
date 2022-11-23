@@ -203,7 +203,7 @@ components:
           type: string
         description:
           type: string
-        measures:
+        measure:
           type: string
         tag:
           type: string
