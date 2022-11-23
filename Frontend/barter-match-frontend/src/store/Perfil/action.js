@@ -30,7 +30,7 @@ export const getPublicaciones = (mail) => {
         method: "POST",
         body: JSON.stringify({
           isHome: false,
-          email: "alva@gmail.com",
+          email: mail,
         }),
         headers: {
           "Content-Type": "application/json",

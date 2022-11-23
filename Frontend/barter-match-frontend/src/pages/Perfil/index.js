@@ -19,6 +19,8 @@ import { selectPerfil } from "../../store/Perfil/selectors";
 const Perfil = () => {
   const dispatch = useDispatch();
 
+  const mail = JSON.parse(localStorage.getItem("mail"));
+
   const publisPerfil = useSelector(selectPerfil);
   const [publicaciones, setPublicaciones] = useState(publisPerfil);
   const [name, setName] = useState("");
@@ -27,11 +29,9 @@ const Perfil = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [titulo, setTitulo] = useState(false);
 
-  const mail = useSelector(selectMail);
-
   useEffect(() => {
     dispatch(getPublicaciones(mail));
-    dispatch(getMatchs());
+    dispatch(getMatchs(mail));
   }, []);
 
   useEffect(() => {
@@ -39,8 +39,6 @@ const Perfil = () => {
       setPublicaciones(publisPerfil);
     }
   }, [publisPerfil]);
-
-  console.log(publicaciones);
 
   const deletePublicacion = (publicacion) => {
     setPublicaciones(publicaciones.filter((p) => p.title !== publicacion));

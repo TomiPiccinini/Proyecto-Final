@@ -15,13 +15,14 @@ import { CardSwiper } from "react-card-rotate-swiper";
 import { useDispatch, useSelector } from "react-redux";
 import { getPublicaciones } from "../../store/HomePubli/action";
 import { selectPublicaciones } from "../../store/HomePubli/selectors";
-import { selectMail } from "../../store/Login/selectors";
 
 const HomePublicaciones = () => {
   const dispatch = useDispatch();
 
+  const mail = JSON.parse(localStorage.getItem("mail"));
+
   useEffect(() => {
-    dispatch(getPublicaciones());
+    dispatch(getPublicaciones(mail));
   }, []);
 
   const publis = useSelector(selectPublicaciones);
@@ -29,9 +30,9 @@ const HomePublicaciones = () => {
   const [openDetails, setOpenDetails] = useState(false);
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
-  const mail = useSelector(selectMail);
+  
 
-  console.log(publis);
+  console.log('mail', mail);
 
   useEffect(() => {
     VanillaTilt.init(document.querySelectorAll(".card"), {

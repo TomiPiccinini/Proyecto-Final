@@ -31,12 +31,13 @@ export const getPublicaciones = (mail) => {
   return async (dispatch, getState) => {
     dispatch(getPublicacionesRequested());
     const requestURL = `http://bartermatch-proyecto.herokuapp.com/media`;
+    console.log("mail", mail);
     try {
       const response = await fetch(requestURL, {
         method: "POST",
         body: JSON.stringify({
           isHome: true,
-          email: "alva@gmail.com",
+          email: mail,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -44,6 +45,7 @@ export const getPublicaciones = (mail) => {
       });
       const response_1 = await checkStatus(response);
       const json = await parseJSON(response_1);
+      console.log("json", json);
       if (response_1.status === 200) {
         dispatch(getPublicacionesSucces(json.media_list));
       } else {
@@ -78,16 +80,15 @@ const postPubliError = (msg) => {
   };
 };
 
-export const postPubli = (data) => {
+export const postPubli = (mail, data) => {
   return async (dispatch, getState) => {
-    const mail = selectMail(getState());
     console.log("data", data);
     dispatch(postPubliRequested());
     const requestURL = `http://bartermatch-proyecto.herokuapp.com/media/save`;
     try {
       const response = await fetch(requestURL, {
         method: "POST",
-        body: JSON.stringify({ email: "franco12@gmail.com", media: data }),
+        body: JSON.stringify({ email: mail, media: data }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -157,9 +158,8 @@ export const deletePublicacion = (mail) => {
 
 /* LIKE */
 
-export const postLike = (data) => {
+export const postLike = (mail, data) => {
   return async (dispatch, getState) => {
-    const mail = selectMail(getState());
     console.log("data", data);
     dispatch(postPubliRequested());
     const requestURL = `http://bartermatch-proyecto.herokuapp.com/like/save`;
