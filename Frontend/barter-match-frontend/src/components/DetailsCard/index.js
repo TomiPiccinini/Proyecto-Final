@@ -22,7 +22,6 @@ const useStyles = makeStyles(() => ({
 
 export default function AlertDialogSlide(props) {
   const classes = useStyles();
-  console.log(props)
   if (!props.show) {
     return null;
   }
@@ -38,17 +37,17 @@ export default function AlertDialogSlide(props) {
           aria-describedby="alert-dialog-slide-description"
           className={classes.root}
         >
-          <DialogTitle >{props.name.titulo}</DialogTitle>
+          <DialogTitle >{props.name.title}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
               <DialogContainer className={classes.root} >
-                <MatchImg src={props.name.url} />
+                <MatchImg src={props.name.photoList[0].url} />
                 <p>Detalles del producto</p>
-                <p>Marca: {props.name.marca}</p>
-                <p>Descripción: {props.name.descripcion}</p>
-                <p>Estado: {props.name.condicion}</p>
-                <p>Talle: {props.name.talle}</p>
-                <p>Tipo de Prenda: {props.name.categoria}</p>
+                <p>Marca: {props.name.brand}</p>
+                <p>Descripción: {props.name.description}</p>
+                <p>Estado: {props.name.state}</p>
+                <p>Talle: {props.name.measure}</p>
+                <p>Tipo de Prenda: {props.name.tag}</p>
               </DialogContainer>
             </DialogContentText>
           </DialogContent>

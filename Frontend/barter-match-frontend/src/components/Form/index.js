@@ -7,17 +7,17 @@ import { useDispatch } from "react-redux";
 const Formulario = () => {
   const dispatch = useDispatch();
   const [datos, setDatos] = useState({
-    titulo: "",
-    marca: "",
+    title: "",
+    brand: "",
     color: "",
     description: "",
-    imagen: "",
   });
 
   const [showAlert, setShowAlert] = useState(false);
   const [condition, setCondition] = useState("");
   const [talle, setTalle] = useState("");
   const [category, setCategory] = useState("");
+  const [base64Done, setBase64] = useState("");
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -46,10 +46,12 @@ const Formulario = () => {
   };
 
   const enviarDatos = (event) => {
-    console.log(datos);
     datos["state"] = condition;
     datos["measure"] = talle;
     datos["tag"] = category;
+    datos["updateDate"] = "asd";
+    datos["photoList"] = [{ url: base64Done }];
+
     console.log(datos);
     dispatch(postPubli(datos));
     setShowAlert(true);
@@ -61,69 +63,69 @@ const Formulario = () => {
 
   const categories = [
     {
-      value: "calzado",
+      value: "Calzado",
       label: "Calzado",
     },
     {
-      value: "pantalon",
+      value: "Pantalón",
       label: "Pantalón",
     },
     {
-      value: "remera",
+      value: "Remera",
       label: "Remera",
     },
     {
-      value: "campera",
+      value: "Campera",
       label: "Campera",
     },
     {
-      value: "buzo",
+      value: "Buzo",
       label: "Buzo",
     },
     {
-      value: "gorra",
+      value: "Gorra",
       label: "Gorra",
     },
     {
-      value: "accesorio",
+      value: "Accesorio",
       label: "Accesorio",
     },
   ];
 
   const talles = [
     {
-      value: "xs",
+      value: "XS",
       label: "XS",
     },
     {
-      value: "s",
+      value: "S",
       label: "S",
     },
     {
-      value: "m",
+      value: "M",
       label: "M",
     },
     {
-      value: "l",
+      value: "L",
       label: "L",
     },
     {
-      value: "xl",
+      value: "XL",
       label: "XL",
     },
     {
-      value: "xxl",
+      value: "XXL",
       label: "XXL",
     },
   ];
 
   const conditions = [
     {
-      value: "new",
+      value: "Nuevo",
       label: "Nuevo",
     },
     {
-      value: "used",
+      value: "Usado",
       label: "Usado",
     },
   ];
@@ -146,6 +148,26 @@ const Formulario = () => {
     },
   }));
 
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const handleFileUpload = async (e) => {
+    console.log(e);
+    const file = e.target.files[0];
+    const base64 = await convertToBase64(file);
+    setBase64(base64);
+  };
+
   const classes = useStyles();
   return (
     <Box
@@ -165,7 +187,7 @@ const Formulario = () => {
           <TextField
             className={classes.root}
             required
-            id="titulo"
+            id="title"
             label="Titulo"
             variant="filled"
             onChange={handleInputChange}
@@ -190,7 +212,7 @@ const Formulario = () => {
         <div>
           <TextField
             className={classes.root}
-            id="marca"
+            id="brand"
             label="Marca"
             variant="filled"
             onChange={handleInputChange}
@@ -230,6 +252,7 @@ const Formulario = () => {
             label="Talle"
             type="text"
             variant="filled"
+            value={talle}
             onChange={handleChangeTalle}
           >
             {talles.map((option) => (
@@ -250,14 +273,14 @@ const Formulario = () => {
             onChange={handleInputChange}
           />
           <TextField
-            className={classes.root}
-            fullWidth
-            id="imagen"
-            label="URL Imagen"
-            helperText="Ingrese URL de la imagen"
-            variant="filled"
-            onChange={handleInputChange}
-          />
+            type="file"
+            label="Image"
+            name="myFile"
+            accept=".jpeg, .png, .jpg"
+            onChange={(e) => handleFileUpload(e)}
+          >
+            Subir imágen
+          </TextField>
         </div>
         <Button
           variant="contained"
