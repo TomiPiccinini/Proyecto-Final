@@ -1,4 +1,5 @@
 import * as types from "./types";
+import { checkStatus, parseJSON } from "../../utils/request";
 
 const getPerfilRequested = () => {
   return {
@@ -9,38 +10,89 @@ const getPerfilRequested = () => {
 const getPerfilSucces = (perfil) => {
   return {
     type: types.GET_PERFIL_FINISHED,
-    perfil
+    perfil,
   };
 };
 
 const getPerfilError = (msg) => {
   return {
     type: types.GET_PERFIL_ERROR,
-    msg
+    msg,
   };
 };
 
-export const getPerfil = () => {
+export const getPublicaciones = (mail) => {
   return async (dispatch, getState) => {
     dispatch(getPerfilRequested());
-    const requestURL = ``;
+    const requestURL = `http://bartermatch-proyecto.herokuapp.com/media`;
     try {
       const response = await fetch(requestURL, {
-        method: "GET",
-        credentials: "include",
+        method: "POST",
+        body: JSON.stringify({
+          isHome: false,
+          email: "alva@gmail.com",
+        }),
         headers: {
-          Accept: "application/json",
+          "Content-Type": "application/json",
         },
       });
       const response_1 = await checkStatus(response);
-      const users = await parseJSON(response_1);
-      if (users.status === "1") {
-        dispatch(getPerfilSucces(users.result));
+      const json = await parseJSON(response_1);
+      console.log("publis:", json);
+      if (response_1.status === 200) {
+        dispatch(getPerfilSucces(json.media_list));
       } else {
-        dispatch(getPerfilError(users.message));
+        dispatch(getPerfilError("Error"));
       }
     } catch (error) {
-      dispatch(getPerfilError('ERROR'));
+      console.log(error);
+      //dispatch(getPublicacionesError("ERROR"));
+    }
+  };
+};
+
+/* GET MATCHS */
+
+const getMatchsRequested = () => {
+  return {
+    type: types.GET_PERFIL_REQUESTED,
+  };
+};
+
+const getMatchsSucces = (perfil) => {
+  return {
+    type: types.GET_PERFIL_FINISHED,
+    perfil,
+  };
+};
+
+const getMatchsError = (msg) => {
+  return {
+    type: types.GET_PERFIL_ERROR,
+    msg,
+  };
+};
+
+export const getMatchs = (mail) => {
+  return async (dispatch, getState) => {
+    dispatch(getMatchsRequested());
+    const requestURL = `http://bartermatch-proyecto.herokuapp.com/match/consult`;
+    try {
+      const response = await fetch(requestURL, {
+        method: "POST",
+        body: "franco12@gmail.com",
+      });
+      const response_1 = await checkStatus(response);
+      const json = await parseJSON(response_1);
+      console.log("matchs", json);
+      /*if (response_1.status === 200) {
+        dispatch(getMatchsSucces(json.media_list));
+      } else {
+        dispatch(getMatchsError("Error"));
+      }*/
+    } catch (error) {
+      console.log(error);
+      //dispatch(getPublicacionesError("ERROR"));
     }
   };
 };

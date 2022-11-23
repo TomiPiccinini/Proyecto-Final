@@ -22,7 +22,6 @@ const useStyles = makeStyles(() => ({
 
 export default function AlertDialogSlide(props) {
   const classes = useStyles();
-  console.log(props)
   if (!props.show) {
     return null;
   }

@@ -52,8 +52,8 @@ const HomePublicaciones = () => {
   };
 
   const handleSwipe = (d) => {
-    (d == "left") ? console.log('hola') : console.log("chau")
-  }
+    d == "left" ? console.log("hola") : console.log("chau");
+  };
   return (
     <Wrapper>
       <NavBar />
@@ -71,7 +71,6 @@ const HomePublicaciones = () => {
               <CardSwiper
                 onSwipe={handleSwipe}
                 className={"swiper"}
-
                 contents={
                   <>
                     <div
@@ -86,8 +85,8 @@ const HomePublicaciones = () => {
                     </div>
                   </>
                 }
-              />))
-            }
+              />
+            ))}
           </div>
         </Tooltip>
         <div
@@ -97,9 +96,7 @@ const HomePublicaciones = () => {
             flexDirection: "column",
             textAlign: "center",
           }}
-        >
-        
-        </div>
+        ></div>
         <DetailsCard
           show={openDetails}
           image={image}

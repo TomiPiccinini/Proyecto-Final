@@ -12,7 +12,7 @@ import java.util.List;
 public interface MatcheoCrudRepository extends CrudRepository <Matcheo, Integer> {
 
     @Query(
-            value = "SELECT * FROM match m WHERE (m.id_publicacion1 = :idPublicacion OR " +
+            value = "SELECT * FROM matcheo m WHERE (m.id_publicacion1 = :idPublicacion OR " +
                     "m.id_publicacion2 = :idPublicacion) AND estado = 'Activo'",
             nativeQuery = true
     )

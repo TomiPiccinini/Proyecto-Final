@@ -36,24 +36,35 @@ public class MatchService {
         MatchGetResponse response = new MatchGetResponse();
         List<MsgMatch> matchesWithMsg = new ArrayList<>();
 
+        System.out.println("Entrando al service de Matchs, se busca el userId a partir del email");
         Integer userId = userRepository.findByEmail(email).getUserId();
 
+        System.out.println("Se trae todas las publicaciones del usuario");
         mediaRepository.getAllWithUserId(userId).forEach(a -> {
+            System.out.println("Se buscan los matchs por cada publicacion");
             matchRepository.getMatchs(a.getMediaId()).forEach(mat -> {
 
+                System.out.println("Se encontro match");
                 MsgMatch msgMatch = new MsgMatch();
 
                 msgMatch.setDateTimeMatch(mat.getDateTimeMatch());
                 msgMatch.setMensajes(null);
 
                 Integer otherMediaId = mat.getMediaId1().equals(a.getMediaId()) ? a.getMediaId() : mat.getMediaId2();
+                System.out.println("Obtengo datos de la publicacion del otro usuario");
                 Media otherMedia = mediaRepository.getMediaByMediaId(otherMediaId);
                 msgMatch.setIdOtherUser(otherMedia.getUserId());
 
                 User otherUser = userRepository.findByUserId(otherMedia.getUserId());
                 msgMatch.setNameOtherUser(otherUser.getName());
-                msgMatch.setFoto(otherMedia.getPhotoList().get(0).getUrl());
+                if (!otherMedia.getPhotoList().isEmpty()){
+                    msgMatch.setFoto(otherMedia.getPhotoList().get(0).getUrl());
+                }else {
+                    System.out.println("Fotos no encontradas en la publicacion");
+                }
 
+
+                System.out.println("Se buscan los mensajes enviados entre los usuarios");
                 List<MessageRequest> messageRequests = new ArrayList<>();
                 messageRepository.getAllMessagesByMatchId(mat.getMatchId()).forEach(mess -> {
                     MessageRequest messageReq = new MessageRequest();
@@ -72,7 +83,6 @@ public class MatchService {
 
         });
 
-
         response.setMatchs(matchesWithMsg);
         return response;
     }
@@ -86,11 +96,13 @@ public class MatchService {
         Message reqToSave = new Message();
         reqToSave.setMatchId(message.getMatchId());
 
+        System.out.println("Se buscan users Ids a partir de los mails");
         reqToSave.setUserIssuing(userRepository.findByEmail(message.getEmailIssuing()).getUserId());
         reqToSave.setUserReceiver(userRepository.findByEmail(message.getEmailReceiver()).getUserId());
         reqToSave.setText(message.getText());
         reqToSave.setDateTime(message.getDateTime());
 
+        System.out.println("Se realiza el guardado de mensajes");
         messageRepository.saveMessage(reqToSave);
     }
 

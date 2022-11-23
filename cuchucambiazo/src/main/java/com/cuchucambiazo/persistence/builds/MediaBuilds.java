@@ -19,7 +19,7 @@ public class MediaBuilds {
         media.setBrand(publicacion.getMarca());
         media.setColor(publicacion.getColor());
         media.setTitle(publicacion.getTitulo());
-        media.setUserId(publicacion.getIdPublicacion());
+        media.setUserId(publicacion.getIdUsuario());
         media.setDescription(publicacion.getDescripcion());
         media.setMeasures(publicacion.getMedidas());
         media.setState(publicacion.getEstado());

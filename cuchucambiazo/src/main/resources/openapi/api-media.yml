@@ -151,6 +151,7 @@ components:
           $ref: '#/components/schemas/MediaList'
       required:
         - media_list
+        - email
 
     MediaList:
       type: array
@@ -177,11 +178,17 @@ components:
         - state
         - description
         - measures
+        - title
+        - color
+        - brand
+        - tag
       properties:
         mediaId:
           type: integer
         userId:
           type: integer
+        userEmail:
+          type: string
         title:
           type: string
         color:
