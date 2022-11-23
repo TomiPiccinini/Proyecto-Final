@@ -41,16 +41,16 @@ public class MatchService {
 
         System.out.println("Se trae todas las publicaciones del usuario");
         mediaRepository.getAllWithUserId(userId).forEach(a -> {
-            System.out.println("Se buscan los matchs por cada publicacion");
+            System.out.println("Se buscan los matchs por cada publicacion : " + a);
             matchRepository.getMatchs(a.getMediaId()).forEach(mat -> {
 
-                System.out.println("Se encontro match");
+                System.out.println("Se encontro match : " + mat);
                 MsgMatch msgMatch = new MsgMatch();
 
                 msgMatch.setDateTimeMatch(mat.getDateTimeMatch());
                 msgMatch.setMensajes(null);
 
-                Integer otherMediaId = mat.getMediaId1().equals(a.getMediaId()) ? a.getMediaId() : mat.getMediaId2();
+                Integer otherMediaId = mat.getMediaId1().equals(a.getMediaId()) ? mat.getMediaId2() : a.getMediaId();
                 System.out.println("Obtengo datos de la publicacion del otro usuario");
                 Media otherMedia = mediaRepository.getMediaByMediaId(otherMediaId);
                 msgMatch.setIdOtherUser(otherMedia.getUserId());
