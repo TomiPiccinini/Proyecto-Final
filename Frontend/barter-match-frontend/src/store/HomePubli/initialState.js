@@ -3,5 +3,7 @@ export const initialState = {
   error: false,
   errorMessage: "",
   publicaciones: [],
-  newPubli: {}
+  newPubli: {},
+  showMatch: false,
+  imageMatch: "",
 };

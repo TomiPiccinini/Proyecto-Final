@@ -1,4 +1,4 @@
-import * as types from "./types";
+/*import * as types from "./types";
 
 export const setMail = (mail) => {
   return {
@@ -12,3 +12,4 @@ export const restoreMail = () => {
     type: types.RESTORE_MAIL
   };
 };
+*/

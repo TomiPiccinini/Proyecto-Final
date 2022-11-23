@@ -1,27 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Wrapper } from "./styled";
 import { Box, TextField, Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Typography from "@mui/material/Typography";
 import history from "../../utils/history";
 import { loginstyles } from "./loginstyles.css";
-import { setMail } from "../../store/Login/action";
 import { useDispatch } from "react-redux";
 
 const Login = () => {
+  const [mail, setUserMail] = useState("");
 
-  const dispatch = useDispatch()
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
 
-  const [mail, setUserMail] = useState('')
+  const email = JSON.parse(localStorage.getItem("mail"));
+  console.log("email", email);
 
   const saveMail = (mail) => {
+    localStorage.setItem("mail", JSON.stringify(mail));
     history.push("home");
-    dispatch(setMail(mail));
   };
 
   const handleInputChange = (event) => {
-    if(event.target.id == 'usuario') {
-      setUserMail(event.target.value)
+    if (event.target.id == "usuario") {
+      setUserMail(event.target.value);
     }
   };
 
@@ -42,7 +45,12 @@ const Login = () => {
           noValidate
           autoComplete="off"
         >
-          <img src="https://i.ibb.co/7zthj3d/Pngtree-gray-silhouette-avatar-6404679.png" alt="Pngtree-gray-silhouette-avatar-6404679" border="0"  width={'150px'}/>
+          <img
+            src="https://i.ibb.co/7zthj3d/Pngtree-gray-silhouette-avatar-6404679.png"
+            alt="Pngtree-gray-silhouette-avatar-6404679"
+            border="0"
+            width={"150px"}
+          />
           <Typography
             variant="h4"
             fontWeight="bold"

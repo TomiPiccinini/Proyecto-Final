@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 
 const Formulario = () => {
   const dispatch = useDispatch();
+  const mail = JSON.parse(localStorage.getItem("mail"));
   const [datos, setDatos] = useState({
     title: "",
     brand: "",
@@ -53,7 +54,7 @@ const Formulario = () => {
     datos["photoList"] = [{ url: base64Done }];
 
     console.log(datos);
-    dispatch(postPubli(datos));
+    dispatch(postPubli(mail, datos));
     setShowAlert(true);
   };
 
