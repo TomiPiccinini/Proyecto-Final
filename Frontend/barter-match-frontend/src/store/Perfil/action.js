@@ -80,7 +80,7 @@ export const getMatchs = (mail) => {
     try {
       const response = await fetch(requestURL, {
         method: "POST",
-        body: "franco12@gmail.com",
+        body: mail,
       });
       const response_1 = await checkStatus(response);
       const json = await parseJSON(response_1);
