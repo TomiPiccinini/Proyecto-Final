@@ -25,6 +25,11 @@ body{
 
   }
 
+  .MisPublicaciones{
+    display:flex;
+    flex-direction: row;
+  }
+
   .carta {
     background-color: #fff;
     width: 200px;

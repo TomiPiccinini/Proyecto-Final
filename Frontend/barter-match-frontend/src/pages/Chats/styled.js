@@ -23,18 +23,19 @@ export const FirstColumn = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px 0px 10px 0px;
+  background-color:(185,185,185,0.5);
 `
 
 export const SecondColumn = styled.div`
   width: 80%;
   height: 100%;
   padding: 10px 0px 10px 0px;
-  margin-top: 10px;
-  border: 1px solid #FFFFFF;
+  border-left: 1px solid #FFFFFF;
   font-size: 24px;
   text-align: ${(props) => props.noMessage ? 'center': 'none'};
   justify-content: ${(props) => props.noMessage ? 'center': 'none'};
   align-items: ${(props) => props.noMessage ? 'center': 'none'};
+  
 `
 
 export const ContainerUsers = styled.div`
@@ -84,6 +85,8 @@ export const ContainerSend = styled.div`
   text-align: center;
   justify-content: center;
   align-items: center;
+  
   display: flex;
   color: #fff;
+  
 `
