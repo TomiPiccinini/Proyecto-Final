@@ -158,18 +158,17 @@ export const deletePublicacion = (mail) => {
 
 /* LIKE */
 
-export const postLike = (mail, data) => {
+export const postLike = (mail, mediaId, emailReceiver) => {
   return async (dispatch, getState) => {
-    console.log("data", data);
-    dispatch(postPubliRequested());
+    dispatch(likeRequested());
     const requestURL = `http://bartermatch-proyecto.herokuapp.com/like/save`;
     try {
       const response = await fetch(requestURL, {
         method: "POST",
         body: JSON.stringify({
-          emailIssuing: "string",
-          mediaId: 0,
-          emailReceiver: "string",
+          emailIssuing: mail,
+          mediaId: mediaId,
+          emailReceiver: emailReceiver,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -179,6 +178,9 @@ export const postLike = (mail, data) => {
       console.log(response_1);
       const json = await parseJSON(response_1);
       console.log(json);
+      if (json.isMatch === true) {
+        dispatch(likeSucces(json.matchPhoto));
+      }
 
       /*if (response.status === "1") {
         dispatch(postPubliSucces(response.result));
@@ -188,5 +190,31 @@ export const postLike = (mail, data) => {
     } catch (error) {
       dispatch(postPubliError("ERROR"));
     }
+  };
+};
+
+const likeRequested = () => {
+  return {
+    type: types.LIKE_PUBLI_REQUESTED,
+  };
+};
+
+const likeSucces = (foto) => {
+  return {
+    type: types.LIKE_PUBLI_FINISHED,
+    foto,
+  };
+};
+
+export const closeLike = () => {
+  return {
+    type: types.CLOSE_LIKE_PUBLI,
+  };
+};
+
+const likeError = (msg) => {
+  return {
+    type: types.LIKE_PUBLI_ERROR,
+    msg,
   };
 };

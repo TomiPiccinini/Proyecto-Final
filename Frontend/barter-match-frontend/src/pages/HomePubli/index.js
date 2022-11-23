@@ -13,8 +13,16 @@ import Tooltip from "@mui/material/Tooltip";
 import VanillaTilt from "vanilla-tilt";
 import { CardSwiper } from "react-card-rotate-swiper";
 import { useDispatch, useSelector } from "react-redux";
-import { getPublicaciones } from "../../store/HomePubli/action";
-import { selectPublicaciones } from "../../store/HomePubli/selectors";
+import {
+  closeLike,
+  getPublicaciones,
+  postLike,
+} from "../../store/HomePubli/action";
+import {
+  selectImageMatch,
+  selectPublicaciones,
+  selectShowMatch,
+} from "../../store/HomePubli/selectors";
 
 const HomePublicaciones = () => {
   const dispatch = useDispatch();
@@ -26,13 +34,14 @@ const HomePublicaciones = () => {
   }, []);
 
   const publis = useSelector(selectPublicaciones);
-  const [open, setOpen] = useState(false);
+  const showMatch = useSelector(selectShowMatch);
+  const imageMatch = useSelector(selectImageMatch);
+  const [open, setOpen] = useState(showMatch);
   const [openDetails, setOpenDetails] = useState(false);
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
-  
 
-  console.log('mail', mail);
+  console.log("mail", mail);
 
   useEffect(() => {
     VanillaTilt.init(document.querySelectorAll(".card"), {
@@ -43,6 +52,10 @@ const HomePublicaciones = () => {
     });
   }, []);
 
+  useEffect(() => {
+    setOpen(showMatch);
+  }, [showMatch]);
+
   const handleOpen = () => {
     setOpen(!open);
   };
@@ -52,9 +65,21 @@ const HomePublicaciones = () => {
     setOpenDetails(!openDetails);
   };
 
-  const handleSwipe = (d) => {
-    d == "left" ? console.log("hola") : console.log("chau");
+  const sendLike = (producto) => {
+    console.log("dentro sendlike", producto);
+    const mediaId = producto.mediaId;
+    const emailReceiver = producto.userEmail;
+    const imageMyProduct = producto.photoList[0].url;
+    setImage(imageMyProduct);
+    dispatch(postLike(mail, mediaId, emailReceiver));
   };
+
+  const handleSwipe = (d, producto) => {
+    console.log(d);
+    console.log(producto);
+    d == "left" ? console.log("left") : sendLike(producto);
+  };
+
   return (
     <Wrapper>
       <NavBar />
@@ -70,7 +95,7 @@ const HomePublicaciones = () => {
           <div className="cardContainer">
             {publis.map((producto, index) => (
               <CardSwiper
-                onSwipe={handleSwipe}
+                onSwipe={(d) => handleSwipe(d, producto)}
                 className={"swiper"}
                 contents={
                   <>
@@ -100,7 +125,6 @@ const HomePublicaciones = () => {
         ></div>
         <DetailsCard
           show={openDetails}
-          image={image}
           name={name}
           handleCloseDetails={() => {
             setOpenDetails(!openDetails);
@@ -108,8 +132,10 @@ const HomePublicaciones = () => {
         />
         <Dialog
           name={open}
+          imageOtherProduct={imageMatch}
+          imageMyProduct={image}
           handleClose={() => {
-            setOpen(!open);
+            dispatch(closeLike());
           }}
         />
 
