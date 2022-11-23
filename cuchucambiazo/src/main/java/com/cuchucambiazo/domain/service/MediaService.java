@@ -78,7 +78,7 @@ public class MediaService {
         Media reqToSave = request.getMedia();
         reqToSave.setUserId(user.getUserId());
         if (reqToSave.getMediaId() != null){
-            if (mediaRepository.existsMedia(reqToSave.getMediaId())) {
+            if (Boolean.TRUE.equals(mediaRepository.existsMedia(reqToSave.getMediaId()))) {
                 mediaRepository.updateMedia(reqToSave);
             } else {
                 mediaRepository.save(reqToSave);

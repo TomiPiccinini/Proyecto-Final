@@ -101,7 +101,7 @@ public class PublicacionRepository implements MediaRepository {
 
 
         publicacionCrudRepository.updatePublicacion(media.getColor(), media.getDescription(), media.getState(),
-                formatter.format(date), media.getBrand(), media.getMeasures(), media.getTag(), media.getTitle(),
+                formatter.format(date), media.getBrand(), media.getMeasure(), media.getTag(), media.getTitle(),
                 media.getMediaId());
         media.getPhotoList().forEach(pic -> {
             Foto foto = fotoBuilds.buildPhototoFoto(pic);
