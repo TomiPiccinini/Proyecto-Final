@@ -48,6 +48,7 @@ public class MatchService {
                 System.out.println("Se encontro match : " + mat);
                 MsgMatch msgMatch = new MsgMatch();
 
+                msgMatch.setMatchId(mat.getMatchId());
                 msgMatch.setDateTimeMatch(mat.getDateTimeMatch());
                 msgMatch.setMensajes(null);
 
