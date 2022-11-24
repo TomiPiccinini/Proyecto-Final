@@ -58,10 +58,6 @@ const Formulario = () => {
     setShowAlert(true);
   };
 
-  // const adjuntarImagen = () => {
-
-  // }
-
   const categories = [
     {
       value: "Calzado",

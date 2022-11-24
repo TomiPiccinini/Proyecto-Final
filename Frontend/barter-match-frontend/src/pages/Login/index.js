@@ -15,7 +15,6 @@ const Login = () => {
   }, []);
 
   const email = JSON.parse(localStorage.getItem("mail"));
-  console.log("email", email);
 
   const saveMail = (mail) => {
     localStorage.setItem("mail", JSON.stringify(mail));
