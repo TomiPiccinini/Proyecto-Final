@@ -35,7 +35,11 @@ export const getMatchs = (mail) => {
       const response_1 = await checkStatus(response);
       const json = await parseJSON(response_1);
       console.log("chatMatchs", json);
-      dispatch(getMatchsSucces(json.matchs));
+      if (json.matchs != []) {
+        dispatch(getMatchsSucces(json.matchs));
+      } else {
+        dispatch(getMatchsSucces([]));
+      }
       /*if (response_1.status === 200) {
         dispatch(getMatchsSucces(json.media_list));
       } else {
@@ -95,5 +99,19 @@ export const setMessage = (body) => {
       console.log(error);
       //dispatch(getPublicacionesError("ERROR"));
     }
+  };
+};
+
+export const setSelectedUserStore = (user) => {
+  console.log(user);
+  return {
+    type: types.SET_SELECTED_USER,
+    user,
+  };
+};
+
+export const restoreSelectedUser = () => {
+  return {
+    type: types.RESTORE_SELECTED_USER,
   };
 };

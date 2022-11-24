@@ -63,10 +63,9 @@ const postPubliRequested = () => {
   };
 };
 
-const postPubliSucces = (publicacion) => {
+const postPubliSucces = () => {
   return {
     type: types.POST_PUBLIS_FINISHED,
-    publicacion,
   };
 };
 
@@ -92,61 +91,9 @@ export const postPubli = (mail, data) => {
       const response_1 = await checkStatus(response);
       const json = await parseJSON(response_1);
       console.log(json);
-
-      /*if (response.status === "1") {
-        dispatch(postPubliSucces(response.result));
-      } else {
-        dispatch(postPubliError(response.message));
-      }*/
+      dispatch(postPubliSucces());
     } catch (error) {
       dispatch(postPubliError("ERROR"));
-    }
-  };
-};
-
-/* DELETE REQUESTED */
-
-const deleteRequested = () => {
-  return {
-    type: types.DELETE_PUBLI_REQUESTED,
-  };
-};
-
-const deleteSucces = () => {
-  return {
-    type: types.DELETE_PUBLI_FINISHED,
-  };
-};
-
-const deleteError = (msg) => {
-  return {
-    type: types.DELETE_PUBLI_ERROR,
-    msg,
-  };
-};
-
-export const deletePublicacion = (mail) => {
-  return async (dispatch, getState) => {
-    dispatch(deleteRequested());
-    const requestURL = `http://bartermatch-proyecto.herokuapp.com/media/delete`;
-    try {
-      const response = await fetch(requestURL, {
-        method: "DELETE",
-        body: {
-          mail: mail,
-        },
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-        },
-      });
-      if (response.status === "1") {
-        dispatch(deleteSucces(response.result));
-      } else {
-        dispatch(deleteError(response.message));
-      }
-    } catch (error) {
-      dispatch(deleteError("ERROR"));
     }
   };
 };

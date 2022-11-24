@@ -7,28 +7,44 @@ import { red } from "@mui/material/colors";
 import Typography from "@mui/material/Typography";
 import { Alert, Switch } from "@mui/material";
 import DetailsCard from "../../components/DetailsCard";
+import MatchCard from "../../components/MatchCard";
 // eslint-disable-next-line
 import { styles } from "./perfilStyles.css";
 import VanillaTilt from "vanilla-tilt";
 import { Wrapper } from "./styled";
 import { useDispatch, useSelector } from "react-redux";
 import { selectMail } from "../../store/Login/selectors";
-import { getMatchs, getPublicaciones } from "../../store/Perfil/action";
-import { selectMatchs, selectPerfil } from "../../store/Perfil/selectors";
+import {
+  deletePubli,
+  getMatchs,
+  getPublicaciones,
+} from "../../store/Perfil/action";
+import {
+  selectLoading,
+  selectMatchs,
+  selectPerfil,
+} from "../../store/Perfil/selectors";
+import CircularIndeterminate from "../../components/Loading";
 
 const Perfil = () => {
   const dispatch = useDispatch();
 
   const mail = JSON.parse(localStorage.getItem("mail"));
 
+  const loading = useSelector(selectLoading);
   const publisPerfil = useSelector(selectPerfil);
   const matchs = useSelector(selectMatchs);
   const [publicaciones, setPublicaciones] = useState(publisPerfil);
   const [name, setName] = useState("");
+  const [match, setMatch] = useState("");
   const [image, setImage] = useState("");
+  const [checked, setChecked] = useState(false);
+  const [openMatch, setOpenMatch] = useState(false);
   const [openDetails, setOpenDetails] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [titulo, setTitulo] = useState(false);
+
+  console.log(matchs);
 
   useEffect(() => {
     dispatch(getPublicaciones(mail));
@@ -41,9 +57,10 @@ const Perfil = () => {
     }
   }, [publisPerfil]);
 
-  const deletePublicacion = (publicacion) => {
+  const deletePublicacion = (publicacion, mediaId) => {
     setPublicaciones(publicaciones.filter((p) => p.title !== publicacion));
     setShowAlert(true);
+    dispatch(deletePubli(mediaId));
   };
 
   useEffect(() => {
@@ -62,8 +79,9 @@ const Perfil = () => {
     return () => clearTimeout(timer);
   }, [showAlert]);
 
-  const handleChange = () => {
-    setTitulo(!titulo);
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+    console.log(checked);
   };
 
   const handleOpenDetails = (name) => {
@@ -71,33 +89,45 @@ const Perfil = () => {
     setOpenDetails(!openDetails);
   };
 
-  const tituloRender = (titulo) => {
-    if (titulo) {
+  const handleOpenMatch = (match) => {
+    setMatch(match)
+    setOpenMatch(!openMatch)
+  }
+
+  const tituloRender = () => {
+    if (checked) {
+      console.log('entro')
       return (
         <>
-          <div className="MisPublicaciones" style={{ marginTop: "50px" }}>
-            <Typography variant="h4">Mis Publicaciones/Matchs</Typography>
-            <Switch
-              defaultUnchecked
-              color="default"
-              size="medium"
-              onChange={handleChange}
-            />
+          <div className="productos">
+            {matchs.map((match) => (
+              <div style={{ textAlign: "center", marginBottom: "25px" }}>
+                <div
+                  style={{
+                    backgroundImage: `url(${match.otherMedia.photoList[0].url})`,
+                  }}
+                  className="carta"
+                  onClick={() => handleOpenMatch(match)}
+                ></div>
+                <div
+                  style={{
+                    display: "flex",
+                    textAlign: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <h3 style={{ fontFamily: "Alatsi", margin: 0 }}>
+                    {match.otherMedia.title}
+                  </h3>
+                </div>
+              </div>
+            ))}
           </div>
         </>
       );
     } else {
       return (
         <>
-          <div className="MisPublicaciones" style={{ marginTop: "50px" }}>
-            <Typography variant="h4">Mis Publicaciones/Matchs</Typography>
-            <Switch
-              defaultUnchecked
-              color="default"
-              size="medium"
-              onChange={handleChange}
-            />
-          </div>
           <div className="productos">
             {publicaciones.map((publicacion) => (
               <div style={{ textAlign: "center", marginBottom: "25px" }}>
@@ -108,7 +138,6 @@ const Perfil = () => {
                   className="carta"
                   onClick={() => handleOpenDetails(publicacion)}
                 ></div>
-
                 <div
                   style={{
                     display: "flex",
@@ -121,7 +150,9 @@ const Perfil = () => {
                   </h3>
                   <DeleteIcon
                     sx={{ color: red["A700"], cursor: "pointer" }}
-                    onClick={() => deletePublicacion(publicacion.title)}
+                    onClick={() =>
+                      deletePublicacion(publicacion.title, publicacion.mediaId)
+                    }
                   />
                 </div>
               </div>
@@ -132,6 +163,7 @@ const Perfil = () => {
     }
   };
 
+  if (loading) return <CircularIndeterminate />;
   return (
     <Wrapper>
       <NavBar />
@@ -153,7 +185,18 @@ const Perfil = () => {
               {mail}
             </Typography>
           </div>
-          {tituloRender(titulo)}
+          <div className="MisPublicaciones" style={{ marginTop: "50px" }}>
+            <Typography variant="h4">Mis Publicaciones/Matchs</Typography>
+            <Switch
+              checked={checked}
+              onChange={handleChange}
+              inputProps={{ "aria-label": "controlled" }}
+              color="default"
+              size="medium"
+            />
+          </div>
+          {tituloRender()}
+
           <DetailsCard
             show={openDetails}
             image={image}
@@ -162,6 +205,14 @@ const Perfil = () => {
               setOpenDetails(!openDetails);
             }}
           />
+          <MatchCard
+            show={openMatch}
+            match={match} 
+            handleCloseMatchs={() => {
+              setOpenMatch(!openMatch);
+            }}
+            />
+
           {showAlert && (
             <Alert
               variant="filled"

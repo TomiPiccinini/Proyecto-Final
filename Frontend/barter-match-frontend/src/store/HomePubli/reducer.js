@@ -31,7 +31,6 @@ const homeReducer = (state = initialState, action) =>
         break;
       case types.POST_PUBLIS_FINISHED:
         draft.loading = false;
-        draft.newPubli = action.publicacion;
         draft.error = false;
         draft.errorMessage = "";
         break;
@@ -41,23 +40,8 @@ const homeReducer = (state = initialState, action) =>
         draft.error = true;
         draft.errorMessage = action.msg;
         break;
-      case types.DELETE_PUBLI_REQUESTED:
-        draft.loading = true;
-        draft.error = false;
-        draft.errorMessage = "";
-        break;
-      case types.DELETE_PUBLI_FINISHED:
-        draft.loading = false;
-        draft.error = false;
-        draft.errorMessage = "";
-        break;
-      case types.DELETE_PUBLI_ERROR:
-        draft.loading = false;
-        draft.error = true;
-        draft.errorMessage = action.msg;
-        break;
       case types.LIKE_PUBLI_REQUESTED:
-        draft.loading = true;
+        draft.loading = false;
         draft.error = false;
         draft.errorMessage = "";
         draft.showMatch = false;

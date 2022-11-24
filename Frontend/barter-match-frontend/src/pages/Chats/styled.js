@@ -41,6 +41,8 @@ export const SecondColumn = styled.div`
 export const ContainerUsers = styled.div`
   width: 100%;
   cursor: pointer;
+  display: flex;
+  justifyContent: center;
 `
 
 export const NameUsers = styled.div`

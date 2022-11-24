@@ -16,8 +16,17 @@ import SendIcon from "@mui/icons-material/Send";
 import Chip from "@mui/material/Chip";
 import { makeStyles } from "@mui/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { selectMatchs } from "../../store/Chats/selectors";
-import { getMatchs, setMessage } from "../../store/Chats/action";
+import {
+  selectLoading,
+  selectMatchs,
+  selectUserSelected,
+} from "../../store/Chats/selectors";
+import {
+  getMatchs,
+  setMessage,
+  setSelectedUserStore,
+} from "../../store/Chats/action";
+import CircularIndeterminate from "../../components/Loading/index";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -30,10 +39,7 @@ const useStyles = makeStyles(() => ({
     color: "fff",
     backgroundColor: "fff",
   },
-  nombres: {
-    fontSize: "100px",
-    backgroundColor: "red",
-  },
+  
 }));
 
 const ChatBox = (props) => {
@@ -60,8 +66,10 @@ const ChatBox = (props) => {
         text: mensaje,
         dateTime: "",
       };
-      console.log(message)
+      console.log(message);
       dispatch(setMessage(message));
+      props.user.mensajes.push(message);
+      setMensaje("");
     }
   };
 
@@ -135,11 +143,19 @@ const Chat = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("asd");
     dispatch(getMatchs(mail));
   }, []);
 
-  const [user, setSelectedUser] = useState(null);
+  useEffect(() => {
+    if (userSelected !== null) {
+      setSelectedUser(userSelected);
+    }
+  }, [userSelected]);
+
+  const loading = useSelector(selectLoading);
+  const userSelected = useSelector(selectUserSelected);
+
+  const [user, setSelectedUser] = useState(userSelected);
 
   const mail = JSON.parse(localStorage.getItem("mail"));
 
@@ -148,6 +164,7 @@ const Chat = () => {
 
   console.log("user", user);
 
+  if (loading) return <CircularIndeterminate />;
   return (
     <Wrapper>
       <NavBar />
@@ -160,9 +177,11 @@ const Chat = () => {
                   label={u.emailOtherUser}
                   color="primary"
                   variant="filled"
-                  onClick={() => setSelectedUser(u)}
+                  onClick={() => {
+                    setSelectedUser(u);
+                  }}
                   style={{
-                    width: "80%",
+                    width: "100%",
                     margin: "15px 10px",
                     color: "#fff",
                     backgroundColor: "#9198e5",

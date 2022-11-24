@@ -20,9 +20,11 @@ import {
 } from "../../store/HomePubli/action";
 import {
   selectImageMatch,
+  selectLoading,
   selectPublicaciones,
   selectShowMatch,
 } from "../../store/HomePubli/selectors";
+import CircularIndeterminate from "../../components/Loading";
 
 const HomePublicaciones = () => {
   const dispatch = useDispatch();
@@ -33,6 +35,7 @@ const HomePublicaciones = () => {
     dispatch(getPublicaciones(mail));
   }, []);
 
+  const loading = useSelector(selectLoading);
   const publis = useSelector(selectPublicaciones);
   const showMatch = useSelector(selectShowMatch);
   const imageMatch = useSelector(selectImageMatch);
@@ -76,6 +79,7 @@ const HomePublicaciones = () => {
     d == "left" ? console.log("left") : sendLike(producto);
   };
 
+  if (loading) return <CircularIndeterminate />;
   return (
     <Wrapper>
       <NavBar />
