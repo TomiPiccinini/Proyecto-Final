@@ -87,8 +87,62 @@ components:
       properties:
         isMatch:
           type: boolean
-        matchPhoto:
+        yourMedia:
+          $ref: '#/components/schemas/MediaLike'
+        otherMedia:
+          $ref: '#/components/schemas/MediaLike'
+
+    MediaLike:
+      type: object
+      description: ''
+      required:
+        - photoList
+        - state
+        - description
+        - measures
+        - title
+        - color
+        - brand
+        - tag
+      properties:
+        mediaId:
+          type: integer
+        userEmail:
           type: string
+        title:
+          type: string
+        color:
+          type: string
+        brand:
+          type: string
+        photoList:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhotoLike'
+        state:
+          type: string
+        description:
+          type: string
+        measure:
+          type: string
+        tag:
+          type: string
+        updateDate:
+          type: string
+        dischargeDate:
+          type: string
+
+    PhotoLike:
+      type: object
+      description: ''
+      properties:
+        photoId:
+          type: integer
+        mediaId:
+          type: integer
+        url:
+          type: string
+          format: base64
 
     GeneralBusinessError:
       type: object

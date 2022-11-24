@@ -1,9 +1,10 @@
 package com.cuchucambiazo.domain.service;
 
-import api.cuchucambiazo.controller.like.model.Like;
-import api.cuchucambiazo.controller.like.model.LikeResponse;
-import api.cuchucambiazo.controller.like.model.PostLikeRequest;
+import api.cuchucambiazo.controller.like.model.*;
 import api.cuchucambiazo.controller.match.model.Match;
+import api.cuchucambiazo.controller.match.model.MediaMatch;
+import api.cuchucambiazo.controller.match.model.PhotoMatch;
+import api.cuchucambiazo.controller.media.model.Media;
 import api.cuchucambiazo.controller.media.model.Photo;
 import com.cuchucambiazo.domain.repository.LikeRepository;
 import com.cuchucambiazo.domain.repository.MatchRepository;
@@ -67,18 +68,43 @@ public class LikeService {
                 likeRepository.deleteLike(a);
 
                 response.setIsMatch(true);
-                List<Photo> photoList = mediaRepository.getMediaByMediaId(a.getMediaId()).getPhotoList();
-                if (!photoList.isEmpty()){
-                    System.out.println("Imagen encontrada");
-                    response.setMatchPhoto(mediaRepository.getMediaByMediaId(a.getMediaId()).getPhotoList().get(0).getUrl());
-                }else{
-                    System.out.println("No se encontro imagen");
-                    response.setMatchPhoto("No se Encontro Imagen");
-                }
+                response.setYourMedia(mediaToMediaLike(mediaRepository.getMediaByMediaId(a.getMediaId()),
+                        request.getEmailIssuing()));
+                response.setOtherMedia(mediaToMediaLike(mediaRepository.getMediaByMediaId(request.getMediaId()),
+                        request.getEmailReceiver()));
 
             });
         }
 
         return response;
     }
+
+    private MediaLike mediaToMediaLike(Media media, String email){
+
+        MediaLike mediaLike = new MediaLike();
+
+        mediaLike.setMediaId(media.getMediaId());
+        mediaLike.setColor(media.getColor());
+        mediaLike.setBrand(media.getBrand());
+        mediaLike.setDescription(media.getDescription());
+        mediaLike.setTag(media.getTag());
+        mediaLike.setMeasure(media.getMeasure());
+        mediaLike.setState(media.getState());
+        mediaLike.setTitle(media.getTitle());
+        mediaLike.setUpdateDate(media.getUpdateDate());
+        mediaLike.setUserEmail(email);
+
+        List<PhotoLike> photoLikes = new ArrayList<>();
+        media.getPhotoList().forEach(photo -> {
+            PhotoLike photoLike = new PhotoLike();
+            photoLike.setMediaId(photo.getMediaId());
+            photoLike.setPhotoId(photo.getPhotoId());
+            photoLike.setUrl(photo.getUrl());
+            photoLikes.add(photoLike);
+        });
+
+        mediaLike.setPhotoList(photoLikes);
+        return mediaLike;
+    }
+
 }
