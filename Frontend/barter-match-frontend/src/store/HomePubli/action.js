@@ -117,15 +117,12 @@ export const postLike = (mail, mediaId, emailReceiver) => {
       });
       const response_1 = await checkStatus(response);
       const json = await parseJSON(response_1);
-      if (json.isMatch === true) {
-        dispatch(likeSucces(json.otherMedia.PhotoList[0].url));
+      console.log(json);
+      console.log(json.otherMedia.photoList[0].url);
+      if (json.isMatch) {
+        console.log('entra if')
+        dispatch(likeSucces(json.otherMedia.photoList[0].url));
       }
-
-      /*if (response.status === "1") {
-        dispatch(postPubliSucces(response.result));
-      } else {
-        dispatch(postPubliError(response.message));
-      }*/
     } catch (error) {
       dispatch(postPubliError("ERROR"));
     }

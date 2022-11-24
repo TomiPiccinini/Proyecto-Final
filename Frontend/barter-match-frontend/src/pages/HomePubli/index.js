@@ -1,12 +1,11 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import NavBar from "../../components/NavBar";
 import { Container, Wrapper } from "./styled";
-import InfoIcon from '@mui/icons-material/Info';
+import InfoIcon from "@mui/icons-material/Info";
 import { Button } from "@mui/material";
 // eslint-disable-next-line
 import { styles } from "./styles.css";
 import Dialog from "../../components/Dialog";
-import { Productos } from "./constants";
 import history from "../../utils/history";
 import DetailsCard from "../../components/DetailsCard";
 import Tooltip from "@mui/material/Tooltip";
@@ -43,7 +42,7 @@ const HomePublicaciones = () => {
   const [openDetails, setOpenDetails] = useState(false);
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
-  
+
   useEffect(() => {
     VanillaTilt.init(document.querySelectorAll(".card"), {
       glare: true,
@@ -51,11 +50,15 @@ const HomePublicaciones = () => {
       max: 25,
       speed: 400,
     });
-  },);
+  });
 
   useEffect(() => {
     setOpen(showMatch);
-  }, [showMatch]);
+  }, []);
+
+  console.log("showMatch: ", showMatch);
+  console.log("open: ", open);
+  console.log("ImagenMatch", imageMatch);
 
   const handleOpen = () => {
     setOpen(!open);
@@ -70,7 +73,7 @@ const HomePublicaciones = () => {
     console.log("dentro sendlike", producto);
     const mediaId = producto.mediaId;
     const emailReceiver = producto.userEmail;
-    const imageMyProduct = producto.photoList[0].url;
+    const imageMyProduct = producto.yourMedia.photoList[0].url;
     setImage(imageMyProduct);
     dispatch(postLike(mail, mediaId, emailReceiver));
   };
@@ -89,38 +92,39 @@ const HomePublicaciones = () => {
           href="https://fonts.googleapis.com/css?family=Alatsi&display=swap"
           rel="stylesheet"
         />
-        <Tooltip
-          title="Ver detalles del producto"
-          placement="top"
-        >
+        <Tooltip title="Ver detalles del producto" placement="top">
           <div className="cardContainer">
             {publis.map((producto, index) => (
               <>
-              <CardSwiper
-                onSwipe={(d) => handleSwipe(d, producto)}
-                className={"swiper"}
-                contents={
-                  <>
-                    <div
-                      
-                      style={{
-                        backgroundImage: `url(${producto.photoList[0].url})`,
-                        //backgroundImage: 'url(' + producto.url + ')',
-                      }}
-                      className="card"
-                    >
-                      <h3>{producto.title}</h3>
-                    </div>
-                  </>
-                }
-               
-              />
-              <InfoIcon sx={{position:'absolute' , top:'150px', marginLeft:'-10px', color:"#fff"}}
-              onClick={() => handleOpenDetails(producto)}
-              />
+                <CardSwiper
+                  onSwipe={(d) => handleSwipe(d, producto)}
+                  className={"swiper"}
+                  contents={
+                    <>
+                      <div
+                        style={{
+                          backgroundImage: `url(${producto.photoList[0].url})`,
+                          //backgroundImage: 'url(' + producto.url + ')',
+                        }}
+                        className="card"
+                      >
+                        <h3>{producto.title}</h3>
+                      </div>
+                    </>
+                  }
+                />
+                <InfoIcon
+                  sx={{
+                    position: "absolute",
+                    top: "150px",
+                    marginLeft: "-10px",
+                    color: "#fff",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => handleOpenDetails(producto)}
+                />
               </>
             ))}
-          
           </div>
         </Tooltip>
         <div
@@ -139,7 +143,7 @@ const HomePublicaciones = () => {
           }}
         />
         <Dialog
-          name={open}
+          name={showMatch}
           imageOtherProduct={imageMatch}
           imageMyProduct={image}
           handleClose={() => {
