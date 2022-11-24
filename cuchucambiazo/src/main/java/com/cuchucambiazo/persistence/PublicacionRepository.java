@@ -90,7 +90,7 @@ public class PublicacionRepository implements MediaRepository {
 
         if (publicacion.isPresent()){
             Media response = mediaBuilds.PublicacionToMedia(publicacion.get());
-            System.out.println("Media encontrada: " + response);
+            System.out.println("Media encontrada: " + response.getMediaId());
             return response;
 
         }else {
