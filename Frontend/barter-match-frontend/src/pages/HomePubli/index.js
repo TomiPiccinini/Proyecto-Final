@@ -76,8 +76,8 @@ const HomePublicaciones = () => {
   };
 
   const handleSwipe = (d, producto) => {
-    console.log(d);
-    d == "left" ? console.log("left") : sendLike(producto);
+    
+    d == "right" ? sendLike(producto) : console.log(d);
   };
 
   if (loading) return <CircularIndeterminate />;
