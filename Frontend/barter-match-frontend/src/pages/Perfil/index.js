@@ -36,6 +36,7 @@ const Perfil = () => {
   const matchs = useSelector(selectMatchs);
   const [publicaciones, setPublicaciones] = useState(publisPerfil);
   const [name, setName] = useState("");
+  const [match, setMatch] = useState("");
   const [image, setImage] = useState("");
   const [checked, setChecked] = useState(false);
   const [openMatch, setOpenMatch] = useState(false);
@@ -88,20 +89,25 @@ const Perfil = () => {
     setOpenDetails(!openDetails);
   };
 
+  const handleOpenMatch = (match) => {
+    setMatch(match)
+    setOpenMatch(!openMatch)
+  }
+
   const tituloRender = () => {
     if (checked) {
       console.log('entro')
       return (
         <>
           <div className="productos">
-            {matchs.map((publicacion) => (
+            {matchs.map((match) => (
               <div style={{ textAlign: "center", marginBottom: "25px" }}>
                 <div
                   style={{
-                    backgroundImage: `url(${publicacion.otherMedia.photoList[0].url})`,
+                    backgroundImage: `url(${match.otherMedia.photoList[0].url})`,
                   }}
                   className="carta"
-                  onClick={() => handleOpenDetails(publicacion)}
+                  onClick={() => handleOpenMatch(match)}
                 ></div>
                 <div
                   style={{
@@ -111,7 +117,7 @@ const Perfil = () => {
                   }}
                 >
                   <h3 style={{ fontFamily: "Alatsi", margin: 0 }}>
-                    {publicacion.otherMedia.title}
+                    {match.otherMedia.title}
                   </h3>
                 </div>
               </div>
@@ -199,6 +205,13 @@ const Perfil = () => {
               setOpenDetails(!openDetails);
             }}
           />
+          <MatchCard
+            show={openMatch}
+            match={match} 
+            handleCloseMatchs={() => {
+              setOpenMatch(!openMatch);
+            }}
+            />
 
           {showAlert && (
             <Alert
