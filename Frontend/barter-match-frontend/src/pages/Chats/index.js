@@ -7,6 +7,7 @@ import {
   ContainerUsers,
   NoMessages,
   ContainerSend,
+  ContainerMessage,
 } from "./styled";
 import NavBar from "../../components/NavBar";
 import { USERS } from "./constants";
@@ -39,41 +40,46 @@ const useStyles = makeStyles(() => ({
     color: "fff",
     backgroundColor: "fff",
   },
-  
 }));
 
-const ChatBox = (props) => {
+const ChatBox = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
   const mail = JSON.parse(localStorage.getItem("mail"));
 
+  const user = useSelector(selectUserSelected);
+
   const [mensaje, setMensaje] = useState("");
-  console.log(mensaje);
 
   const handleInputChange = (event) => {
     setMensaje(event.target.value);
   };
 
+  const isSender = (message) => {
+    if (mail == message.emailIssuing) return false;
+    else return true;
+  };
+
   const sendMessage = () => {
     if (mensaje != "") {
-      const u = props.user;
+      setMensaje("");
+      const u = user;
       const message = {
-        //matchId: u.matchId,
-        matchId: 4,
+        matchId: u.matchId,
         emailReceiver: u.otherMedia.userEmail,
         emailIssuing: mail,
         text: mensaje,
         dateTime: "",
       };
-      console.log(message);
+
       dispatch(setMessage(message));
-      props.user.mensajes.push(message);
-      setMensaje("");
+      user.mensajes.push(message);
+      dispatch(setSelectedUserStore(user));
     }
   };
 
-  if (props.user.mensajes === []) {
+  if (user.mensajes === []) {
     return (
       <SecondColumn noMessage={true}>
         <NoMessages>AÚN NO HAY MENSAJES.</NoMessages>
@@ -98,20 +104,22 @@ const ChatBox = (props) => {
         </ContainerSend>
       </SecondColumn>
     );
-  } else {
+  } else if (user.mensajes !== []) {
     return (
       <SecondColumn>
-        {props.user.mensajes.map((message) => {
+        {user.mensajes.map((message) => {
           return (
             <>
-              <Chip
-                className={classes.nombres}
-                label={message.text}
-                color="primary"
-                variant="filled"
-                sx={{ backgroundColor: "#9198e5", fontSize: "16px" }}
-              />
-              {/* <Messages key={message.text} sender={message.sender}>{message.text}</Messages> */}
+              <ContainerMessage sender={isSender(message)}>
+                <Chip
+                  className={classes.nombres}
+                  label={message.text}
+                  color="primary"
+                  variant="filled"
+                  sx={{ backgroundColor: "#9198e5", fontSize: "16px" }}
+                />
+                {/* <Messages key={message.text} sender={message.sender}>{message.text}</Messages> */}
+              </ContainerMessage>
             </>
           );
         })}
@@ -146,23 +154,15 @@ const Chat = () => {
     dispatch(getMatchs(mail));
   }, []);
 
-  useEffect(() => {
-    if (userSelected !== null) {
-      setSelectedUser(userSelected);
-    }
-  }, [userSelected]);
+  //useEffect(() => {
+  //}, []);
 
   const loading = useSelector(selectLoading);
-  const userSelected = useSelector(selectUserSelected);
-
-  const [user, setSelectedUser] = useState(userSelected);
+  const user = useSelector(selectUserSelected);
 
   const mail = JSON.parse(localStorage.getItem("mail"));
 
   const matchs = useSelector(selectMatchs);
-  console.log("matchIndex", matchs);
-
-  console.log("user", user);
 
   if (loading) return <CircularIndeterminate />;
   return (
@@ -178,7 +178,7 @@ const Chat = () => {
                   color="primary"
                   variant="filled"
                   onClick={() => {
-                    setSelectedUser(u);
+                    dispatch(setSelectedUserStore(u));
                   }}
                   style={{
                     width: "100%",

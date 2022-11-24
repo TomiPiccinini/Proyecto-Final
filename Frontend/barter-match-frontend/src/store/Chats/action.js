@@ -34,7 +34,6 @@ export const getMatchs = (mail) => {
       });
       const response_1 = await checkStatus(response);
       const json = await parseJSON(response_1);
-      console.log("chatMatchs", json);
       if (json.matchs != []) {
         dispatch(getMatchsSucces(json.matchs));
       } else {
@@ -56,20 +55,20 @@ export const getMatchs = (mail) => {
 
 const setMessageRequested = () => {
   return {
-    type: types.GET_MATCHS_REQUESTED,
+    type: types.SET_MESSAGE_REQUESTED,
   };
 };
 
 const setMessageSucces = (matchs) => {
   return {
-    type: types.GET_MATCHS_FINISHED,
+    type: types.SET_MESSAGE_FINISHED,
     matchs,
   };
 };
 
 const setMessageError = (msg) => {
   return {
-    type: types.GET_MATCHS_ERROR,
+    type: types.SET_MESSAGE_ERROR,
     msg,
   };
 };
@@ -88,7 +87,6 @@ export const setMessage = (body) => {
       });
       const response_1 = await checkStatus(response);
       const json = await parseJSON(response_1);
-      console.log("chatMatchs", json);
       dispatch(setMessageSucces(json.matchs));
       /*if (response_1.status === 200) {
         dispatch(getMatchsSucces(json.media_list));

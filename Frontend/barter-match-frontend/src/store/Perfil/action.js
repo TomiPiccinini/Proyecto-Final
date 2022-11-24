@@ -82,7 +82,6 @@ export const getMatchs = (mail) => {
       });
       const response_1 = await checkStatus(response);
       const json = await parseJSON(response_1);
-      console.log("matchs", json.matchs);
       dispatch(getMatchsSucces(json.matchs));
     } catch (error) {
       //dispatch(getPublicacionesError("ERROR"));
@@ -119,18 +118,58 @@ export const deletePubli = (idPubli) => {
     try {
       const response = await fetch(requestURL, {
         method: "POST",
-        body: idPubli,
+        body: JSON.stringify({ mediaId: idPubli }),
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       const response_1 = await checkStatus(response);
       const json = await parseJSON(response_1);
       console.log(json);
-      /*if (response.status === "1") {
-        dispatch(deleteSucces(response.result));
-      } else {
-        dispatch(deleteError(response.message));
-      }*/
+      dispatch(deleteSucces());
     } catch (error) {
       dispatch(deleteError("ERROR"));
     }
+  };
+};
+
+export const acceptMatchs = (match) => {
+  return async (dispatch, getState) => {
+    dispatch(closeMatchRequested());
+    const requestURL = `http://bartermatch-proyecto.herokuapp.com/match/close`;
+    try {
+      const response = await fetch(requestURL, {
+        method: "POST",
+        body: JSON.stringify(match),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const response_1 = await checkStatus(response);
+      const json = await parseJSON(response_1);
+      console.log(json);
+      dispatch(closeMatchSucces(json));
+    } catch (error) {
+      //dispatch(getPublicacionesError("ERROR"));
+    }
+  };
+};
+
+const closeMatchRequested = () => {
+  return {
+    type: types.DELETE_PUBLI_REQUESTED,
+  };
+};
+
+const closeMatchSucces = () => {
+  return {
+    type: types.DELETE_PUBLI_FINISHED,
+  };
+};
+
+const closeMatchError = (msg) => {
+  return {
+    type: types.DELETE_PUBLI_ERROR,
+    msg,
   };
 };
