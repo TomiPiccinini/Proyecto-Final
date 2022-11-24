@@ -83,9 +83,54 @@ export const getMatchs = (mail) => {
       const response_1 = await checkStatus(response);
       const json = await parseJSON(response_1);
       console.log("matchs", json.matchs);
-        dispatch(getMatchsSucces(json.matchs));
+      dispatch(getMatchsSucces(json.matchs));
     } catch (error) {
       //dispatch(getPublicacionesError("ERROR"));
+    }
+  };
+};
+
+/* DELETE REQUESTED */
+
+const deleteRequested = () => {
+  return {
+    type: types.DELETE_PUBLI_REQUESTED,
+  };
+};
+
+const deleteSucces = () => {
+  return {
+    type: types.DELETE_PUBLI_FINISHED,
+  };
+};
+
+const deleteError = (msg) => {
+  return {
+    type: types.DELETE_PUBLI_ERROR,
+    msg,
+  };
+};
+
+export const deletePubli = (idPubli) => {
+  return async (dispatch, getState) => {
+    console.log(idPubli)
+    dispatch(deleteRequested());
+    const requestURL = `http://bartermatch-proyecto.herokuapp.com/media/delete`;
+    try {
+      const response = await fetch(requestURL, {
+        method: "POST",
+        body: idPubli,
+      });
+      const response_1 = await checkStatus(response);
+      const json = await parseJSON(response_1);
+      console.log(json);
+      /*if (response.status === "1") {
+        dispatch(deleteSucces(response.result));
+      } else {
+        dispatch(deleteError(response.message));
+      }*/
+    } catch (error) {
+      dispatch(deleteError("ERROR"));
     }
   };
 };

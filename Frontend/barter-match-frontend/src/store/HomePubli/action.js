@@ -104,53 +104,6 @@ export const postPubli = (mail, data) => {
   };
 };
 
-/* DELETE REQUESTED */
-
-const deleteRequested = () => {
-  return {
-    type: types.DELETE_PUBLI_REQUESTED,
-  };
-};
-
-const deleteSucces = () => {
-  return {
-    type: types.DELETE_PUBLI_FINISHED,
-  };
-};
-
-const deleteError = (msg) => {
-  return {
-    type: types.DELETE_PUBLI_ERROR,
-    msg,
-  };
-};
-
-export const deletePublicacion = (mail) => {
-  return async (dispatch, getState) => {
-    dispatch(deleteRequested());
-    const requestURL = `http://bartermatch-proyecto.herokuapp.com/media/delete`;
-    try {
-      const response = await fetch(requestURL, {
-        method: "DELETE",
-        body: {
-          mail: mail,
-        },
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-        },
-      });
-      if (response.status === "1") {
-        dispatch(deleteSucces(response.result));
-      } else {
-        dispatch(deleteError(response.message));
-      }
-    } catch (error) {
-      dispatch(deleteError("ERROR"));
-    }
-  };
-};
-
 /* LIKE */
 
 export const postLike = (mail, mediaId, emailReceiver) => {

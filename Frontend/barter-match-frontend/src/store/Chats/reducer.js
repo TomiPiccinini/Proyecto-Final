@@ -23,6 +23,10 @@ const chatsReducer = (state = initialState, action) =>
         draft.error = true;
         draft.errorMessage = action.msg;
         break;
+      case types.SET_SELECTED_USER:
+        draft.selectedUser = action.user;
+      case types.RESTORE_SELECTED_USER:
+        draft.selectedUser = null;
     }
   });
 

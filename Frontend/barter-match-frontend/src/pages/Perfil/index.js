@@ -13,14 +13,24 @@ import VanillaTilt from "vanilla-tilt";
 import { Wrapper } from "./styled";
 import { useDispatch, useSelector } from "react-redux";
 import { selectMail } from "../../store/Login/selectors";
-import { getMatchs, getPublicaciones } from "../../store/Perfil/action";
-import { selectMatchs, selectPerfil } from "../../store/Perfil/selectors";
+import {
+  deletePubli,
+  getMatchs,
+  getPublicaciones,
+} from "../../store/Perfil/action";
+import {
+  selectLoading,
+  selectMatchs,
+  selectPerfil,
+} from "../../store/Perfil/selectors";
+import CircularIndeterminate from "../../components/Loading";
 
 const Perfil = () => {
   const dispatch = useDispatch();
 
   const mail = JSON.parse(localStorage.getItem("mail"));
 
+  const loading = useSelector(selectLoading);
   const publisPerfil = useSelector(selectPerfil);
   const matchs = useSelector(selectMatchs);
   const [publicaciones, setPublicaciones] = useState(publisPerfil);
@@ -29,6 +39,8 @@ const Perfil = () => {
   const [openDetails, setOpenDetails] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [titulo, setTitulo] = useState(false);
+
+  console.log(publicaciones);
 
   useEffect(() => {
     dispatch(getPublicaciones(mail));
@@ -41,9 +53,10 @@ const Perfil = () => {
     }
   }, [publisPerfil]);
 
-  const deletePublicacion = (publicacion) => {
+  const deletePublicacion = (publicacion, mediaId) => {
     setPublicaciones(publicaciones.filter((p) => p.title !== publicacion));
     setShowAlert(true);
+    dispatch(deletePubli(mediaId));
   };
 
   useEffect(() => {
@@ -108,7 +121,6 @@ const Perfil = () => {
                   className="carta"
                   onClick={() => handleOpenDetails(publicacion)}
                 ></div>
-
                 <div
                   style={{
                     display: "flex",
@@ -121,7 +133,9 @@ const Perfil = () => {
                   </h3>
                   <DeleteIcon
                     sx={{ color: red["A700"], cursor: "pointer" }}
-                    onClick={() => deletePublicacion(publicacion.title)}
+                    onClick={() =>
+                      deletePublicacion(publicacion.title, publicacion.mediaId)
+                    }
                   />
                 </div>
               </div>
@@ -132,6 +146,7 @@ const Perfil = () => {
     }
   };
 
+  if (loading) return <CircularIndeterminate />;
   return (
     <Wrapper>
       <NavBar />
