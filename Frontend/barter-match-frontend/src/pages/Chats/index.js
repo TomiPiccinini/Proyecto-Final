@@ -39,10 +39,7 @@ const useStyles = makeStyles(() => ({
     color: "fff",
     backgroundColor: "fff",
   },
-  nombres: {
-    fontSize: "100px",
-    backgroundColor: "red",
-  },
+  
 }));
 
 const ChatBox = (props) => {

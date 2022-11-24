@@ -7,6 +7,7 @@ import { red } from "@mui/material/colors";
 import Typography from "@mui/material/Typography";
 import { Alert, Switch } from "@mui/material";
 import DetailsCard from "../../components/DetailsCard";
+import MatchCard from "../../components/MatchCard";
 // eslint-disable-next-line
 import { styles } from "./perfilStyles.css";
 import VanillaTilt from "vanilla-tilt";
@@ -36,6 +37,8 @@ const Perfil = () => {
   const [publicaciones, setPublicaciones] = useState(publisPerfil);
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
+  const [checked, setChecked] = useState(false);
+  const [openMatch, setOpenMatch] = useState(false);
   const [openDetails, setOpenDetails] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [titulo, setTitulo] = useState(false);
@@ -75,8 +78,9 @@ const Perfil = () => {
     return () => clearTimeout(timer);
   }, [showAlert]);
 
-  const handleChange = () => {
-    setTitulo(!titulo);
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+    console.log(checked);
   };
 
   const handleOpenDetails = (name) => {
@@ -84,33 +88,40 @@ const Perfil = () => {
     setOpenDetails(!openDetails);
   };
 
-  const tituloRender = (titulo) => {
-    if (titulo) {
+  const tituloRender = () => {
+    if (checked) {
       return (
         <>
-          <div className="MisPublicaciones" style={{ marginTop: "50px" }}>
-            <Typography variant="h4">Mis Publicaciones/Matchs</Typography>
-            <Switch
-              defaultUnchecked
-              color="default"
-              size="medium"
-              onChange={handleChange}
-            />
+          <div className="productos">
+            {matchs.map((publicacion) => (
+              <div style={{ textAlign: "center", marginBottom: "25px" }}>
+                <div
+                  style={{
+                    backgroundImage: `url(${publicacion.otherMedia.photoList[0].url})`,
+                  }}
+                  className="carta"
+                  onClick={() => handleOpenDetails(publicacion)}
+                ></div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    textAlign: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <h3 style={{ fontFamily: "Alatsi", margin: 0 }}>
+                    {publicacion.otherMedia.title}
+                  </h3>
+                </div>
+              </div>
+            ))}
           </div>
         </>
       );
     } else {
       return (
         <>
-          <div className="MisPublicaciones" style={{ marginTop: "50px" }}>
-            <Typography variant="h4">Mis Publicaciones/Matchs</Typography>
-            <Switch
-              defaultUnchecked
-              color="default"
-              size="medium"
-              onChange={handleChange}
-            />
-          </div>
           <div className="productos">
             {publicaciones.map((publicacion) => (
               <div style={{ textAlign: "center", marginBottom: "25px" }}>
@@ -168,7 +179,18 @@ const Perfil = () => {
               {mail}
             </Typography>
           </div>
-          {tituloRender(titulo)}
+          <div className="MisPublicaciones" style={{ marginTop: "50px" }}>
+            <Typography variant="h4">Mis Publicaciones/Matchs</Typography>
+            <Switch
+              checked={checked}
+              onChange={handleChange}
+              inputProps={{ "aria-label": "controlled" }}
+              color="default"
+              size="medium"
+            />
+          </div>
+          {tituloRender()}
+
           <DetailsCard
             show={openDetails}
             image={image}
@@ -177,6 +199,7 @@ const Perfil = () => {
               setOpenDetails(!openDetails);
             }}
           />
+
           {showAlert && (
             <Alert
               variant="filled"
