@@ -35,7 +35,8 @@ const HomePublicaciones = () => {
   }, []);
 
   const loading = useSelector(selectLoading);
-  const publis = useSelector(selectPublicaciones);
+  const publisOriginal = useSelector(selectPublicaciones);
+  const publis = publisOriginal.reverse();
   const showMatch = useSelector(selectShowMatch);
   const imageMatch = useSelector(selectImageMatch);
   const [open, setOpen] = useState(showMatch);
