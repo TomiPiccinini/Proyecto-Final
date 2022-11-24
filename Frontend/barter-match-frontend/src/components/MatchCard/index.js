@@ -47,7 +47,7 @@ export default function AlertDialogSlide(props) {
                 <DialogContentText id="alert-dialog-slide-description">
                   <DialogContainer className={classes.root} >
                     <MatchImg src={props.match.otherMedia.photoList[0].url} />
-                    <p>Detalles del producto</p>
+                    <h1>Detalles del producto</h1>
                     <p>Marca: {props.match.otherMedia.brand}</p>
                     <p>Descripción: {props.match.otherMedia.description}</p>
                     <p>Estado: {props.match.otherMedia.state}</p>
@@ -65,7 +65,7 @@ export default function AlertDialogSlide(props) {
                 <DialogContentText id="alert-dialog-slide-description">
                   <DialogContainer className={classes.root} >
                     <MatchImg src={props.match.yourMedia.photoList[0].url} />
-                    <p>Detalles del producto</p>
+                    <h1>Detalles del producto</h1>
                     <p>Marca: {props.match.yourMedia.brand}</p>
                     <p>Descripción: {props.match.yourMedia.description}</p>
                     <p>Estado: {props.match.yourMedia.state}</p>
