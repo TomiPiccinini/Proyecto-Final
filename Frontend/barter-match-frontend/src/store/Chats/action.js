@@ -78,6 +78,9 @@ export const setMessage = (body) => {
       const response = await fetch(requestURL, {
         method: "POST",
         body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       const response_1 = await checkStatus(response);
       const json = await parseJSON(response_1);

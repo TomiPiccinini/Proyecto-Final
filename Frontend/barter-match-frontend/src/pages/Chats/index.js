@@ -51,13 +51,16 @@ const ChatBox = (props) => {
 
   const sendMessage = () => {
     if (mensaje != "") {
-      const user = props.user;
+      const u = props.user;
       const message = {
-        matchId: user.matchId,
-        emailReceiver: user.emailReceiver,
+        //matchId: u.matchId,
+        matchId: 4,
+        emailReceiver: u.otherMedia.userEmail,
         emailIssuing: mail,
         text: mensaje,
+        dateTime: "",
       };
+      console.log(message)
       dispatch(setMessage(message));
     }
   };
@@ -118,6 +121,7 @@ const ChatBox = (props) => {
             variant="contained"
             sx={{ backgroundColor: "rgb(82 97 205)" }}
             endIcon={<SendIcon />}
+            onClick={() => sendMessage()}
           >
             Enviar
           </Button>
@@ -151,9 +155,9 @@ const Chat = () => {
         <FirstColumn>
           {matchs.map((u) => {
             return (
-              <ContainerUsers key={u.idOtherUser}>
+              <ContainerUsers key={u.emailOtherUser}>
                 <Chip
-                  label={u.nameOtherUser}
+                  label={u.emailOtherUser}
                   color="primary"
                   variant="filled"
                   onClick={() => setSelectedUser(u)}

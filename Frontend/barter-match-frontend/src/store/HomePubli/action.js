@@ -31,7 +31,6 @@ export const getPublicaciones = (mail) => {
   return async (dispatch, getState) => {
     dispatch(getPublicacionesRequested());
     const requestURL = `http://bartermatch-proyecto.herokuapp.com/media`;
-    console.log("mail", mail);
     try {
       const response = await fetch(requestURL, {
         method: "POST",
@@ -45,14 +44,12 @@ export const getPublicaciones = (mail) => {
       });
       const response_1 = await checkStatus(response);
       const json = await parseJSON(response_1);
-      console.log("json", json);
       if (response_1.status === 200) {
         dispatch(getPublicacionesSucces(json.media_list));
       } else {
         dispatch(getPublicacionesError("Error"));
       }
     } catch (error) {
-      console.log(error);
       //dispatch(getPublicacionesError("ERROR"));
     }
   };
@@ -82,7 +79,6 @@ const postPubliError = (msg) => {
 
 export const postPubli = (mail, data) => {
   return async (dispatch, getState) => {
-    console.log("data", data);
     dispatch(postPubliRequested());
     const requestURL = `http://bartermatch-proyecto.herokuapp.com/media/save`;
     try {
@@ -94,7 +90,6 @@ export const postPubli = (mail, data) => {
         },
       });
       const response_1 = await checkStatus(response);
-      console.log(response_1);
       const json = await parseJSON(response_1);
       console.log(json);
 
@@ -175,9 +170,7 @@ export const postLike = (mail, mediaId, emailReceiver) => {
         },
       });
       const response_1 = await checkStatus(response);
-      console.log(response_1);
       const json = await parseJSON(response_1);
-      console.log(json);
       if (json.isMatch === true) {
         dispatch(likeSucces(json.matchPhoto));
       }

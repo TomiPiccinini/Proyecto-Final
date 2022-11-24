@@ -38,14 +38,12 @@ export const getPublicaciones = (mail) => {
       });
       const response_1 = await checkStatus(response);
       const json = await parseJSON(response_1);
-      console.log("publis:", json);
       if (response_1.status === 200) {
         dispatch(getPerfilSucces(json.media_list));
       } else {
         dispatch(getPerfilError("Error"));
       }
     } catch (error) {
-      console.log(error);
       //dispatch(getPublicacionesError("ERROR"));
     }
   };
@@ -59,10 +57,10 @@ const getMatchsRequested = () => {
   };
 };
 
-const getMatchsSucces = (perfil) => {
+const getMatchsSucces = (matchs) => {
   return {
     type: types.GET_PERFIL_FINISHED,
-    perfil,
+    matchs,
   };
 };
 
@@ -84,14 +82,9 @@ export const getMatchs = (mail) => {
       });
       const response_1 = await checkStatus(response);
       const json = await parseJSON(response_1);
-      console.log("matchs", json);
-      /*if (response_1.status === 200) {
-        dispatch(getMatchsSucces(json.media_list));
-      } else {
-        dispatch(getMatchsError("Error"));
-      }*/
+      console.log("matchs", json.matchs);
+        dispatch(getMatchsSucces(json.matchs));
     } catch (error) {
-      console.log(error);
       //dispatch(getPublicacionesError("ERROR"));
     }
   };

@@ -40,9 +40,6 @@ const HomePublicaciones = () => {
   const [openDetails, setOpenDetails] = useState(false);
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
-
-  console.log("mail", mail);
-
   useEffect(() => {
     VanillaTilt.init(document.querySelectorAll(".card"), {
       glare: true,
@@ -76,7 +73,6 @@ const HomePublicaciones = () => {
 
   const handleSwipe = (d, producto) => {
     console.log(d);
-    console.log(producto);
     d == "left" ? console.log("left") : sendLike(producto);
   };
 

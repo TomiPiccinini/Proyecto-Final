@@ -14,7 +14,7 @@ import { Wrapper } from "./styled";
 import { useDispatch, useSelector } from "react-redux";
 import { selectMail } from "../../store/Login/selectors";
 import { getMatchs, getPublicaciones } from "../../store/Perfil/action";
-import { selectPerfil } from "../../store/Perfil/selectors";
+import { selectMatchs, selectPerfil } from "../../store/Perfil/selectors";
 
 const Perfil = () => {
   const dispatch = useDispatch();
@@ -22,6 +22,7 @@ const Perfil = () => {
   const mail = JSON.parse(localStorage.getItem("mail"));
 
   const publisPerfil = useSelector(selectPerfil);
+  const matchs = useSelector(selectMatchs);
   const [publicaciones, setPublicaciones] = useState(publisPerfil);
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
