@@ -112,8 +112,9 @@ public class PublicacionRepository implements MediaRepository {
         List<Matcheo> matcheos = matcheoCrudRepository.getMatchPublicacionId(mediaId);
 
         matcheos.forEach(matcheo -> {
-
+        System.out.println("Se borran primero los mensajes del matcheo: " + matcheo.toString());
             mensajeCrudRepository.findAllByIdMatcheo(matcheo.getIdMatcheo()).forEach(mensaje -> {
+                System.out.println("Se borra el mensaje: " + mensaje.toString());
                 mensajeCrudRepository.delete(mensaje);
             });
             matcheoCrudRepository.deleteById(matcheo.getIdMatcheo());
