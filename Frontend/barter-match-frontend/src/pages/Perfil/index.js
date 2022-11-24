@@ -188,7 +188,7 @@ const Perfil = () => {
 
   if (loading) return <CircularIndeterminate />;
   return (
-    <Wrapper>
+    <Wrapper isMatch={matchs}>
       <NavBar />
       <div className="Contenedor">
         <link
