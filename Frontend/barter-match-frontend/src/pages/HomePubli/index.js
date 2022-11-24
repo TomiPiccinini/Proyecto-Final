@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import NavBar from "../../components/NavBar";
 import { Container, Wrapper } from "./styled";
-import HomeCard from "../../components/HomeCard";
+import InfoIcon from '@mui/icons-material/Info';
 import { Button } from "@mui/material";
 // eslint-disable-next-line
 import { styles } from "./styles.css";
@@ -43,6 +43,7 @@ const HomePublicaciones = () => {
   const [openDetails, setOpenDetails] = useState(false);
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
+  
   useEffect(() => {
     VanillaTilt.init(document.querySelectorAll(".card"), {
       glare: true,
@@ -50,7 +51,7 @@ const HomePublicaciones = () => {
       max: 25,
       speed: 400,
     });
-  }, []);
+  },);
 
   useEffect(() => {
     setOpen(showMatch);
@@ -89,18 +90,19 @@ const HomePublicaciones = () => {
           rel="stylesheet"
         />
         <Tooltip
-          title="Haga doble click para ver detalles del producto"
+          title="Ver detalles del producto"
           placement="top"
         >
           <div className="cardContainer">
             {publis.map((producto, index) => (
+              <>
               <CardSwiper
                 onSwipe={(d) => handleSwipe(d, producto)}
                 className={"swiper"}
                 contents={
                   <>
                     <div
-                      onDoubleClick={() => handleOpenDetails(producto)}
+                      
                       style={{
                         backgroundImage: `url(${producto.photoList[0].url})`,
                         //backgroundImage: 'url(' + producto.url + ')',
@@ -111,8 +113,14 @@ const HomePublicaciones = () => {
                     </div>
                   </>
                 }
+               
               />
+              <InfoIcon sx={{position:'absolute' , top:'150px', marginLeft:'-10px', color:"#fff"}}
+              onClick={() => handleOpenDetails(producto)}
+              />
+              </>
             ))}
+          
           </div>
         </Tooltip>
         <div

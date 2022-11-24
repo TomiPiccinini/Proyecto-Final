@@ -40,17 +40,15 @@ export default function AlertDialogSlide(props) {
           <DialogTitle >{props.name.title}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
-              <DialogContainer className={classes.root} >
-                <MatchImg src={props.name.photoList[0].url} />
-                <h1>Detalles del producto</h1>
-                <Detalles>
-                <Detalle>Marca: {props.name.brand}</Detalle>
-                <Detalle>Descripción: {props.name.description}</Detalle>
-                <Detalle>Estado: {props.name.state}</Detalle>
-                <Detalle>Talle: {props.name.measure}</Detalle>
-                <Detalle>Tipo de Prenda: {props.name.tag}</Detalle>
-                </Detalles>
-              </DialogContainer>
+            <DialogContainer className={classes.root} >
+                    <MatchImg src={props.match.otherMedia.photoList[0].url} />
+                    <h1>Detalles del producto</h1>
+                    <p>Marca: {props.match.otherMedia.brand}</p>
+                    <p>Descripción: {props.match.otherMedia.description}</p>
+                    <p>Estado: {props.match.otherMedia.state}</p>
+                    <p>Talle: {props.match.otherMedia.measure}</p>
+                    <p>Tipo de Prenda: {props.match.otherMedia.tag}</p>
+                  </DialogContainer>
             </DialogContentText>
           </DialogContent>
           <DialogActions>
