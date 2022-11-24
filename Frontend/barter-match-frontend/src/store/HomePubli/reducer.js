@@ -31,7 +31,6 @@ const homeReducer = (state = initialState, action) =>
         break;
       case types.POST_PUBLIS_FINISHED:
         draft.loading = false;
-        draft.newPubli = action.publicacion;
         draft.error = false;
         draft.errorMessage = "";
         break;

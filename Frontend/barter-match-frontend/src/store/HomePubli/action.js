@@ -63,10 +63,9 @@ const postPubliRequested = () => {
   };
 };
 
-const postPubliSucces = (publicacion) => {
+const postPubliSucces = () => {
   return {
     type: types.POST_PUBLIS_FINISHED,
-    publicacion,
   };
 };
 
@@ -92,12 +91,7 @@ export const postPubli = (mail, data) => {
       const response_1 = await checkStatus(response);
       const json = await parseJSON(response_1);
       console.log(json);
-
-      /*if (response.status === "1") {
-        dispatch(postPubliSucces(response.result));
-      } else {
-        dispatch(postPubliError(response.message));
-      }*/
+      dispatch(postPubliSucces());
     } catch (error) {
       dispatch(postPubliError("ERROR"));
     }
