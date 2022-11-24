@@ -73,8 +73,8 @@ const HomePublicaciones = () => {
     console.log("dentro sendlike", producto);
     const mediaId = producto.mediaId;
     const emailReceiver = producto.userEmail;
-    const imageMyProduct = producto.yourMedia.photoList[0].url;
-    setImage(imageMyProduct);
+    const imageOtherProduct = producto.photoList[0].url;
+    setImage(imageOtherProduct);
     dispatch(postLike(mail, mediaId, emailReceiver));
   };
 
@@ -144,8 +144,8 @@ const HomePublicaciones = () => {
         />
         <Dialog
           name={showMatch}
-          imageOtherProduct={imageMatch}
-          imageMyProduct={image}
+          imageMyProduct={imageMatch}
+          imageOtherProduct={image}
           handleClose={() => {
             dispatch(closeLike());
           }}

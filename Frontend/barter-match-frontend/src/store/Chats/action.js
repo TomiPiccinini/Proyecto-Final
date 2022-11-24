@@ -26,7 +26,7 @@ const getMatchsError = (msg) => {
 export const getMatchs = (mail) => {
   return async (dispatch, getState) => {
     dispatch(getMatchsRequested());
-    const requestURL = `http://localhost:8080/match/consult`;
+    const requestURL = `http://bartermatch-proyecto.herokuapp.com/match/consult`;
     try {
       const response = await fetch(requestURL, {
         method: "POST",
@@ -76,7 +76,7 @@ const setMessageError = (msg) => {
 export const setMessage = (body) => {
   return async (dispatch, getState) => {
     dispatch(setMessageRequested());
-    const requestURL = `http://localhost:8080/match/message`;
+    const requestURL = `http://bartermatch-proyecto.herokuapp.com/match/message`;
     try {
       const response = await fetch(requestURL, {
         method: "POST",
