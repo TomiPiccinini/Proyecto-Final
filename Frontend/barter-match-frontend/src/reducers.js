@@ -8,6 +8,7 @@ import history from "./utils/history";
 import homeReducer from "./store/HomePubli/reducer";
 import perfilReducer from "./store/Perfil/reducer";
 import loginReducer from "./store/Login/reducer";
+import chatsReducer from "./store/Chats/reducer";
 
 /*
 Merges the main reducer with the router state and dynamically injected reducers
@@ -19,9 +20,7 @@ export default function createReducer(injectedReducers = {}) {
     home: homeReducer,
     perfil: perfilReducer,
     login: loginReducer,
-    /*information: informationReducer,
-    intro: introReducer,
-    viewerReducer: documentViewerReducer,*/
+    chats: chatsReducer,
     router: connectRouter(history),
     ...injectedReducers,
   });
