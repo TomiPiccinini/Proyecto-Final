@@ -63,8 +63,8 @@ const ChatBox = () => {
 
   const sendMessage = () => {
     if (mensaje != "") {
+      setMensaje("");
       const u = user;
-
       const message = {
         matchId: u.matchId,
         emailReceiver: u.otherMedia.userEmail,
@@ -72,9 +72,9 @@ const ChatBox = () => {
         text: mensaje,
         dateTime: "",
       };
+
       dispatch(setMessage(message));
       user.mensajes.push(message);
-      setMensaje("");
       dispatch(setSelectedUserStore(user));
     }
   };
@@ -151,9 +151,7 @@ const Chat = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (user == null) {
-      dispatch(getMatchs(mail));
-    }
+    dispatch(getMatchs(mail));
   }, []);
 
   //useEffect(() => {
