@@ -6,10 +6,7 @@ import com.cuchucambiazo.domain.repository.MediaRepository;
 import com.cuchucambiazo.domain.service.MatchService;
 import com.cuchucambiazo.persistence.builds.FotoBuilds;
 import com.cuchucambiazo.persistence.builds.MediaBuilds;
-import com.cuchucambiazo.persistence.crud.FotoCrudRepository;
-import com.cuchucambiazo.persistence.crud.LikeCrudRepository;
-import com.cuchucambiazo.persistence.crud.MatcheoCrudRepository;
-import com.cuchucambiazo.persistence.crud.PublicacionCrudRepository;
+import com.cuchucambiazo.persistence.crud.*;
 
 import com.cuchucambiazo.persistence.entity.Foto;
 import com.cuchucambiazo.persistence.entity.Matcheo;
@@ -35,6 +32,9 @@ public class PublicacionRepository implements MediaRepository {
 
     @Autowired
     private FotoCrudRepository fotoCrudRepository;
+
+    @Autowired
+    private MensajeCrudRepository mensajeCrudRepository;
 
     @Autowired
     private LikeCrudRepository likeCrudRepository;
@@ -112,6 +112,10 @@ public class PublicacionRepository implements MediaRepository {
         List<Matcheo> matcheos = matcheoCrudRepository.getMatchPublicacionId(mediaId);
 
         matcheos.forEach(matcheo -> {
+
+            mensajeCrudRepository.findAllByIdMatcheo(matcheo.getIdMatcheo()).forEach(mensaje -> {
+                mensajeCrudRepository.delete(mensaje);
+            });
             matcheoCrudRepository.deleteById(matcheo.getIdMatcheo());
         });
 

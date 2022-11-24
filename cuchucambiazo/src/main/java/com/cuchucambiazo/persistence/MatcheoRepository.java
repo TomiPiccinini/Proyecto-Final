@@ -4,13 +4,12 @@ import api.cuchucambiazo.controller.match.model.Match;
 import com.cuchucambiazo.domain.repository.MatchRepository;
 import com.cuchucambiazo.persistence.builds.MatchBuilds;
 import com.cuchucambiazo.persistence.crud.MatcheoCrudRepository;
-import com.cuchucambiazo.persistence.entity.Matcheo;
+import com.cuchucambiazo.persistence.crud.MensajeCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +18,9 @@ public class MatcheoRepository implements MatchRepository {
 
     @Autowired
     private MatcheoCrudRepository repository;
+
+    @Autowired
+    private MensajeCrudRepository mensajeCrudRepository;
 
     @Autowired
     private MatchBuilds builds;
@@ -47,6 +49,9 @@ public class MatcheoRepository implements MatchRepository {
 
     @Override
     public void closeMatch(Integer matchId) {
+        mensajeCrudRepository.findAllByIdMatcheo(matchId).forEach(mensaje -> {
+            mensajeCrudRepository.delete(mensaje);
+        });
         repository.deleteById(matchId);
     }
 
