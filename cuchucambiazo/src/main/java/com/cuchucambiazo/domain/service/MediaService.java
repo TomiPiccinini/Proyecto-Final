@@ -90,8 +90,8 @@ public class MediaService {
 
     }
 
-    public void deleteMedia(Integer mediaId){
-        mediaRepository.deleteMedia(mediaId);
+    public void deleteMedia(DeleteMediaRequest mediaId){
+        mediaRepository.deleteMedia(mediaId.getMediaId());
     }
 
 }

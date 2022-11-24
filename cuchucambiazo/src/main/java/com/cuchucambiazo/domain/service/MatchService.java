@@ -48,7 +48,7 @@ public class MatchService {
                 msgMatch.setDateTimeMatch(mat.getDateTimeMatch());
                 msgMatch.setMensajes(null);
 
-                Integer otherMediaId = mat.getMediaId1().equals(a.getMediaId()) ? mat.getMediaId2() : a.getMediaId();
+                Integer otherMediaId = mat.getMediaId1().equals(a.getMediaId()) ? mat.getMediaId2() : mat.getMediaId1();
                 System.out.println("Obtengo datos de la publicacion del otro usuario");
                 Media otherMedia = mediaRepository.getMediaByMediaId(otherMediaId);
                 User otherUser = userRepository.findByUserId(otherMedia.getUserId());

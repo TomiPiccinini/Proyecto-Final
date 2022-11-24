@@ -95,9 +95,9 @@ paths:
       requestBody:
         description: Save medias request
         content:
-          text/plain:
+          application/json:
             schema:
-              type: integer
+              $ref: "#/components/schemas/deleteMediaRequest"
       responses:
         '201':
           description: Remove user confirmation
@@ -129,7 +129,14 @@ paths:
 components:
   schemas:
 
-
+    deleteMediaRequest:
+      type: object
+      description: ''
+      required:
+        - mediaId
+      properties:
+        mediaId:
+          type: integer
 
     getMediaRequest:
       type: object
@@ -177,7 +184,7 @@ components:
         - photoList
         - state
         - description
-        - measures
+        - measure
         - title
         - color
         - brand
