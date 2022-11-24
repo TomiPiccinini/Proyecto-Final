@@ -1,13 +1,19 @@
 package com.cuchucambiazo.persistence;
 
+import api.cuchucambiazo.controller.match.model.MatchRequest;
 import api.cuchucambiazo.controller.media.model.Media;
 import com.cuchucambiazo.domain.repository.MediaRepository;
+import com.cuchucambiazo.domain.service.MatchService;
 import com.cuchucambiazo.persistence.builds.FotoBuilds;
 import com.cuchucambiazo.persistence.builds.MediaBuilds;
 import com.cuchucambiazo.persistence.crud.FotoCrudRepository;
+import com.cuchucambiazo.persistence.crud.LikeCrudRepository;
+import com.cuchucambiazo.persistence.crud.MatcheoCrudRepository;
 import com.cuchucambiazo.persistence.crud.PublicacionCrudRepository;
 
 import com.cuchucambiazo.persistence.entity.Foto;
+import com.cuchucambiazo.persistence.entity.Matcheo;
+import com.cuchucambiazo.persistence.entity.MeGusta;
 import com.cuchucambiazo.persistence.entity.Publicacion;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +37,19 @@ public class PublicacionRepository implements MediaRepository {
     private FotoCrudRepository fotoCrudRepository;
 
     @Autowired
+    private LikeCrudRepository likeCrudRepository;
+
+    @Autowired
+    private MatcheoCrudRepository matcheoCrudRepository;
+
+    @Autowired
     private MediaBuilds mediaBuilds;
 
     @Autowired
     private FotoBuilds fotoBuilds;
+
+
+
 
 
     @Override
@@ -85,11 +100,22 @@ public class PublicacionRepository implements MediaRepository {
 
     @Override
     public void deleteMedia(Integer mediaId) {
+        Publicacion publicacion = publicacionCrudRepository.findById(mediaId).get();
+
         System.out.println("borro las fotos");
         List<Foto> fotos = fotoCrudRepository.findAllByIdPublicacion(mediaId);
-        fotos.forEach(foto -> {
-            fotoCrudRepository.delete(foto);
+        fotos.forEach(foto -> fotoCrudRepository.delete(foto));
+        System.out.println("borro los Me Gustas");
+        List<MeGusta> meGustas = likeCrudRepository.getLikesByUserReceiver(publicacion.getIdUsuario());
+        meGustas.forEach(meGusta -> likeCrudRepository.delete(meGusta));
+
+        List<Matcheo> matcheos = matcheoCrudRepository.getMatchPublicacionId(mediaId);
+
+        matcheos.forEach(matcheo -> {
+            matcheoCrudRepository.deleteById(matcheo.getIdMatcheo());
         });
+
+
         System.out.println("borro las medias");
         publicacionCrudRepository.deleteById(mediaId);
     }

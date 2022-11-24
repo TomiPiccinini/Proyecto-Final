@@ -9,5 +9,6 @@ public interface MatchRepository {
     Optional<Match> verifyMatch(Match match);
     void saveMatch(Match match);
     List<Match> getMatchs(Integer mediaId);
-    void closeMatch(Integer matchId, String reason);
+    void closeMatch(Integer matchId);
+    Match getMatchById(Integer matchId);
 }

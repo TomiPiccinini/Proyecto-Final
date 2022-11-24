@@ -1,9 +1,11 @@
 package com.cuchucambiazo.domain.service;
 
 
+import api.cuchucambiazo.controller.match.model.Match;
 import api.cuchucambiazo.controller.media.model.*;
 import api.cuchucambiazo.controller.user.model.User;
 import com.cuchucambiazo.domain.repository.LikeRepository;
+import com.cuchucambiazo.domain.repository.MatchRepository;
 import com.cuchucambiazo.domain.repository.MediaRepository;
 import com.cuchucambiazo.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class MediaService {
 
     @Autowired
     private LikeRepository likeRepository;
+
+    @Autowired
+    private MatchRepository matchRepository;
 
     public GetMediaResponse getMedias(GetMediaRequest request){
 
@@ -57,7 +62,21 @@ public class MediaService {
                 User otherUser = userRepository.findByUserId(media.getUserId());
                 System.out.println("OtherUser: " + otherUser);
                 media.setUserEmail(otherUser.getEmail());
-                mediaList.add(media);
+                List<Match> matches = matchRepository.getMatchs(media.getMediaId());
+
+                if (matches.isEmpty()){
+                    mediaList.add(media);
+                }else {
+                    List<Media> medias = mediaRepository.getAllWithUserId(user.getUserId());
+                    matches.forEach(match -> {
+                        medias.forEach(med -> {
+                            if (!match.getMediaId1().equals(med.getMediaId()) && !match.getMediaId2().equals(med.getMediaId())){
+                                mediaList.add(media);
+                            }
+                        });
+                    });
+                }
+
             });
             response.setMediaList(mediaList);
 
@@ -90,8 +109,8 @@ public class MediaService {
 
     }
 
-    public void deleteMedia(DeleteMediaRequest mediaId){
-        mediaRepository.deleteMedia(mediaId.getMediaId());
+    public void deleteMedia(Integer mediaId){
+        mediaRepository.deleteMedia(mediaId);
     }
 
 }

@@ -33,7 +33,7 @@ public class MediaController implements MediaApi {
     @Override
     @CrossOrigin
     public ResponseEntity<GeneralBusinessResponse> removeMedia(DeleteMediaRequest request) {
-        service.deleteMedia(request);
+        service.deleteMedia(request.getMediaId());
         return new ResponseEntity<>(buildGeneralBusinessResponse(), HttpStatus.ACCEPTED);
     }
 

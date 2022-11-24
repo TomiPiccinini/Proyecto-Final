@@ -29,6 +29,9 @@ public class MatchService {
     @Autowired
     private MessageRepository messageRepository;
 
+    @Autowired
+    private MediaService mediaService;
+
     public MatchGetResponse getMatchs(String email){
 
         MatchGetResponse response = new MatchGetResponse();
@@ -82,7 +85,24 @@ public class MatchService {
     }
 
     public void closeMatch(MatchRequest request){
-        matchRepository.closeMatch(request.getMatchId(), request.getReason().getValue());
+
+
+
+        if (request.getReason().equals(MatchRequest.ReasonEnum.CONFIRMADO)){
+            System.out.println("El Match fue confirmado, borramos ambas publicaciones, primero buscamos los datos de ambas");
+            Match match = matchRepository.getMatchById(request.getMatchId());
+            if (match != null){
+                System.out.println("Se borra publicacion 1");
+                mediaService.deleteMedia(match.getMediaId1());
+                System.out.println("Se borra publicacion 2");
+                mediaService.deleteMedia(match.getMediaId2());
+            }
+        } else {
+            matchRepository.closeMatch(request.getMatchId());
+        }
+
+
+
     }
 
     public void addMessage(MessageRequest message){

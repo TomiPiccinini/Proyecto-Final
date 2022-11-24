@@ -19,10 +19,8 @@ public interface MatcheoCrudRepository extends CrudRepository <Matcheo, Integer>
     List<Matcheo> getMatchPublicacionId(@Param("idPublicacion") Integer idPublicacion);
 
     @Query(
-            value = "UPDATE TABLE matcheo m SET m.fecha_baja = :fechaBaja, m.estado = :reason" +
-                    "WHERE m.id_match = :matchId",
+            value = "SELECT * FROM matcheo WHERE matcheo.id_match = :matchId",
             nativeQuery = true
     )
-    void closeMatch(@Param("matchId") Integer matchId, @Param("reason") String reason,
-                    @Param("fechaBaja") String fechaBaja);
+    Matcheo getMatchByIdMatch(@Param("matchId") Integer matchId);
 }

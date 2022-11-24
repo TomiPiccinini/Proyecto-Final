@@ -4,6 +4,7 @@ import api.cuchucambiazo.controller.match.model.Match;
 import com.cuchucambiazo.domain.repository.MatchRepository;
 import com.cuchucambiazo.persistence.builds.MatchBuilds;
 import com.cuchucambiazo.persistence.crud.MatcheoCrudRepository;
+import com.cuchucambiazo.persistence.entity.Matcheo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -45,10 +46,12 @@ public class MatcheoRepository implements MatchRepository {
     }
 
     @Override
-    public void closeMatch(Integer matchId, String reason) {
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    public void closeMatch(Integer matchId) {
+        repository.deleteById(matchId);
+    }
 
-        repository.closeMatch(matchId, reason, formatter.format(date));
+    @Override
+    public Match getMatchById(Integer matchId) {
+        return builds.MatcheoToMatch(repository.getMatchByIdMatch(matchId));
     }
 }
