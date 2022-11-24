@@ -48,6 +48,7 @@ const homeReducer = (state = initialState, action) =>
         draft.imageMatch = "";
         break;
       case types.LIKE_PUBLI_FINISHED:
+        console.log("entra redux");
         draft.loading = false;
         draft.error = false;
         draft.errorMessage = "";
