@@ -43,7 +43,7 @@ const Perfil = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [titulo, setTitulo] = useState(false);
 
-  console.log(publicaciones);
+  console.log(matchs);
 
   useEffect(() => {
     dispatch(getPublicaciones(mail));
@@ -90,6 +90,7 @@ const Perfil = () => {
 
   const tituloRender = () => {
     if (checked) {
+      console.log('entro')
       return (
         <>
           <div className="productos">
@@ -102,7 +103,6 @@ const Perfil = () => {
                   className="carta"
                   onClick={() => handleOpenDetails(publicacion)}
                 ></div>
-
                 <div
                   style={{
                     display: "flex",

@@ -53,20 +53,20 @@ export const getPublicaciones = (mail) => {
 
 const getMatchsRequested = () => {
   return {
-    type: types.GET_PERFIL_REQUESTED,
+    type: types.GET_MATCHS_REQUESTED,
   };
 };
 
 const getMatchsSucces = (matchs) => {
   return {
-    type: types.GET_PERFIL_FINISHED,
+    type: types.GET_MATCHS_FINISHED,
     matchs,
   };
 };
 
 const getMatchsError = (msg) => {
   return {
-    type: types.GET_PERFIL_ERROR,
+    type: types.GET_MATCHS_ERROR,
     msg,
   };
 };
@@ -113,7 +113,7 @@ const deleteError = (msg) => {
 
 export const deletePubli = (idPubli) => {
   return async (dispatch, getState) => {
-    console.log(idPubli)
+    console.log(idPubli);
     dispatch(deleteRequested());
     const requestURL = `http://bartermatch-proyecto.herokuapp.com/media/delete`;
     try {

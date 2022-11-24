@@ -41,7 +41,7 @@ const homeReducer = (state = initialState, action) =>
         draft.errorMessage = action.msg;
         break;
       case types.LIKE_PUBLI_REQUESTED:
-        draft.loading = true;
+        draft.loading = false;
         draft.error = false;
         draft.errorMessage = "";
         draft.showMatch = false;
