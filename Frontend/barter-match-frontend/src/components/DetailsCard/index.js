@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { DialogContainer, MatchImg } from "./styled";
+import { DialogContainer, MatchImg, Detalles, Detalle } from "./styled";
 import { Grow } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
@@ -42,12 +42,14 @@ export default function AlertDialogSlide(props) {
             <DialogContentText id="alert-dialog-slide-description">
               <DialogContainer className={classes.root} >
                 <MatchImg src={props.name.photoList[0].url} />
-                <p>Detalles del producto</p>
-                <p>Marca: {props.name.brand}</p>
-                <p>Descripción: {props.name.description}</p>
-                <p>Estado: {props.name.state}</p>
-                <p>Talle: {props.name.measure}</p>
-                <p>Tipo de Prenda: {props.name.tag}</p>
+                <h1>Detalles del producto</h1>
+                <Detalles>
+                <Detalle>Marca: {props.name.brand}</Detalle>
+                <Detalle>Descripción: {props.name.description}</Detalle>
+                <Detalle>Estado: {props.name.state}</Detalle>
+                <Detalle>Talle: {props.name.measure}</Detalle>
+                <Detalle>Tipo de Prenda: {props.name.tag}</Detalle>
+                </Detalles>
               </DialogContainer>
             </DialogContentText>
           </DialogContent>

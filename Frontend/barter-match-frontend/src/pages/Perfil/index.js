@@ -3,6 +3,7 @@ import NavBar from "../../components/NavBar";
 import Imagenperfil from "../../images/User-Profile.png";
 import { Publicaciones } from "./constants";
 import DeleteIcon from "@mui/icons-material/DeleteRounded";
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import { red } from "@mui/material/colors";
 import Typography from "@mui/material/Typography";
 import { Alert, Switch } from "@mui/material";
@@ -57,12 +58,6 @@ const Perfil = () => {
     }
   }, [publisPerfil]);
 
-  const deletePublicacion = (publicacion, mediaId) => {
-    setPublicaciones(publicaciones.filter((p) => p.title !== publicacion));
-    setShowAlert(true);
-    dispatch(deletePubli(mediaId));
-  };
-
   useEffect(() => {
     VanillaTilt.init(document.querySelectorAll(".carta"), {
       glare: true,
@@ -70,7 +65,25 @@ const Perfil = () => {
       max: 25,
       speed: 400,
     });
-  }, []);
+  });
+
+  const deletePublicacion = (publicacion, mediaId) => {
+    setPublicaciones(publicaciones.filter((p) => p.title !== publicacion));
+    setShowAlert(true);
+    dispatch(deletePubli(mediaId));
+  };
+
+
+
+  const deleteMatch = () => {
+
+  }
+
+  const confirmMatch = () => {
+
+  }
+
+  
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -96,7 +109,7 @@ const Perfil = () => {
 
   const tituloRender = () => {
     if (checked) {
-      console.log('entro')
+      
       return (
         <>
           <div className="productos">
@@ -119,6 +132,18 @@ const Perfil = () => {
                   <h3 style={{ fontFamily: "Alatsi", margin: 0 }}>
                     {match.otherMedia.title}
                   </h3>
+                  <TaskAltIcon
+                  sx={{ color: 'green' , cursor: "pointer" }}
+                  onClick={() =>
+                    confirmMatch()
+                  }
+                  />
+                  <DeleteIcon
+                    sx={{ color: red["A700"], cursor: "pointer" }}
+                    onClick={() =>
+                      deleteMatch()
+                    }
+                  />
                 </div>
               </div>
             ))}

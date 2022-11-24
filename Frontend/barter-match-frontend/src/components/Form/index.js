@@ -271,12 +271,11 @@ const Formulario = () => {
           />
           <TextField
             type="file"
-            label="Image"
             name="myFile"
             accept=".jpeg, .png, .jpg"
             onChange={(e) => handleFileUpload(e)}
           >
-            Subir imágen
+            
           </TextField>
         </div>
         <Button
