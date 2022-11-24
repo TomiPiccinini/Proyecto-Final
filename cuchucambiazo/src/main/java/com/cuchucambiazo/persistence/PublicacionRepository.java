@@ -85,6 +85,12 @@ public class PublicacionRepository implements MediaRepository {
 
     @Override
     public void deleteMedia(Integer mediaId) {
+        System.out.println("borro las fotos");
+        List<Foto> fotos = fotoCrudRepository.findAllByIdPublicacion(mediaId);
+        fotos.forEach(foto -> {
+            fotoCrudRepository.delete(foto);
+        });
+        System.out.println("borro las medias");
         publicacionCrudRepository.deleteById(mediaId);
     }
 

@@ -165,11 +165,14 @@ components:
       type: object
       description: ''
       required:
+        - matchId
         - foto
         - dateTimeMatch
         - nameOtherUser
         - idOtherUser
       properties:
+        matchId:
+          type: integer
         yourMedia:
           $ref: '#/components/schemas/MediaMatch'
         otherMedia:

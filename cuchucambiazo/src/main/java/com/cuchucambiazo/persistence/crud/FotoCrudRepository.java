@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface FotoCrudRepository extends CrudRepository<Foto, Integer> {
 
     @Query(
@@ -16,4 +18,5 @@ public interface FotoCrudRepository extends CrudRepository<Foto, Integer> {
                      @Param("idPublicacion") Integer idPublicacion,
                      @Param("url") String url);
 
+    List<Foto> findAllByIdPublicacion(Integer idPublicacion);
 }
