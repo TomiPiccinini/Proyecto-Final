@@ -170,14 +170,14 @@ components:
         - nameOtherUser
         - idOtherUser
       properties:
-        foto:
-          type: string
+        yourMedia:
+          $ref: '#/components/schemas/MediaMatch'
+        otherMedia:
+          $ref: '#/components/schemas/MediaMatch'
         dateTimeMatch:
           type: string
-        nameOtherUser:
+        emailOtherUser:
           type: string
-        idOtherUser:
-          type: integer
         mensajes:
           type: array
           items:
@@ -202,6 +202,58 @@ components:
           type: string
         text:
           type: string
+
+    MediaMatch:
+      type: object
+      description: ''
+      required:
+        - photoList
+        - state
+        - description
+        - measures
+        - title
+        - color
+        - brand
+        - tag
+      properties:
+        mediaId:
+          type: integer
+        userEmail:
+          type: string
+        title:
+          type: string
+        color:
+          type: string
+        brand:
+          type: string
+        photoList:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhotoMatch'
+        state:
+          type: string
+        description:
+          type: string
+        measure:
+          type: string
+        tag:
+          type: string
+        updateDate:
+          type: string
+        dischargeDate:
+          type: string
+
+    PhotoMatch:
+      type: object
+      description: ''
+      properties:
+        photoId:
+          type: integer
+        mediaId:
+          type: integer
+        url:
+          type: string
+          format: base64
 
     MessageRequest:
       type: object

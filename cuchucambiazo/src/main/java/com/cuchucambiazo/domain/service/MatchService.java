@@ -7,13 +7,11 @@ import com.cuchucambiazo.domain.repository.MatchRepository;
 import com.cuchucambiazo.domain.repository.MediaRepository;
 import com.cuchucambiazo.domain.repository.MessageRepository;
 import com.cuchucambiazo.domain.repository.UserRepository;
-import com.cuchucambiazo.persistence.MensajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 
 @Service
@@ -53,15 +51,11 @@ public class MatchService {
                 Integer otherMediaId = mat.getMediaId1().equals(a.getMediaId()) ? mat.getMediaId2() : a.getMediaId();
                 System.out.println("Obtengo datos de la publicacion del otro usuario");
                 Media otherMedia = mediaRepository.getMediaByMediaId(otherMediaId);
-                msgMatch.setIdOtherUser(otherMedia.getUserId());
-
                 User otherUser = userRepository.findByUserId(otherMedia.getUserId());
-                msgMatch.setNameOtherUser(otherUser.getName());
-                if (!otherMedia.getPhotoList().isEmpty()){
-                    msgMatch.setFoto(otherMedia.getPhotoList().get(0).getUrl());
-                }else {
-                    System.out.println("Fotos no encontradas en la publicacion");
-                }
+                msgMatch.setEmailOtherUser(otherUser.getEmail());
+
+                msgMatch.setYourMedia(mediaToMediaMatch(a, email));
+                msgMatch.setOtherMedia(mediaToMediaMatch(otherMedia, otherUser.getEmail()));
 
 
                 System.out.println("Se buscan los mensajes enviados entre los usuarios");
@@ -104,6 +98,34 @@ public class MatchService {
 
         System.out.println("Se realiza el guardado de mensajes");
         messageRepository.saveMessage(reqToSave);
+    }
+
+    private MediaMatch mediaToMediaMatch(Media media, String email){
+
+        MediaMatch mediaMatch = new MediaMatch();
+
+        mediaMatch.setMediaId(media.getMediaId());
+        mediaMatch.setColor(media.getColor());
+        mediaMatch.setBrand(media.getBrand());
+        mediaMatch.setDescription(media.getDescription());
+        mediaMatch.setTag(media.getTag());
+        mediaMatch.setMeasure(media.getMeasure());
+        mediaMatch.setState(media.getState());
+        mediaMatch.setTitle(media.getTitle());
+        mediaMatch.setUpdateDate(media.getUpdateDate());
+        mediaMatch.setUserEmail(email);
+
+        List<PhotoMatch> photoMatches = new ArrayList<>();
+        media.getPhotoList().forEach(photo -> {
+            PhotoMatch photoMatch = new PhotoMatch();
+            photoMatch.setMediaId(photo.getMediaId());
+            photoMatch.setPhotoId(photo.getPhotoId());
+            photoMatch.setUrl(photo.getUrl());
+            photoMatches.add(photoMatch);
+        });
+
+        mediaMatch.setPhotoList(photoMatches);
+        return mediaMatch;
     }
 
 }
