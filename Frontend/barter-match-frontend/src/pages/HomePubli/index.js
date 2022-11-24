@@ -115,7 +115,7 @@ const HomePublicaciones = () => {
                 }
                
               />
-              <InfoIcon sx={{position:'absolute' , top:'150px', marginLeft:'-10px', color:"#fff"}}
+              <InfoIcon sx={{position:'absolute' , top:'70px', marginLeft:'-10px', color:"#fff"}}
               onClick={() => handleOpenDetails(producto)}
               />
               </>

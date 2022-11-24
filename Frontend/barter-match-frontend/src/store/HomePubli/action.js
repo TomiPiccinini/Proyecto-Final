@@ -30,7 +30,7 @@ franco","1234","franco12@gmail.com
 export const getPublicaciones = (mail) => {
   return async (dispatch, getState) => {
     dispatch(getPublicacionesRequested());
-    const requestURL = `http://bartermatch-proyecto.herokuapp.com/media`;
+    const requestURL = `http://localhost:8080/media`;
     try {
       const response = await fetch(requestURL, {
         method: "POST",
@@ -79,7 +79,7 @@ const postPubliError = (msg) => {
 export const postPubli = (mail, data) => {
   return async (dispatch, getState) => {
     dispatch(postPubliRequested());
-    const requestURL = `http://bartermatch-proyecto.herokuapp.com/media/save`;
+    const requestURL = `http://localhost:8080/media/save`;
     try {
       const response = await fetch(requestURL, {
         method: "POST",
@@ -102,7 +102,7 @@ export const postPubli = (mail, data) => {
 export const postLike = (mail, mediaId, emailReceiver) => {
   return async (dispatch, getState) => {
     dispatch(likeRequested());
-    const requestURL = `http://bartermatch-proyecto.herokuapp.com/like/save`;
+    const requestURL = `http://localhost:8080/like/save`;
     try {
       const response = await fetch(requestURL, {
         method: "POST",

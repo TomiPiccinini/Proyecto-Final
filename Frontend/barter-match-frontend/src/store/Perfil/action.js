@@ -24,7 +24,7 @@ const getPerfilError = (msg) => {
 export const getPublicaciones = (mail) => {
   return async (dispatch, getState) => {
     dispatch(getPerfilRequested());
-    const requestURL = `http://bartermatch-proyecto.herokuapp.com/media`;
+    const requestURL = `http://localhost:8080/media`;
     try {
       const response = await fetch(requestURL, {
         method: "POST",
@@ -74,7 +74,7 @@ const getMatchsError = (msg) => {
 export const getMatchs = (mail) => {
   return async (dispatch, getState) => {
     dispatch(getMatchsRequested());
-    const requestURL = `http://bartermatch-proyecto.herokuapp.com/match/consult`;
+    const requestURL = `http://localhost:8080/match/consult`;
     try {
       const response = await fetch(requestURL, {
         method: "POST",
@@ -114,7 +114,7 @@ export const deletePubli = (idPubli) => {
   return async (dispatch, getState) => {
     console.log(idPubli);
     dispatch(deleteRequested());
-    const requestURL = `http://bartermatch-proyecto.herokuapp.com/media/delete`;
+    const requestURL = `http://localhost:8080/media/delete`;
     try {
       const response = await fetch(requestURL, {
         method: "POST",
@@ -136,7 +136,7 @@ export const deletePubli = (idPubli) => {
 export const acceptMatchs = (match) => {
   return async (dispatch, getState) => {
     dispatch(closeMatchRequested());
-    const requestURL = `http://bartermatch-proyecto.herokuapp.com/match/close`;
+    const requestURL = `http://localhost:8080/match/close`;
     try {
       const response = await fetch(requestURL, {
         method: "POST",
