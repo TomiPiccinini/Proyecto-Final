@@ -3,7 +3,7 @@ import NavBar from "../../components/NavBar";
 import Imagenperfil from "../../images/User-Profile.png";
 import { Publicaciones } from "./constants";
 import DeleteIcon from "@mui/icons-material/DeleteRounded";
-import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { red } from "@mui/material/colors";
 import Typography from "@mui/material/Typography";
 import { Alert, Switch } from "@mui/material";
@@ -16,6 +16,7 @@ import { Wrapper } from "./styled";
 import { useDispatch, useSelector } from "react-redux";
 import { selectMail } from "../../store/Login/selectors";
 import {
+  acceptMatchs,
   deletePubli,
   getMatchs,
   getPublicaciones,
@@ -45,8 +46,6 @@ const Perfil = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [titulo, setTitulo] = useState(false);
 
-  console.log(matchs);
-
   useEffect(() => {
     dispatch(getPublicaciones(mail));
     dispatch(getMatchs(mail));
@@ -73,17 +72,23 @@ const Perfil = () => {
     dispatch(deletePubli(mediaId));
   };
 
+  const deleteMatch = (idMatch) => {
+    const closeMatch = {
+      matchId: idMatch,
+      reason: "Cancelado",
+    };
+    console.log(closeMatch);
+    dispatch(acceptMatchs(closeMatch));
+  };
 
-
-  const deleteMatch = () => {
-
-  }
-
-  const confirmMatch = () => {
-
-  }
-
-  
+  const confirmMatch = (idMatch) => {
+    const closeMatch = {
+      matchId: idMatch,
+      reason: "Confirmado",
+    };
+    console.log(closeMatch);
+    dispatch(acceptMatchs(closeMatch));
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -94,7 +99,6 @@ const Perfil = () => {
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
-    console.log(checked);
   };
 
   const handleOpenDetails = (name) => {
@@ -103,13 +107,12 @@ const Perfil = () => {
   };
 
   const handleOpenMatch = (match) => {
-    setMatch(match)
-    setOpenMatch(!openMatch)
-  }
+    setMatch(match);
+    setOpenMatch(!openMatch);
+  };
 
   const tituloRender = () => {
     if (checked) {
-      
       return (
         <>
           <div className="productos">
@@ -133,16 +136,12 @@ const Perfil = () => {
                     {match.otherMedia.title}
                   </h3>
                   <TaskAltIcon
-                  sx={{ color: 'green' , cursor: "pointer" }}
-                  onClick={() =>
-                    confirmMatch()
-                  }
+                    sx={{ color: "green", cursor: "pointer" }}
+                    onClick={() => confirmMatch(match.matchId)}
                   />
                   <DeleteIcon
                     sx={{ color: red["A700"], cursor: "pointer" }}
-                    onClick={() =>
-                      deleteMatch()
-                    }
+                    onClick={() => deleteMatch(match.matchId)}
                   />
                 </div>
               </div>
@@ -211,14 +210,17 @@ const Perfil = () => {
             </Typography>
           </div>
           <div className="MisPublicaciones" style={{ marginTop: "50px" }}>
-            <Typography variant="h4">Mis Publicaciones/Matchs</Typography>
-            <Switch
-              checked={checked}
-              onChange={handleChange}
-              inputProps={{ "aria-label": "controlled" }}
-              color="default"
-              size="medium"
-            />
+            <Typography variant="h4">
+              Mis Publicaciones{" "}
+              <Switch
+                checked={checked}
+                onChange={handleChange}
+                inputProps={{ "aria-label": "controlled" }}
+                color="default"
+                size="medium"
+              />
+              Matchs
+            </Typography>
           </div>
           {tituloRender()}
 
@@ -232,11 +234,11 @@ const Perfil = () => {
           />
           <MatchCard
             show={openMatch}
-            match={match} 
+            match={match}
             handleCloseMatchs={() => {
               setOpenMatch(!openMatch);
             }}
-            />
+          />
 
           {showAlert && (
             <Alert

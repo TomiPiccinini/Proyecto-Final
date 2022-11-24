@@ -52,8 +52,6 @@ const Formulario = () => {
     datos["tag"] = category;
     datos["updateDate"] = "asd";
     datos["photoList"] = [{ url: base64Done }];
-
-    console.log(datos);
     dispatch(postPubli(mail, datos));
     setShowAlert(true);
   };
@@ -159,7 +157,6 @@ const Formulario = () => {
   };
 
   const handleFileUpload = async (e) => {
-    console.log(e);
     const file = e.target.files[0];
     const base64 = await convertToBase64(file);
     setBase64(base64);
