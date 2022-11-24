@@ -44,7 +44,6 @@ const Perfil = () => {
   const [openMatch, setOpenMatch] = useState(false);
   const [openDetails, setOpenDetails] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-  const [titulo, setTitulo] = useState(false);
 
   useEffect(() => {
     dispatch(getPublicaciones(mail));
